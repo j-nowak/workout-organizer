@@ -87,6 +87,7 @@
 		</table>
 		<table name="muscle_groups" >
 			<column name="muscle_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="image" type="bytea" jt="-2" />
 			<index name="pk_muscle_groups" unique="PRIMARY_KEY" >
 				<column name="muscle_name" />
 			</index>
@@ -198,7 +199,7 @@
                 UPDATE users SET weight = NEW.weight WHERE user_id = NEW.user_id;
             END IF;
         END IF;
-        
+
         RETURN NEW;
     END
 $$ LANGUAGE plpgsql;]]></string>
