@@ -2,8 +2,8 @@
 <project name="Workout organizer" id="Project9462283" template="Default" database="PostgreSQL" >
 	<schema name="workout organizer" schemaname="workout organizer" defo="y" >
 		<table name="exercise_ratings" >
-			<column name="user_id" type="serial" jt="4" mandatory="y" />
-			<column name="exercise_id" type="serial" jt="4" mandatory="y" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="exercise_id" type="integer" jt="4" mandatory="y" />
 			<column name="rating" type="integer" jt="4" mandatory="y" />
 			<index name="pk_exercises_ratings" unique="PRIMARY_KEY" >
 				<column name="user_id" />
@@ -25,15 +25,15 @@
 		<table name="exercises" >
 			<column name="exercise_id" type="serial" jt="4" mandatory="y" />
 			<column name="exercise_name" type="varchar" length="100" jt="12" mandatory="y" />
-			<column name="description" type="varchar" length="300" jt="12" />
+			<column name="description" type="text" length="300" jt="12" />
 			<column name="movie_uri" type="varchar" length="200" jt="12" />
 			<index name="pk_exercises" unique="PRIMARY_KEY" >
 				<column name="exercise_id" />
 			</index>
 		</table>
 		<table name="friendships" >
-			<column name="user_id1" type="serial" jt="4" mandatory="y" />
-			<column name="user_id2" type="serial" jt="4" mandatory="y" />
+			<column name="user_id1" type="integer" jt="4" mandatory="y" />
+			<column name="user_id2" type="integer" jt="4" mandatory="y" />
 			<index name="idx_friendships" unique="NORMAL" >
 				<column name="user_id1" />
 			</index>
@@ -80,7 +80,7 @@
 			<column name="gym_name" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="address" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="latitiude" type="real" jt="7" />
-			<column name="longitiude" type="real" jt="7" />
+			<column name="longitude" type="real" jt="7" />
 			<index name="pk_gyms" unique="PRIMARY_KEY" >
 				<column name="gym_id" />
 			</index>
@@ -92,7 +92,7 @@
 			</index>
 		</table>
 		<table name="target_muscles" >
-			<column name="exercise_id" type="serial" jt="4" mandatory="y" />
+			<column name="exercise_id" type="integer" jt="4" mandatory="y" />
 			<column name="muscle_name" type="varchar" length="100" jt="12" mandatory="y" />
 			<index name="idx_target_muscles" unique="NORMAL" >
 				<column name="muscle_name" />
@@ -128,8 +128,8 @@
 			</index>
 		</table>
 		<table name="workout_entry" >
-			<column name="workout_id" type="serial" jt="4" mandatory="y" />
-			<column name="exercise_id" type="serial" jt="4" mandatory="y" />
+			<column name="workout_id" type="integer" jt="4" mandatory="y" />
+			<column name="exercise_id" type="integer" jt="4" mandatory="y" />
 			<column name="set_count" type="integer" jt="4" mandatory="y" />
 			<column name="reps_per_set" type="integer" jt="4" />
 			<column name="weight" type="real" jt="7" mandatory="y" />
@@ -152,12 +152,12 @@
 		</table>
 		<table name="workouts" >
 			<column name="workout_id" type="serial" jt="4" mandatory="y" />
-			<column name="user_id" type="serial" jt="4" mandatory="y" />
-			<column name="begin_time" type="timestamp" jt="93" mandatory="y" >
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="gym_id" type="integer" jt="4" />
+			<column name="started_at" type="timestamp" jt="93" mandatory="y" >
 				<defo>current_timestamp</defo>
 			</column>
-			<column name="end_time" type="time" jt="92" mandatory="y" />
-			<column name="gym_id" type="serial" jt="4" />
+			<column name="finished_at" type="timestamp" jt="93" mandatory="y" />
 			<column name="weight" type="numeric" length="5" decimal="2" jt="2" />
 			<index name="pk_workouts" unique="PRIMARY_KEY" >
 				<column name="workout_id" />
@@ -190,7 +190,7 @@
         IF TG_OP = 'INSERT' THEN
             UPDATE users SET weight = NEW.weight WHERE user_id = NEW.user_id;
         ELSIF TG_OP = 'UPDATE'  THEN
-            newer_workouts_count = (SELECT COUNT(*) FROM workouts WHERE user_id = NEW.user_id AND begin_time > NEW.begin_time);
+            newer_workouts_count = (SELECT COUNT(*) FROM workouts WHERE user_id = NEW.user_id AND started_at > NEW.started_at);
             IF newer_workouts_count = 0 THEN
                 UPDATE users SET weight = NEW.weight WHERE user_id = NEW.user_id;
             END IF;
@@ -202,15 +202,15 @@ $$ LANGUAGE plpgsql;]]></string>
 		</function>
 	</schema>
 	<layout id="Layout9462286" name="Workout organizer" show_relation_columns="y" >
-		<entity schema="workout organizer" name="target_muscles" color="b2cdf7" x="330" y="600" />
 		<entity schema="workout organizer" name="muscle_groups" color="b2cdf7" x="300" y="480" />
 		<entity schema="workout organizer" name="workout_entry" color="b2cdf7" x="780" y="45" />
-		<entity schema="workout organizer" name="gyms" color="b2cdf7" x="60" y="60" />
 		<entity schema="workout organizer" name="friendships" color="b2cdf7" x="45" y="210" />
-		<entity schema="workout organizer" name="exercises" color="b2cdf7" x="870" y="285" />
-		<entity schema="workout organizer" name="workouts" color="b2cdf7" x="600" y="45" />
 		<entity schema="workout organizer" name="users" color="b2cdf7" x="105" y="330" />
-		<entity schema="workout organizer" name="exercise_ratings" color="b2cdf7" x="495" y="360" />
 		<entity schema="workout organizer" name="gym_ratings" color="b2cdf7" x="285" y="195" />
+		<entity schema="workout organizer" name="workouts" color="b2cdf7" x="600" y="45" />
+		<entity schema="workout organizer" name="exercises" color="b2cdf7" x="870" y="285" />
+		<entity schema="workout organizer" name="exercise_ratings" color="b2cdf7" x="495" y="360" />
+		<entity schema="workout organizer" name="target_muscles" color="b2cdf7" x="330" y="600" />
+		<entity schema="workout organizer" name="gyms" color="b2cdf7" x="60" y="60" />
 	</layout>
 </project>
