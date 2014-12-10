@@ -66,6 +66,7 @@
 		</table>
 		<table name="muscle_groups" >
 			<column name="muscle_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="image" type="bytea" jt="-2" />
 			<index name="pk_muscle_groups" unique="PRIMARY_KEY" >
 				<column name="muscle_name" />
 			</index>
@@ -157,12 +158,12 @@
 	<layout id="Layout9462286" name="Workout organizer" show_relation_columns="y" >
 		<entity schema="workout organizer" name="users" color="b2cdf7" x="105" y="330" />
 		<entity schema="workout organizer" name="target_muscles" color="b2cdf7" x="330" y="600" />
-		<entity schema="workout organizer" name="muscle_groups" color="b2cdf7" x="300" y="480" />
 		<entity schema="workout organizer" name="workout_entry" color="b2cdf7" x="780" y="45" />
 		<entity schema="workout organizer" name="gyms" color="b2cdf7" x="60" y="60" />
 		<entity schema="workout organizer" name="workouts" color="b2cdf7" x="600" y="45" />
 		<entity schema="workout organizer" name="exercises" color="b2cdf7" x="870" y="285" />
 		<entity schema="workout organizer" name="exercises_ratings" color="b2cdf7" x="495" y="360" />
 		<entity schema="workout organizer" name="friendships" color="b2cdf7" x="45" y="210" />
+		<entity schema="workout organizer" name="muscle_groups" color="b2cdf7" x="315" y="390" />
 	</layout>
 </project>
