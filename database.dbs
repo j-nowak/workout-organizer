@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Workout organizer" id="Project9462283" template="Default" database="PostgreSQL" >
+	<schema name="workout organizer" schemaname="workout organizer" defo="y" >
+		<table name="exercises" >
+			<column name="exercise_id" type="serial" jt="4" mandatory="y" />
+			<column name="exercise_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="description" type="varchar" length="300" jt="12" />
+			<column name="movie_uri" type="varchar" length="200" jt="12" />
+			<index name="pk_exercises" unique="PRIMARY_KEY" >
+				<column name="exercise_id" />
+			</index>
+		</table>
+		<table name="exercises_ratings" >
+			<column name="user_id" type="serial" jt="4" mandatory="y" />
+			<column name="exercise_id" type="serial" jt="4" mandatory="y" />
+			<column name="rating" type="integer" jt="4" mandatory="y" />
+			<index name="pk_exercises_ratings" unique="PRIMARY_KEY" >
+				<column name="user_id" />
+				<column name="exercise_id" />
+			</index>
+			<index name="idx_exercises_ratings" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<index name="idx_exercises_ratings_0" unique="NORMAL" >
+				<column name="exercise_id" />
+			</index>
+			<fk name="fk_exercises_ratings_users" to_schema="workout organizer" to_table="users" delete_action="setNull" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+			<fk name="fk_exercises_ratings_exercises" to_schema="workout organizer" to_table="exercises" delete_action="cascade" >
+				<fk_column name="exercise_id" pk="exercise_id" />
+			</fk>
+		</table>
+		<table name="friendships" >
+			<column name="user_id1" type="serial" jt="4" mandatory="y" />
+			<column name="user_id2" type="serial" jt="4" mandatory="y" />
+			<index name="idx_friendships" unique="NORMAL" >
+				<column name="user_id1" />
+			</index>
+			<index name="idx_friendships" unique="NORMAL" >
+				<column name="user_id2" />
+			</index>
+			<index name="unique_friendships_rel" unique="UNIQUE" >
+				<column name="user_id1" />
+				<column name="user_id2" />
+			</index>
+			<constraint name="proper_rel_check" >
+				<string>user_id1 &lt; user_id2</string>
+			</constraint>
+			<fk name="fk_friendships_users" to_schema="workout organizer" to_table="users" >
+				<fk_column name="user_id1" pk="user_id" />
+			</fk>
+			<fk name="fk_friendships_users2" to_schema="workout organizer" to_table="users" >
+				<fk_column name="user_id2" pk="user_id" />
+			</fk>
+		</table>
+		<table name="gyms" >
+			<column name="gym_id" type="serial" jt="4" mandatory="y" />
+			<column name="gym_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="address" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="latitiude" type="real" jt="7" />
+			<column name="longitiude" type="real" jt="7" />
+			<index name="pk_gyms" unique="PRIMARY_KEY" >
+				<column name="gym_id" />
+			</index>
+		</table>
+		<table name="muscle_groups" >
+			<column name="muscle_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_muscle_groups" unique="PRIMARY_KEY" >
+				<column name="muscle_name" />
+			</index>
+		</table>
+		<table name="target_muscles" >
+			<column name="exercise_id" type="serial" jt="4" mandatory="y" />
+			<column name="muscle_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="idx_target_muscles" unique="NORMAL" >
+				<column name="muscle_name" />
+			</index>
+			<index name="idx_target_muscles_0" unique="NORMAL" >
+				<column name="exercise_id" />
+			</index>
+			<fk name="fk_target_muscles" to_schema="workout organizer" to_table="muscle_groups" delete_action="cascade" >
+				<fk_column name="muscle_name" pk="muscle_name" />
+			</fk>
+			<fk name="fk_target_muscles_exercises" to_schema="workout organizer" to_table="exercises" >
+				<fk_column name="exercise_id" pk="exercise_id" />
+			</fk>
+		</table>
+		<table name="users" >
+			<column name="user_id" type="serial" jt="4" mandatory="y" />
+			<column name="login" type="varchar" length="20" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="50" jt="12" mandatory="y" />
+			<column name="password" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="first_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="last_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="height" type="integer" jt="4" />
+			<column name="weight" type="float8" length="0" decimal="2" jt="6" />
+			<column name="date_of_birth" type="date" jt="91" />
+			<index name="pk_users" unique="PRIMARY_KEY" >
+				<column name="user_id" />
+			</index>
+			<index name="unique_login" unique="UNIQUE" >
+				<column name="login" />
+			</index>
+			<index name="unique_mail" unique="UNIQUE" >
+				<column name="email" />
+			</index>
+		</table>
+		<table name="workout_entry" >
+			<column name="workout_id" type="serial" jt="4" mandatory="y" />
+			<column name="exercise_id" type="serial" jt="4" mandatory="y" />
+			<column name="set_count" type="integer" jt="4" mandatory="y" />
+			<column name="reps_per_set" type="integer" jt="4" />
+			<column name="weight" type="real" jt="7" mandatory="y" />
+			<index name="idx_workout_entry" unique="PRIMARY_KEY" >
+				<column name="workout_id" />
+				<column name="exercise_id" />
+			</index>
+			<index name="idx_workout_entry_0" unique="NORMAL" >
+				<column name="workout_id" />
+			</index>
+			<index name="idx_workout_entry_1" unique="NORMAL" >
+				<column name="exercise_id" />
+			</index>
+			<fk name="fk_workout_entry_workouts" to_schema="workout organizer" to_table="workouts" >
+				<fk_column name="workout_id" pk="workout_id" />
+			</fk>
+			<fk name="fk_workout_entry_exercises" to_schema="workout organizer" to_table="exercises" >
+				<fk_column name="exercise_id" pk="exercise_id" />
+			</fk>
+		</table>
+		<table name="workouts" >
+			<column name="workout_id" type="serial" jt="4" mandatory="y" />
+			<column name="user_id" type="serial" jt="4" mandatory="y" />
+			<column name="begin_time" type="timestamp" jt="93" mandatory="y" >
+				<defo>current_timestamp</defo>
+			</column>
+			<column name="end_time" type="time" jt="92" mandatory="y" />
+			<column name="gym_id" type="serial" jt="4" />
+			<index name="pk_workouts" unique="PRIMARY_KEY" >
+				<column name="workout_id" />
+			</index>
+			<index name="idx_workouts" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<index name="idx_workouts_0" unique="NORMAL" >
+				<column name="gym_id" />
+			</index>
+			<fk name="fk_workouts_users" to_schema="workout organizer" to_table="users" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+			<fk name="fk_workouts_gyms" to_schema="workout organizer" to_table="gyms" >
+				<fk_column name="gym_id" pk="gym_id" />
+			</fk>
+		</table>
+	</schema>
+	<layout id="Layout9462286" name="Workout organizer" show_relation_columns="y" >
+		<entity schema="workout organizer" name="users" color="b2cdf7" x="105" y="330" />
+		<entity schema="workout organizer" name="target_muscles" color="b2cdf7" x="330" y="600" />
+		<entity schema="workout organizer" name="muscle_groups" color="b2cdf7" x="300" y="480" />
+		<entity schema="workout organizer" name="workout_entry" color="b2cdf7" x="780" y="45" />
+		<entity schema="workout organizer" name="gyms" color="b2cdf7" x="60" y="60" />
+		<entity schema="workout organizer" name="workouts" color="b2cdf7" x="600" y="45" />
+		<entity schema="workout organizer" name="exercises" color="b2cdf7" x="870" y="285" />
+		<entity schema="workout organizer" name="exercises_ratings" color="b2cdf7" x="495" y="360" />
+		<entity schema="workout organizer" name="friendships" color="b2cdf7" x="45" y="210" />
+	</layout>
+</project>
