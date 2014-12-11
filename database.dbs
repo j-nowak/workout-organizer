@@ -75,6 +75,7 @@
 			<column name="address" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="latitude" type="real" jt="7" />
 			<column name="longitude" type="real" jt="7" />
+			<column name="url" type="varchar" length="300" jt="12" />
 			<index name="pk_gyms" unique="PRIMARY_KEY" >
 				<column name="gym_id" />
 			</index>
@@ -98,12 +99,6 @@
 			<column name="image" type="bytea" jt="-2" />
 			<index name="pk_muscle_groups" unique="PRIMARY_KEY" >
 				<column name="muscle_name" />
-			</index>
-		</table>
-		<table name="permissions" >
-			<column name="permission_name" type="varchar" length="100" jt="12" mandatory="y" />
-			<index name="pk_permissions" unique="PRIMARY_KEY" >
-				<column name="permission_name" />
 			</index>
 		</table>
 		<table name="target_muscles" >
@@ -141,20 +136,6 @@
 			<index name="unique_mail" unique="UNIQUE" >
 				<column name="email" />
 			</index>
-		</table>
-		<table name="users_permissions" >
-			<column name="user_id" type="integer" jt="4" mandatory="y" />
-			<column name="permission" type="varchar" length="100" jt="12" mandatory="y" />
-			<index name="idx_users_permissions" unique="UNIQUE" >
-				<column name="user_id" />
-				<column name="permission" />
-			</index>
-			<fk name="fk_users_permissions_users" to_schema="workout_organizer" to_table="users" delete_action="cascade" >
-				<fk_column name="user_id" pk="user_id" />
-			</fk>
-			<fk name="fk_users_permissions" to_schema="workout_organizer" to_table="permissions" delete_action="cascade" >
-				<fk_column name="permission" pk="permission_name" />
-			</fk>
 		</table>
 		<table name="workout_entries" >
 			<column name="workout_id" type="integer" jt="4" mandatory="y" />
@@ -266,20 +247,18 @@ $$ LANGUAGE plpgsql;]]></string>
 		</function>
 	</schema>
 	<layout id="Layout9462286" name="Workout organizer" show_relation_columns="y" >
-		<entity schema="workout_organizer" name="muscle_groups" color="b2cdf7" x="300" y="480" />
-		<entity schema="workout_organizer" name="target_muscles" color="b2cdf7" x="330" y="600" />
-		<entity schema="workout_organizer" name="exercises" color="b2cdf7" x="870" y="285" />
-		<entity schema="workout_organizer" name="gyms" color="b2cdf7" x="60" y="60" />
-		<entity schema="workout_organizer" name="users" color="b2cdf7" x="105" y="330" />
-		<entity schema="workout_organizer" name="permissions" color="b2cdf7" x="315" y="720" />
-		<entity schema="workout_organizer" name="exercise_ratings" color="b2cdf7" x="495" y="360" />
-		<entity schema="workout_organizer" name="gym_ratings" color="b2cdf7" x="285" y="195" />
-		<entity schema="workout_organizer" name="workouts" color="b2cdf7" x="600" y="45" />
-		<entity schema="workout_organizer" name="detailed_news" color="b2cdf7" x="735" y="540" />
-		<entity schema="workout_organizer" name="friendships" color="b2cdf7" x="45" y="210" />
-		<entity schema="workout_organizer" name="workout_entries" color="b2cdf7" x="780" y="45" />
-		<entity schema="workout_organizer" name="simple_news" color="b2cdf7" x="735" y="480" />
-		<entity schema="workout_organizer" name="users_permissions" color="b2cdf7" x="60" y="645" />
-		<entity schema="workout_organizer" name="likes" color="b2cdf7" x="480" y="240" />
+		<entity schema="workout_organizer" name="likes" color="b2cdf7" x="420" y="165" />
+		<entity schema="workout_organizer" name="users" color="b2cdf7" x="240" y="285" />
+		<entity schema="workout_organizer" name="exercise_ratings" color="b2cdf7" x="270" y="570" />
+		<entity schema="workout_organizer" name="exercises" color="b2cdf7" x="525" y="570" />
+		<entity schema="workout_organizer" name="detailed_news" color="b2cdf7" x="795" y="180" />
+		<entity schema="workout_organizer" name="gyms" color="b2cdf7" x="570" y="45" />
+		<entity schema="workout_organizer" name="gym_ratings" color="b2cdf7" x="240" y="45" />
+		<entity schema="workout_organizer" name="simple_news" color="b2cdf7" x="795" y="45" />
+		<entity schema="workout_organizer" name="friendships" color="b2cdf7" x="45" y="285" />
+		<entity schema="workout_organizer" name="workouts" color="b2cdf7" x="570" y="285" />
+		<entity schema="workout_organizer" name="workout_entries" color="b2cdf7" x="795" y="285" />
+		<entity schema="workout_organizer" name="target_muscles" color="b2cdf7" x="795" y="585" />
+		<entity schema="workout_organizer" name="muscle_groups" color="b2cdf7" x="795" y="450" />
 	</layout>
 </project>
