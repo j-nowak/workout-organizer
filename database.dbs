@@ -92,6 +92,12 @@
 				<column name="muscle_name" />
 			</index>
 		</table>
+		<table name="permissions" >
+			<column name="permission_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_permissions" unique="PRIMARY_KEY" >
+				<column name="permission_name" />
+			</index>
+		</table>
 		<table name="target_muscles" >
 			<column name="exercise_id" type="integer" jt="4" mandatory="y" />
 			<column name="muscle_name" type="varchar" length="100" jt="12" mandatory="y" />
@@ -127,6 +133,26 @@
 			<index name="unique_mail" unique="UNIQUE" >
 				<column name="email" />
 			</index>
+		</table>
+		<table name="users_permissions" >
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="permission" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="idx_users_permissions" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<index name="idx_users_permissions" unique="NORMAL" >
+				<column name="permission" />
+			</index>
+			<index name="idx_users_permissions" unique="UNIQUE" >
+				<column name="user_id" />
+				<column name="permission" />
+			</index>
+			<fk name="fk_users_permissions_users" to_schema="workout_organizer" to_table="users" delete_action="cascade" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+			<fk name="fk_users_permissions" to_schema="workout_organizer" to_table="permissions" delete_action="cascade" >
+				<fk_column name="permission" pk="permission_name" />
+			</fk>
 		</table>
 		<table name="workout_entry" >
 			<column name="workout_id" type="integer" jt="4" mandatory="y" />
@@ -216,5 +242,7 @@ $$ LANGUAGE plpgsql;]]></string>
 		<entity schema="workout_organizer" name="workouts" color="b2cdf7" x="600" y="45" />
 		<entity schema="workout_organizer" name="gyms" color="b2cdf7" x="60" y="60" />
 		<entity schema="workout_organizer" name="users" color="b2cdf7" x="105" y="330" />
+		<entity schema="workout_organizer" name="permissions" color="b2cdf7" x="315" y="720" />
+		<entity schema="workout_organizer" name="users_permissions" color="b2cdf7" x="60" y="645" />
 	</layout>
 </project>
