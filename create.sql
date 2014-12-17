@@ -11,7 +11,8 @@ CREATE TABLE exercises (
 CREATE TABLE gyms (
 	gym_id               serial  NOT NULL,
 	gym_name             varchar(100)  NOT NULL,
-	address              varchar(100)  NOT NULL,
+	city                 varchar(100)  NOT NULL,
+	street               varchar(100)  NOT NULL,
 	latitude             real  ,
 	longitude            real  ,
 	url                  varchar(300)  ,
@@ -112,7 +113,7 @@ CREATE TABLE workout_entries (
 	exercise_id          integer  NOT NULL,
 	set_count            integer  NOT NULL,
 	reps_per_set         integer  ,
-	weight               numeric(5,2)  NOT NULL,
+	weight               numeric(5,2)  ,
 	CONSTRAINT idx_workout_entry PRIMARY KEY ( workout_id, exercise_id )
  );
 
@@ -152,11 +153,20 @@ CREATE VIEW simple_news AS SELECT u.user_id AS friend_id, u.first_name, u.last_n
   GROUP BY u.user_id, f.first_user_id, f.second_user_id, g.gym_id, w.workout_id
   ORDER BY w.finished_at DESC;
 
-CREATE TRIGGER update_weight_trigger
-    AFTER INSERT OR UPDATE ON workouts
-    FOR EACH ROW
-    WHEN (NEW.weight IS NOT NULL)
-    EXECUTE PROCEDURE update_weight();;
+CREATE OR REPLACE FUNCTION insert_friendship() RETURNS TRIGGER AS $$
+    DECLARE
+        first_user_id int;
+        second_user_id int;
+    BEGIN
+        first_user_id = least(NEW.first_user_id, NEW.second_user_id);
+        second_user_id = greatest(NEW.first_user_id, NEW.second_user_id);
+
+        NEW.first_user_id = first_user_id;
+        NEW.second_user_id = second_user_id;
+
+        RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION update_weight() RETURNS TRIGGER AS $$
     DECLARE
@@ -174,6 +184,17 @@ CREATE OR REPLACE FUNCTION update_weight() RETURNS TRIGGER AS $$
         RETURN NEW;
     END
 $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER insert_friendship_trigger
+    BEFORE INSERT ON friendships
+    FOR EACH ROW
+    EXECUTE PROCEDURE insert_friendship();
+
+CREATE TRIGGER update_weight_trigger
+    AFTER INSERT OR UPDATE ON workouts
+    FOR EACH ROW
+    WHEN (NEW.weight IS NOT NULL)
+    EXECUTE PROCEDURE update_weight();
 
 ALTER TABLE exercise_ratings ADD CONSTRAINT fk_exercises_ratings_users FOREIGN KEY ( user_id ) REFERENCES users( user_id ) ON DELETE CASCADE;
 

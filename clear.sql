@@ -13,8 +13,7 @@ DROP TABLE IF EXISTS workout_entries CASCADE;
 DROP VIEW IF EXISTS detailed_news;
 DROP VIEW IF EXISTS simple_news;
 
-DROP TRIGGER IF EXISTS update_weight_trigger ON workouts;
-
 DROP FUNCTION IF EXISTS update_weight();
+DROP FUNCTION IF EXISTS insert_friendship();
 
 DROP SCHEMA workout_organizer;
