@@ -172,13 +172,9 @@ CREATE OR REPLACE FUNCTION update_weight() RETURNS TRIGGER AS $$
     DECLARE
         newer_workouts_count int;
     BEGIN
-        IF TG_OP = 'INSERT' THEN
+        newer_workouts_count = (SELECT COUNT(*) FROM workouts WHERE user_id = NEW.user_id AND finished_at > NEW.finished_at);
+        IF newer_workouts_count = 0 THEN
             UPDATE users SET weight = NEW.weight WHERE user_id = NEW.user_id;
-        ELSIF TG_OP = 'UPDATE'  THEN
-            newer_workouts_count = (SELECT COUNT(*) FROM workouts WHERE user_id = NEW.user_id AND started_at > NEW.started_at);
-            IF newer_workouts_count = 0 THEN
-                UPDATE users SET weight = NEW.weight WHERE user_id = NEW.user_id;
-            END IF;
         END IF;
 
         RETURN NEW;
