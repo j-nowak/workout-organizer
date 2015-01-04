@@ -1,0 +1,12 @@
+2015-01-04 22:53:40,954 - [INFO] - from play in run-main-1 
+Application started (Prod)
+
+2015-01-04 22:53:41,015 - [INFO] - from play in run-main-1 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2015-01-04 22:58:46,416 - [INFO] - from play in run-main-0 
+Application started (Prod)
+
+2015-01-04 22:58:46,473 - [INFO] - from play in run-main-0 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
