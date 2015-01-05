@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Workout organizer</title>
+
+		<link rel="stylesheet"  type="text/css" href="assets/login.css">
+		
+		<script type="text/javascript" src="assets/login.js"></script>
+
+	</head>
+
+		<div class="wrapper">
+			<div class="container">
+				<div class="tabs">
+					<button id="signup" class="login-tab active">SIGNUP</button>
+					<button id="login" class="login-tab">LOGIN</button>
+					<button id="forgot-pass" class="login-tab">FORGET PASSWORD</button>
+				</div>
+				<div class="content">
+					<form  action="" autocomplete="on">
+						<div id ="signup-container">
+							<p>
+								<label for="firstname" > Your first name </label> <br>
+								<input class="field" name="firstname" required="required" type="text" placeholder="Edward"/>
+							</p>
+							<p>
+								<label for="lastname" > Your last name </label> <br>
+								<input class="field" name="lastname" required="required" type="text" placeholder="Szczypka"/>
+							</p>
+							<p>
+								<label for="username" > Your username </label> <br>
+								<input class="field" name="username" required="required" type="text" placeholder="edzio"/>
+							</p>
+							<p>
+								<label for="email"> Your email </label> <br>
+								<input class="field" name="email" required="required" type="text" placeholder="edzio@email.com"/>
+							</p>
+							<p>
+								<label for="password"> Password </label> <br>
+								<input class="field" name="email" required="required" type="password" placeholder="edzio"/>
+							</p>
+							<p>
+								<label for="repeat-password"> Repeat password </label> <br>
+								<input class="field" name="repeat-password" required="required" type="password" placeholder="edzio"/>
+							</p>
+							
+							<input type="submit" value="Sign up">
+						</div>
+						
+						<div id="login-container" class="invisible">
+							<p>
+								<label for="username" > Your username or email</label> <br>
+								<input class="field" name="username" required="required" type="text" placeholder="edzio or edzio@email.com"/>
+							</p>
+							<p>
+								<label for="password"> Password </label> <br>
+								<input class="field" name="email" required="required" type="password" placeholder="edzio"/>
+							</p>
+							
+							<input type="submit" value="Login">
+						</div>
+						
+						
+					</form>
+					
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
