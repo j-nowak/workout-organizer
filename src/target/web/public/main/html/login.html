@@ -15,11 +15,11 @@
 				<div class="tabs">
 					<button id="signup" class="login-tab active">SIGNUP</button>
 					<button id="login" class="login-tab">LOGIN</button>
-					<button id="forgot-pass" class="login-tab">FORGET PASSWORD</button>
+					<button id="forgot-pass" class="login-tab">FORGOT PASSWORD</button>
 				</div>
 				<div class="content">
-					<form  action="" autocomplete="on">
-						<div id ="signup-container">
+					<div id ="signup-container">
+						<form  action="/register" method="post" autocomplete="on">
 							<p>
 								<label for="firstname" > Your first name </label> <br>
 								<input class="field" name="firstname" required="required" type="text" placeholder="Edward"/>
@@ -29,7 +29,7 @@
 								<input class="field" name="lastname" required="required" type="text" placeholder="Szczypka"/>
 							</p>
 							<p>
-								<label for="username" > Your username </label> <br>
+								<label for="username" > Your login </label> <br>
 								<input class="field" name="username" required="required" type="text" placeholder="edzio"/>
 							</p>
 							<p>
@@ -38,7 +38,7 @@
 							</p>
 							<p>
 								<label for="password"> Password </label> <br>
-								<input class="field" name="email" required="required" type="password" placeholder="edzio"/>
+								<input class="field" name="password" required="required" type="password" placeholder="edzio"/>
 							</p>
 							<p>
 								<label for="repeat-password"> Repeat password </label> <br>
@@ -46,11 +46,13 @@
 							</p>
 							
 							<input type="submit" value="Sign up">
-						</div>
-						
-						<div id="login-container" class="invisible">
+						</form>
+					</div>
+					
+					<div id="login-container" class="invisible">
+						<form  action="/signin" method ="post" autocomplete="on">
 							<p>
-								<label for="username" > Your username or email</label> <br>
+								<label for="username" > Your login or email</label> <br>
 								<input class="field" name="username" required="required" type="text" placeholder="edzio or edzio@email.com"/>
 							</p>
 							<p>
@@ -59,11 +61,8 @@
 							</p>
 							
 							<input type="submit" value="Login">
-						</div>
-						
-						
-					</form>
-					
+						</form>
+					</div>					
 				</div>
 			</div>
 		</div>

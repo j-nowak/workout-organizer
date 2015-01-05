@@ -5,6 +5,9 @@
 # Home page
 GET     /                           controllers.Application.login()
 
+# Sign up and in
+POST	/register					controllers.SignController.registerUser()
+
 # Map static resources from the /public folder to the /assets URL path
 GET		/login						controllers.Assets.at(path="/public/html", file="login.html")
 
