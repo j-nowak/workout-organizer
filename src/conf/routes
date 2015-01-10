@@ -9,6 +9,7 @@ GET     /home                       controllers.Application.home()
 GET		/exercises					controllers.Application.listAllExercises()
 
 # Sign up and in
+GET		/							controllers.Assets.at(path="/public/html", file="login.html")
 GET		/login						controllers.Assets.at(path="/public/html", file="login.html")
 POST	/register					controllers.SignController.registerUser()
 POST	/signin						controllers.SignController.loginUser()

@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakub/workspace/workout-organizer/src/conf/routes
-// @HASH:27b53f23cf40c31efd4baf4a6db25ea61c1f63b0
-// @DATE:Sat Jan 10 15:49:27 CET 2015
+// @HASH:50e166cf4e6f8069cf703a82b9edf0b5603f952a
+// @DATE:Sat Jan 10 18:07:56 CET 2015
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -15,10 +15,11 @@ import _root_.play.libs.F
 import Router.queryString
 
 
+// @LINE:23
 // @LINE:22
 // @LINE:21
-// @LINE:20
-// @LINE:18
+// @LINE:19
+// @LINE:16
 // @LINE:15
 // @LINE:14
 // @LINE:13
@@ -27,27 +28,27 @@ import Router.queryString
 // @LINE:6
 package controllers {
 
+// @LINE:16
 // @LINE:15
 // @LINE:14
-// @LINE:13
 class ReverseSignController {
 
 
-// @LINE:13
+// @LINE:14
 def registerUser(): Call = {
    import ReverseRouteContext.empty
    Call("POST", _prefix + { _defaultPrefix } + "register")
 }
                         
 
-// @LINE:14
+// @LINE:15
 def loginUser(): Call = {
    import ReverseRouteContext.empty
    Call("POST", _prefix + { _defaultPrefix } + "signin")
 }
                         
 
-// @LINE:15
+// @LINE:16
 def logout(): Call = {
    import ReverseRouteContext.empty
    Call("GET", _prefix + { _defaultPrefix } + "logout")
@@ -57,42 +58,44 @@ def logout(): Call = {
 }
                           
 
+// @LINE:23
 // @LINE:22
 // @LINE:21
-// @LINE:20
-// @LINE:18
+// @LINE:19
+// @LINE:13
 // @LINE:12
 class ReverseAssets {
 
 
+// @LINE:23
 // @LINE:22
 // @LINE:21
-// @LINE:20
-// @LINE:18
+// @LINE:19
+// @LINE:13
 // @LINE:12
 def at(path:String, file:String): Call = {
    (path: @unchecked, file: @unchecked) match {
 // @LINE:12
 case (path, file) if path == "/public/html" && file == "login.html" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public/html"), ("file", "login.html")))
-  Call("GET", _prefix + { _defaultPrefix } + "login")
+  Call("GET", _prefix)
                                          
-// @LINE:18
+// @LINE:19
 case (path, file) if path == "/public" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public")))
   Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[PathBindable[String]].unbind("file", file))
                                          
-// @LINE:20
+// @LINE:21
 case (path, file) if path == "/public/javascripts" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public/javascripts")))
   Call("GET", _prefix + { _defaultPrefix } + "javascripts/" + implicitly[PathBindable[String]].unbind("file", file))
                                          
-// @LINE:21
+// @LINE:22
 case (path, file) if path == "/public/images" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public/images")))
   Call("GET", _prefix + { _defaultPrefix } + "images/" + implicitly[PathBindable[String]].unbind("file", file))
                                          
-// @LINE:22
+// @LINE:23
 case (path, file) if path == "/public/stylesheets" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public/stylesheets")))
   Call("GET", _prefix + { _defaultPrefix } + "stylesheets/" + implicitly[PathBindable[String]].unbind("file", file))
@@ -129,10 +132,11 @@ def home(): Call = {
                   
 
 
+// @LINE:23
 // @LINE:22
 // @LINE:21
-// @LINE:20
-// @LINE:18
+// @LINE:19
+// @LINE:16
 // @LINE:15
 // @LINE:14
 // @LINE:13
@@ -142,13 +146,13 @@ def home(): Call = {
 package controllers.javascript {
 import ReverseRouteContext.empty
 
+// @LINE:16
 // @LINE:15
 // @LINE:14
-// @LINE:13
 class ReverseSignController {
 
 
-// @LINE:13
+// @LINE:14
 def registerUser : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.SignController.registerUser",
    """
@@ -159,7 +163,7 @@ def registerUser : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:14
+// @LINE:15
 def loginUser : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.SignController.loginUser",
    """
@@ -170,7 +174,7 @@ def loginUser : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:15
+// @LINE:16
 def logout : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.SignController.logout",
    """
@@ -184,23 +188,28 @@ def logout : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
+// @LINE:23
 // @LINE:22
 // @LINE:21
-// @LINE:20
-// @LINE:18
+// @LINE:19
+// @LINE:13
 // @LINE:12
 class ReverseAssets {
 
 
+// @LINE:23
 // @LINE:22
 // @LINE:21
-// @LINE:20
-// @LINE:18
+// @LINE:19
+// @LINE:13
 // @LINE:12
 def at : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Assets.at",
    """
       function(path, file) {
+      if (path == """ + implicitly[JavascriptLitteral[String]].to("/public/html") + """ && file == """ + implicitly[JavascriptLitteral[String]].to("login.html") + """) {
+      return _wA({method:"GET", url:"""" + _prefix + """"})
+      }
       if (path == """ + implicitly[JavascriptLitteral[String]].to("/public/html") + """ && file == """ + implicitly[JavascriptLitteral[String]].to("login.html") + """) {
       return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "login"})
       }
@@ -257,10 +266,11 @@ def home : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
+// @LINE:23
 // @LINE:22
 // @LINE:21
-// @LINE:20
-// @LINE:18
+// @LINE:19
+// @LINE:16
 // @LINE:15
 // @LINE:14
 // @LINE:13
@@ -270,25 +280,25 @@ def home : JavascriptReverseRoute = JavascriptReverseRoute(
 package controllers.ref {
 
 
+// @LINE:16
 // @LINE:15
 // @LINE:14
-// @LINE:13
 class ReverseSignController {
 
 
-// @LINE:13
+// @LINE:14
 def registerUser(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.SignController.registerUser(), HandlerDef(this.getClass.getClassLoader, "", "controllers.SignController", "registerUser", Seq(), "POST", """""", _prefix + """register""")
 )
                       
 
-// @LINE:14
+// @LINE:15
 def loginUser(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.SignController.loginUser(), HandlerDef(this.getClass.getClassLoader, "", "controllers.SignController", "loginUser", Seq(), "POST", """""", _prefix + """signin""")
 )
                       
 
-// @LINE:15
+// @LINE:16
 def logout(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.SignController.logout(), HandlerDef(this.getClass.getClassLoader, "", "controllers.SignController", "logout", Seq(), "GET", """""", _prefix + """logout""")
 )
@@ -297,17 +307,18 @@ def logout(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 }
                           
 
+// @LINE:23
 // @LINE:22
 // @LINE:21
-// @LINE:20
-// @LINE:18
+// @LINE:19
+// @LINE:13
 // @LINE:12
 class ReverseAssets {
 
 
 // @LINE:12
 def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Assets.at(path, file), HandlerDef(this.getClass.getClassLoader, "", "controllers.Assets", "at", Seq(classOf[String], classOf[String]), "GET", """ Sign up and in""", _prefix + """login""")
+   controllers.Assets.at(path, file), HandlerDef(this.getClass.getClassLoader, "", "controllers.Assets", "at", Seq(classOf[String], classOf[String]), "GET", """ Sign up and in""", _prefix + """""")
 )
                       
 

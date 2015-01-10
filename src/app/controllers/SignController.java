@@ -31,7 +31,9 @@ public class SignController extends Controller {
 		
 		User user = new User(login, email, password, firstName, lastName);
 		if (saveUser(user)) {
-			return ok("Registered!");
+			session().clear();
+			session(Application.USER_EMAIL, user.getEmail());
+			return redirect(Application.HOME);
 		}
 		else {
 			throw new NotImplementedException(); //TODO invalid inserts
