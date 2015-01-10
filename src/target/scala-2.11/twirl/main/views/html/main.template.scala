@@ -51,11 +51,12 @@ Seq[Any](format.raw/*1.54*/("""
 	        <li ><a id="nav-exercises" href="/exercises">Exercises</a></li>
 	        <li ><a id="nav-gyms" href="#">Gyms</a></li>
 	        <li ><a id="nav-account" href="#">Account</a></li>
+	        <li ><a id="nav-logout" href="/logout">Logout</a></li>
 	      </ul>
 	    </div>
 	  </header>
-        """),_display_(/*29.10*/content),format.raw/*29.17*/("""
-    """),format.raw/*30.5*/("""</body>
+        """),_display_(/*30.10*/content),format.raw/*30.17*/("""
+    """),format.raw/*31.5*/("""</body>
 </html>"""))}
   }
 
@@ -68,11 +69,11 @@ Seq[Any](format.raw/*1.54*/("""
 }
               /*
                   -- GENERATED --
-                  DATE: Sat Jan 10 17:52:06 CET 2015
+                  DATE: Sat Jan 10 22:19:03 CET 2015
                   SOURCE: /home/jakub/workspace/workout-organizer/src/app/views/main.scala.html
-                  HASH: c842abff1545e3ff24c89c9493dba98a86c170a7
-                  MATRIX: 734->1|874->53|901->54|978->105|1003->110|1393->472|1422->473|1460->483|1504->500|1537->512|1576->524|1605->525|2088->981|2116->988|2148->993
-                  LINES: 26->1|29->1|30->2|34->6|34->6|40->12|40->12|41->13|41->13|41->13|42->14|42->14|57->29|57->29|58->30
+                  HASH: b1536a34892fde4e63776702a08e41e03020bb5d
+                  MATRIX: 734->1|874->53|901->54|978->105|1003->110|1393->472|1422->473|1460->483|1504->500|1537->512|1576->524|1605->525|2152->1045|2180->1052|2212->1057
+                  LINES: 26->1|29->1|30->2|34->6|34->6|40->12|40->12|41->13|41->13|41->13|42->14|42->14|58->30|58->30|59->31
                   -- GENERATED --
               */
           

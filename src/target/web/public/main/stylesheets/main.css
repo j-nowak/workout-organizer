@@ -78,3 +78,38 @@ ul#muslce-groups li:hover {
    color: #000;
    background-color: #ddd; 
 }
+
+ul#exercises-list li {
+	border: 1px solid;
+	border-color: grey;
+	margin: 50px;
+	display: block;
+	border-radius: 5px;
+}
+
+.exercises-container {
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ex-name {
+	padding:10px;
+	background-color: rgb(157, 180, 184);
+	border-bottom: 1px solid;
+	border-color: grey;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	font-size: 20px;
+	color: rgb(24, 39, 140);
+	text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+	font-weight: 700;
+}
+
+.ex-content {
+	background-color: rgb(136, 156, 176);
+	padding: 10px;
+	font-size: 15px;
+	font-style: italic;
+	line-height: 24px;
+}

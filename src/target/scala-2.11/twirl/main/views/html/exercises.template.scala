@@ -44,9 +44,18 @@ Seq[Any](format.raw/*1.29*/("""
 	<div class="exercises-container">
 		<ul id="exercises-list">
 			"""),_display_(/*18.5*/for(ex <- exercises) yield /*18.25*/ {_display_(Seq[Any](format.raw/*18.27*/("""
-				"""),format.raw/*19.5*/("""<li>"""),_display_(/*19.10*/ex/*19.12*/.getName()),format.raw/*19.22*/("""</li>
-			""")))}),format.raw/*20.5*/("""
-		"""),format.raw/*21.3*/("""</ul>
+				"""),format.raw/*19.5*/("""<li>
+					<div class="ex-name">
+						"""),_display_(/*21.8*/ex/*21.10*/.getName()),format.raw/*21.20*/("""
+					"""),format.raw/*22.6*/("""</div>
+					<div class="ex-content">
+						Description: """),_display_(/*24.21*/ex/*24.23*/.getDescription()),format.raw/*24.40*/(""" """),format.raw/*24.41*/("""<br>
+						Movie: """),_display_(/*25.15*/ex/*25.17*/.getMovieUri()),format.raw/*25.31*/(""" """),format.raw/*25.32*/("""<br>
+						Rating: """),_display_(/*26.16*/ex/*26.18*/.getRating()),format.raw/*26.30*/(""" """),format.raw/*26.31*/("""<br>
+					</div>
+				</li>
+			""")))}),format.raw/*29.5*/("""
+		"""),format.raw/*30.3*/("""</ul>
 	</div>
 """)))}))}
   }
@@ -60,11 +69,11 @@ Seq[Any](format.raw/*1.29*/("""
 }
               /*
                   -- GENERATED --
-                  DATE: Sat Jan 10 17:52:38 CET 2015
+                  DATE: Sat Jan 10 21:58:47 CET 2015
                   SOURCE: /home/jakub/workspace/workout-organizer/src/app/views/exercises.scala.html
-                  HASH: d3dcd1dd3425a7bf6d78481f73cd2233525abcde
-                  MATRIX: 735->1|850->28|878->31|938->83|977->85|1006->88|1359->415|1395->435|1435->437|1467->442|1499->447|1510->449|1541->459|1581->469|1611->472
-                  LINES: 26->1|29->1|31->3|31->3|31->3|33->5|46->18|46->18|46->18|47->19|47->19|47->19|47->19|48->20|49->21
+                  HASH: b1d9d9ff0b9249fd8d072506aa0ff92c4eba659e
+                  MATRIX: 735->1|850->28|878->31|938->83|977->85|1006->88|1359->415|1395->435|1435->437|1467->442|1532->481|1543->483|1574->493|1607->499|1691->556|1702->558|1740->575|1769->576|1815->595|1826->597|1861->611|1890->612|1937->632|1948->634|1981->646|2010->647|2071->678|2101->681
+                  LINES: 26->1|29->1|31->3|31->3|31->3|33->5|46->18|46->18|46->18|47->19|49->21|49->21|49->21|50->22|52->24|52->24|52->24|52->24|53->25|53->25|53->25|53->25|54->26|54->26|54->26|54->26|57->29|58->30
                   -- GENERATED --
               */
           

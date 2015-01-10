@@ -16,7 +16,16 @@
 	<div class="exercises-container">
 		<ul id="exercises-list">
 			@for(ex <- exercises) {
-				<li>@ex.getName()</li>
+				<li>
+					<div class="ex-name">
+						@ex.getName()
+					</div>
+					<div class="ex-content">
+						Description: @ex.getDescription() <br>
+						Movie: @ex.getMovieUri() <br>
+						Rating: @ex.getRating() <br>
+					</div>
+				</li>
 			}
 		</ul>
 	</div>

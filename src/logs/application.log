@@ -1197,3 +1197,1791 @@ Caused by: sun.reflect.generics.reflectiveObjects.NotImplementedException: null
 	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
 	... 6 common frames omitted
 
+2015-01-10 18:23:56,623 - [INFO] - from application in play-akka.actor.default-dispatcher-88 
+User test logged in!
+
+2015-01-10 18:24:00,784 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Wyciskanie sztangi - incline
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Wyciskanie sztangi - decline
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Martwy ciąg
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Arnoldki
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Wyciskanie żołnierskie
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Przysiady
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Uginanie sztangi
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Uginanie hantli z supinacją
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Francuskie wyciskanie
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Podciąganie
+
+2015-01-10 18:24:00,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-89 
+Wspinanie na palce
+
+2015-01-10 18:27:20,815 - [INFO] - from application in play-akka.actor.default-dispatcher-92 
+User test logged in!
+
+2015-01-10 18:27:30,150 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 18:27:30,150 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Wyciskanie sztangi - incline
+
+2015-01-10 18:27:30,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Wyciskanie sztangi - decline
+
+2015-01-10 18:27:30,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Martwy ciąg
+
+2015-01-10 18:27:30,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Arnoldki
+
+2015-01-10 18:27:30,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Wyciskanie żołnierskie
+
+2015-01-10 18:27:30,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Przysiady
+
+2015-01-10 18:27:30,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Uginanie sztangi
+
+2015-01-10 18:27:30,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Uginanie hantli z supinacją
+
+2015-01-10 18:27:30,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Francuskie wyciskanie
+
+2015-01-10 18:27:30,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Podciąganie
+
+2015-01-10 18:27:30,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-93 
+Wspinanie na palce
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Wyciskanie sztangi - incline
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Wyciskanie sztangi - decline
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Martwy ciąg
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Arnoldki
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Wyciskanie żołnierskie
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Przysiady
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Uginanie sztangi
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Uginanie hantli z supinacją
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Francuskie wyciskanie
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Podciąganie
+
+2015-01-10 18:33:32,461 - [DEBUG] - from application in play-akka.actor.default-dispatcher-96 
+Wspinanie na palce
+
+2015-01-10 18:51:51,236 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 18:51:51,236 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Wyciskanie sztangi - incline
+
+2015-01-10 18:51:51,236 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Wyciskanie sztangi - decline
+
+2015-01-10 18:51:51,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Martwy ciąg
+
+2015-01-10 18:51:51,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Arnoldki
+
+2015-01-10 18:51:51,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Wyciskanie żołnierskie
+
+2015-01-10 18:51:51,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Przysiady
+
+2015-01-10 18:51:51,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Uginanie sztangi
+
+2015-01-10 18:51:51,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Uginanie hantli z supinacją
+
+2015-01-10 18:51:51,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Francuskie wyciskanie
+
+2015-01-10 18:51:51,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Podciąganie
+
+2015-01-10 18:51:51,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-105 
+Wspinanie na palce
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Wyciskanie sztangi - incline
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Wyciskanie sztangi - decline
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Martwy ciąg
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Arnoldki
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Wyciskanie żołnierskie
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Przysiady
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Uginanie sztangi
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Uginanie hantli z supinacją
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Francuskie wyciskanie
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Podciąganie
+
+2015-01-10 18:51:58,534 - [DEBUG] - from application in play-akka.actor.default-dispatcher-106 
+Wspinanie na palce
+
+2015-01-10 19:06:55,105 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/workout-organizer
+
+2015-01-10 19:06:55,108 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-01-10 19:06:55,118 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 19:06:55,119 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wyciskanie sztangi - incline
+
+2015-01-10 19:06:55,119 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wyciskanie sztangi - decline
+
+2015-01-10 19:06:55,119 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Martwy ciąg
+
+2015-01-10 19:06:55,119 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Arnoldki
+
+2015-01-10 19:06:55,119 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wyciskanie żołnierskie
+
+2015-01-10 19:06:55,119 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Przysiady
+
+2015-01-10 19:06:55,119 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Uginanie sztangi
+
+2015-01-10 19:06:55,120 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Uginanie hantli z supinacją
+
+2015-01-10 19:06:55,120 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Francuskie wyciskanie
+
+2015-01-10 19:06:55,120 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Podciąganie
+
+2015-01-10 19:06:55,120 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wspinanie na palce
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wyciskanie sztangi - incline
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wyciskanie sztangi - decline
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Martwy ciąg
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Arnoldki
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wyciskanie żołnierskie
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Przysiady
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Uginanie sztangi
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Uginanie hantli z supinacją
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Francuskie wyciskanie
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Podciąganie
+
+2015-01-10 19:06:56,342 - [DEBUG] - from application in play-akka.actor.default-dispatcher-111 
+Wspinanie na palce
+
+2015-01-10 19:07:18,615 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/workout-organizer
+
+2015-01-10 19:07:18,618 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-01-10 19:07:18,625 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Wyciskanie sztangi - incline
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Wyciskanie sztangi - decline
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Martwy ciąg
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Arnoldki
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Wyciskanie żołnierskie
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Przysiady
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Uginanie sztangi
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Uginanie hantli z supinacją
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Francuskie wyciskanie
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Podciąganie
+
+2015-01-10 19:07:18,626 - [DEBUG] - from application in play-akka.actor.default-dispatcher-115 
+Wspinanie na palce
+
+2015-01-10 19:07:31,236 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/workout-organizer
+
+2015-01-10 19:07:31,241 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-01-10 19:07:31,254 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Wyciskanie sztangi - incline
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Wyciskanie sztangi - decline
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Martwy ciąg
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Arnoldki
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Wyciskanie żołnierskie
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Przysiady
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Uginanie sztangi
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Uginanie hantli z supinacją
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Francuskie wyciskanie
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Podciąganie
+
+2015-01-10 19:07:31,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-116 
+Wspinanie na palce
+
+2015-01-10 19:32:53,115 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/workout-organizer
+
+2015-01-10 19:32:53,119 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-01-10 19:32:53,129 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 19:32:53,132 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Wyciskanie sztangi - incline
+
+2015-01-10 19:32:53,134 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Wyciskanie sztangi - decline
+
+2015-01-10 19:32:53,135 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Martwy ciąg
+
+2015-01-10 19:32:53,136 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Arnoldki
+
+2015-01-10 19:32:53,136 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Wyciskanie żołnierskie
+
+2015-01-10 19:32:53,136 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Przysiady
+
+2015-01-10 19:32:53,137 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Uginanie sztangi
+
+2015-01-10 19:32:53,137 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Uginanie hantli z supinacją
+
+2015-01-10 19:32:53,137 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Francuskie wyciskanie
+
+2015-01-10 19:32:53,138 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Podciąganie
+
+2015-01-10 19:32:53,138 - [DEBUG] - from application in play-akka.actor.default-dispatcher-117 
+Wspinanie na palce
+
+2015-01-10 21:23:39,105 - [INFO] - from application in play-akka.actor.default-dispatcher-121 
+User kamilgej logged in!
+
+2015-01-10 21:23:49,933 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:23:49,937 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:23:49,941 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:23:49,942 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Martwy ciąg
+
+2015-01-10 21:23:49,942 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Arnoldki
+
+2015-01-10 21:23:49,943 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Wyciskanie żołnierskie
+
+2015-01-10 21:23:49,943 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Przysiady
+
+2015-01-10 21:23:49,943 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Uginanie sztangi
+
+2015-01-10 21:23:49,944 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Uginanie hantli z supinacją
+
+2015-01-10 21:23:49,944 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Francuskie wyciskanie
+
+2015-01-10 21:23:49,944 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Podciąganie
+
+2015-01-10 21:23:49,945 - [DEBUG] - from application in play-akka.actor.default-dispatcher-123 
+Wspinanie na palce
+
+2015-01-10 21:55:16,941 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:55:16,942 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:55:16,944 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:55:16,946 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Martwy ciąg
+
+2015-01-10 21:55:16,947 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Arnoldki
+
+2015-01-10 21:55:16,947 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie żołnierskie
+
+2015-01-10 21:55:16,947 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Przysiady
+
+2015-01-10 21:55:16,948 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Uginanie sztangi
+
+2015-01-10 21:55:16,948 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Uginanie hantli z supinacją
+
+2015-01-10 21:55:16,948 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Francuskie wyciskanie
+
+2015-01-10 21:55:16,948 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Podciąganie
+
+2015-01-10 21:55:16,949 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wspinanie na palce
+
+2015-01-10 21:55:18,525 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:55:18,525 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:55:18,526 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:55:18,526 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Martwy ciąg
+
+2015-01-10 21:55:18,527 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Arnoldki
+
+2015-01-10 21:55:18,527 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie żołnierskie
+
+2015-01-10 21:55:18,527 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Przysiady
+
+2015-01-10 21:55:18,528 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Uginanie sztangi
+
+2015-01-10 21:55:18,528 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Uginanie hantli z supinacją
+
+2015-01-10 21:55:18,528 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Francuskie wyciskanie
+
+2015-01-10 21:55:18,528 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Podciąganie
+
+2015-01-10 21:55:18,529 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wspinanie na palce
+
+2015-01-10 21:55:19,253 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:55:19,254 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:55:19,254 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:55:19,254 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Martwy ciąg
+
+2015-01-10 21:55:19,254 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Arnoldki
+
+2015-01-10 21:55:19,255 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wyciskanie żołnierskie
+
+2015-01-10 21:55:19,255 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Przysiady
+
+2015-01-10 21:55:19,255 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Uginanie sztangi
+
+2015-01-10 21:55:19,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Uginanie hantli z supinacją
+
+2015-01-10 21:55:19,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Francuskie wyciskanie
+
+2015-01-10 21:55:19,256 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Podciąganie
+
+2015-01-10 21:55:19,257 - [DEBUG] - from application in play-akka.actor.default-dispatcher-124 
+Wspinanie na palce
+
+2015-01-10 21:55:39,161 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:55:39,161 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:55:39,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:55:39,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Martwy ciąg
+
+2015-01-10 21:55:39,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Arnoldki
+
+2015-01-10 21:55:39,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Wyciskanie żołnierskie
+
+2015-01-10 21:55:39,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Przysiady
+
+2015-01-10 21:55:39,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Uginanie sztangi
+
+2015-01-10 21:55:39,163 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Uginanie hantli z supinacją
+
+2015-01-10 21:55:39,163 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Francuskie wyciskanie
+
+2015-01-10 21:55:39,163 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Podciąganie
+
+2015-01-10 21:55:39,163 - [DEBUG] - from application in play-akka.actor.default-dispatcher-127 
+Wspinanie na palce
+
+2015-01-10 21:55:50,536 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:55:50,537 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:55:50,537 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:55:50,537 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Martwy ciąg
+
+2015-01-10 21:55:50,538 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Arnoldki
+
+2015-01-10 21:55:50,538 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wyciskanie żołnierskie
+
+2015-01-10 21:55:50,538 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Przysiady
+
+2015-01-10 21:55:50,538 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Uginanie sztangi
+
+2015-01-10 21:55:50,539 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Uginanie hantli z supinacją
+
+2015-01-10 21:55:50,539 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Francuskie wyciskanie
+
+2015-01-10 21:55:50,539 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Podciąganie
+
+2015-01-10 21:55:50,539 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wspinanie na palce
+
+2015-01-10 21:55:53,783 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:55:53,784 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:55:53,784 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:55:53,784 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Martwy ciąg
+
+2015-01-10 21:55:53,784 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Arnoldki
+
+2015-01-10 21:55:53,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Wyciskanie żołnierskie
+
+2015-01-10 21:55:53,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Przysiady
+
+2015-01-10 21:55:53,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Uginanie sztangi
+
+2015-01-10 21:55:53,785 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Uginanie hantli z supinacją
+
+2015-01-10 21:55:53,786 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Francuskie wyciskanie
+
+2015-01-10 21:55:53,786 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Podciąganie
+
+2015-01-10 21:55:53,786 - [DEBUG] - from application in play-akka.actor.default-dispatcher-130 
+Wspinanie na palce
+
+2015-01-10 21:56:28,015 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:56:28,015 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:56:28,016 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:56:28,016 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Martwy ciąg
+
+2015-01-10 21:56:28,016 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Arnoldki
+
+2015-01-10 21:56:28,016 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wyciskanie żołnierskie
+
+2015-01-10 21:56:28,017 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Przysiady
+
+2015-01-10 21:56:28,017 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Uginanie sztangi
+
+2015-01-10 21:56:28,017 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Uginanie hantli z supinacją
+
+2015-01-10 21:56:28,018 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Francuskie wyciskanie
+
+2015-01-10 21:56:28,018 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Podciąganie
+
+2015-01-10 21:56:28,018 - [DEBUG] - from application in play-akka.actor.default-dispatcher-129 
+Wspinanie na palce
+
+2015-01-10 21:56:31,579 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:56:31,580 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:56:31,580 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:56:31,580 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Martwy ciąg
+
+2015-01-10 21:56:31,580 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Arnoldki
+
+2015-01-10 21:56:31,580 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Wyciskanie żołnierskie
+
+2015-01-10 21:56:31,581 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Przysiady
+
+2015-01-10 21:56:31,581 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Uginanie sztangi
+
+2015-01-10 21:56:31,581 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Uginanie hantli z supinacją
+
+2015-01-10 21:56:31,581 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Francuskie wyciskanie
+
+2015-01-10 21:56:31,581 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Podciąganie
+
+2015-01-10 21:56:31,581 - [DEBUG] - from application in play-akka.actor.default-dispatcher-131 
+Wspinanie na palce
+
+2015-01-10 21:57:36,160 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:57:36,161 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:57:36,161 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:57:36,161 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Martwy ciąg
+
+2015-01-10 21:57:36,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Arnoldki
+
+2015-01-10 21:57:36,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Wyciskanie żołnierskie
+
+2015-01-10 21:57:36,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Przysiady
+
+2015-01-10 21:57:36,162 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Uginanie sztangi
+
+2015-01-10 21:57:36,163 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Uginanie hantli z supinacją
+
+2015-01-10 21:57:36,163 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Francuskie wyciskanie
+
+2015-01-10 21:57:36,163 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Podciąganie
+
+2015-01-10 21:57:36,163 - [DEBUG] - from application in play-akka.actor.default-dispatcher-132 
+Wspinanie na palce
+
+2015-01-10 21:58:24,240 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:58:24,240 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:58:24,240 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:58:24,241 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Martwy ciąg
+
+2015-01-10 21:58:24,241 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Arnoldki
+
+2015-01-10 21:58:24,242 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wyciskanie żołnierskie
+
+2015-01-10 21:58:24,242 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Przysiady
+
+2015-01-10 21:58:24,242 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Uginanie sztangi
+
+2015-01-10 21:58:24,242 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Uginanie hantli z supinacją
+
+2015-01-10 21:58:24,243 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Francuskie wyciskanie
+
+2015-01-10 21:58:24,243 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Podciąganie
+
+2015-01-10 21:58:24,243 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wspinanie na palce
+
+2015-01-10 21:58:36,919 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:58:36,919 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:58:36,919 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:58:36,920 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Martwy ciąg
+
+2015-01-10 21:58:36,920 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Arnoldki
+
+2015-01-10 21:58:36,920 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wyciskanie żołnierskie
+
+2015-01-10 21:58:36,921 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Przysiady
+
+2015-01-10 21:58:36,921 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Uginanie sztangi
+
+2015-01-10 21:58:36,921 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Uginanie hantli z supinacją
+
+2015-01-10 21:58:36,922 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Francuskie wyciskanie
+
+2015-01-10 21:58:36,922 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Podciąganie
+
+2015-01-10 21:58:36,922 - [DEBUG] - from application in play-akka.actor.default-dispatcher-135 
+Wspinanie na palce
+
+2015-01-10 21:58:48,126 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/workout-organizer
+
+2015-01-10 21:58:48,130 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-01-10 21:58:48,138 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:58:48,140 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:58:48,142 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:58:48,143 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Martwy ciąg
+
+2015-01-10 21:58:48,144 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Arnoldki
+
+2015-01-10 21:58:48,144 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Wyciskanie żołnierskie
+
+2015-01-10 21:58:48,144 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Przysiady
+
+2015-01-10 21:58:48,144 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Uginanie sztangi
+
+2015-01-10 21:58:48,145 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Uginanie hantli z supinacją
+
+2015-01-10 21:58:48,145 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Francuskie wyciskanie
+
+2015-01-10 21:58:48,145 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Podciąganie
+
+2015-01-10 21:58:48,145 - [DEBUG] - from application in play-akka.actor.default-dispatcher-136 
+Wspinanie na palce
+
+2015-01-10 21:59:21,227 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:59:21,227 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:59:21,228 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:59:21,229 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Martwy ciąg
+
+2015-01-10 21:59:21,230 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Arnoldki
+
+2015-01-10 21:59:21,230 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Wyciskanie żołnierskie
+
+2015-01-10 21:59:21,231 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Przysiady
+
+2015-01-10 21:59:21,231 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Uginanie sztangi
+
+2015-01-10 21:59:21,232 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Uginanie hantli z supinacją
+
+2015-01-10 21:59:21,232 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Francuskie wyciskanie
+
+2015-01-10 21:59:21,233 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Podciąganie
+
+2015-01-10 21:59:21,233 - [DEBUG] - from application in play-akka.actor.default-dispatcher-138 
+Wspinanie na palce
+
+2015-01-10 21:59:59,620 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 21:59:59,621 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - incline
+
+2015-01-10 21:59:59,621 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - decline
+
+2015-01-10 21:59:59,621 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Martwy ciąg
+
+2015-01-10 21:59:59,622 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Arnoldki
+
+2015-01-10 21:59:59,622 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie żołnierskie
+
+2015-01-10 21:59:59,622 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Przysiady
+
+2015-01-10 21:59:59,623 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Uginanie sztangi
+
+2015-01-10 21:59:59,623 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Uginanie hantli z supinacją
+
+2015-01-10 21:59:59,623 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Francuskie wyciskanie
+
+2015-01-10 21:59:59,623 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Podciąganie
+
+2015-01-10 21:59:59,624 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wspinanie na palce
+
+2015-01-10 22:00:14,893 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:00:14,893 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:00:14,894 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:00:14,894 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Martwy ciąg
+
+2015-01-10 22:00:14,894 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Arnoldki
+
+2015-01-10 22:00:14,895 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wyciskanie żołnierskie
+
+2015-01-10 22:00:14,895 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Przysiady
+
+2015-01-10 22:00:14,895 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Uginanie sztangi
+
+2015-01-10 22:00:14,895 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Uginanie hantli z supinacją
+
+2015-01-10 22:00:14,895 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Francuskie wyciskanie
+
+2015-01-10 22:00:14,896 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Podciąganie
+
+2015-01-10 22:00:14,896 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wspinanie na palce
+
+2015-01-10 22:00:26,802 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:00:26,803 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:00:26,804 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:00:26,804 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Martwy ciąg
+
+2015-01-10 22:00:26,805 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Arnoldki
+
+2015-01-10 22:00:26,805 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wyciskanie żołnierskie
+
+2015-01-10 22:00:26,805 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Przysiady
+
+2015-01-10 22:00:26,806 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Uginanie sztangi
+
+2015-01-10 22:00:26,806 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Uginanie hantli z supinacją
+
+2015-01-10 22:00:26,806 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Francuskie wyciskanie
+
+2015-01-10 22:00:26,806 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Podciąganie
+
+2015-01-10 22:00:26,807 - [DEBUG] - from application in play-akka.actor.default-dispatcher-146 
+Wspinanie na palce
+
+2015-01-10 22:00:28,946 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:00:28,947 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:00:28,948 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:00:28,949 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Martwy ciąg
+
+2015-01-10 22:00:28,950 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Arnoldki
+
+2015-01-10 22:00:28,951 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie żołnierskie
+
+2015-01-10 22:00:28,952 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Przysiady
+
+2015-01-10 22:00:28,952 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Uginanie sztangi
+
+2015-01-10 22:00:28,952 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Uginanie hantli z supinacją
+
+2015-01-10 22:00:28,952 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Francuskie wyciskanie
+
+2015-01-10 22:00:28,953 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Podciąganie
+
+2015-01-10 22:00:28,953 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wspinanie na palce
+
+2015-01-10 22:00:31,463 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:00:31,464 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:00:31,464 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:00:31,464 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Martwy ciąg
+
+2015-01-10 22:00:31,465 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Arnoldki
+
+2015-01-10 22:00:31,465 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie żołnierskie
+
+2015-01-10 22:00:31,465 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Przysiady
+
+2015-01-10 22:00:31,465 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Uginanie sztangi
+
+2015-01-10 22:00:31,466 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Uginanie hantli z supinacją
+
+2015-01-10 22:00:31,466 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Francuskie wyciskanie
+
+2015-01-10 22:00:31,466 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Podciąganie
+
+2015-01-10 22:00:31,467 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wspinanie na palce
+
+2015-01-10 22:00:57,107 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:00:57,107 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:00:57,108 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:00:57,108 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Martwy ciąg
+
+2015-01-10 22:00:57,108 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Arnoldki
+
+2015-01-10 22:00:57,109 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wyciskanie żołnierskie
+
+2015-01-10 22:00:57,109 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Przysiady
+
+2015-01-10 22:00:57,109 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Uginanie sztangi
+
+2015-01-10 22:00:57,110 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Uginanie hantli z supinacją
+
+2015-01-10 22:00:57,110 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Francuskie wyciskanie
+
+2015-01-10 22:00:57,110 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Podciąganie
+
+2015-01-10 22:00:57,110 - [DEBUG] - from application in play-akka.actor.default-dispatcher-141 
+Wspinanie na palce
+
+2015-01-10 22:02:31,286 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:02:31,287 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:02:31,287 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:02:31,287 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Martwy ciąg
+
+2015-01-10 22:02:31,288 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Arnoldki
+
+2015-01-10 22:02:31,288 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Wyciskanie żołnierskie
+
+2015-01-10 22:02:31,289 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Przysiady
+
+2015-01-10 22:02:31,289 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Uginanie sztangi
+
+2015-01-10 22:02:31,289 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Uginanie hantli z supinacją
+
+2015-01-10 22:02:31,290 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Francuskie wyciskanie
+
+2015-01-10 22:02:31,290 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Podciąganie
+
+2015-01-10 22:02:31,290 - [DEBUG] - from application in play-akka.actor.default-dispatcher-150 
+Wspinanie na palce
+
+2015-01-10 22:02:54,377 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:02:54,378 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:02:54,378 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:02:54,378 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Martwy ciąg
+
+2015-01-10 22:02:54,379 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Arnoldki
+
+2015-01-10 22:02:54,379 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie żołnierskie
+
+2015-01-10 22:02:54,379 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Przysiady
+
+2015-01-10 22:02:54,380 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Uginanie sztangi
+
+2015-01-10 22:02:54,380 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Uginanie hantli z supinacją
+
+2015-01-10 22:02:54,380 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Francuskie wyciskanie
+
+2015-01-10 22:02:54,380 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Podciąganie
+
+2015-01-10 22:02:54,381 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wspinanie na palce
+
+2015-01-10 22:03:07,872 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:03:07,872 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:03:07,872 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:03:07,872 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Martwy ciąg
+
+2015-01-10 22:03:07,872 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Arnoldki
+
+2015-01-10 22:03:07,873 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie żołnierskie
+
+2015-01-10 22:03:07,873 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Przysiady
+
+2015-01-10 22:03:07,873 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Uginanie sztangi
+
+2015-01-10 22:03:07,873 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Uginanie hantli z supinacją
+
+2015-01-10 22:03:07,873 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Francuskie wyciskanie
+
+2015-01-10 22:03:07,873 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Podciąganie
+
+2015-01-10 22:03:07,874 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wspinanie na palce
+
+2015-01-10 22:03:24,059 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:03:24,059 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:03:24,060 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:03:24,060 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Martwy ciąg
+
+2015-01-10 22:03:24,060 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Arnoldki
+
+2015-01-10 22:03:24,060 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wyciskanie żołnierskie
+
+2015-01-10 22:03:24,061 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Przysiady
+
+2015-01-10 22:03:24,061 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Uginanie sztangi
+
+2015-01-10 22:03:24,061 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Uginanie hantli z supinacją
+
+2015-01-10 22:03:24,061 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Francuskie wyciskanie
+
+2015-01-10 22:03:24,061 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Podciąganie
+
+2015-01-10 22:03:24,062 - [DEBUG] - from application in play-akka.actor.default-dispatcher-152 
+Wspinanie na palce
+
+2015-01-10 22:03:34,763 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:03:34,764 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:03:34,765 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:03:34,765 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Martwy ciąg
+
+2015-01-10 22:03:34,765 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Arnoldki
+
+2015-01-10 22:03:34,765 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wyciskanie żołnierskie
+
+2015-01-10 22:03:34,766 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Przysiady
+
+2015-01-10 22:03:34,766 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Uginanie sztangi
+
+2015-01-10 22:03:34,766 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Uginanie hantli z supinacją
+
+2015-01-10 22:03:34,766 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Francuskie wyciskanie
+
+2015-01-10 22:03:34,766 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Podciąganie
+
+2015-01-10 22:03:34,766 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wspinanie na palce
+
+2015-01-10 22:04:05,719 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:04:05,719 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:04:05,719 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:04:05,719 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Martwy ciąg
+
+2015-01-10 22:04:05,720 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Arnoldki
+
+2015-01-10 22:04:05,720 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wyciskanie żołnierskie
+
+2015-01-10 22:04:05,720 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Przysiady
+
+2015-01-10 22:04:05,720 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Uginanie sztangi
+
+2015-01-10 22:04:05,720 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Uginanie hantli z supinacją
+
+2015-01-10 22:04:05,721 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Francuskie wyciskanie
+
+2015-01-10 22:04:05,721 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Podciąganie
+
+2015-01-10 22:04:05,721 - [DEBUG] - from application in play-akka.actor.default-dispatcher-155 
+Wspinanie na palce
+
+2015-01-10 22:04:31,907 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:04:31,907 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:04:31,908 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:04:31,908 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Martwy ciąg
+
+2015-01-10 22:04:31,908 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Arnoldki
+
+2015-01-10 22:04:31,908 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Wyciskanie żołnierskie
+
+2015-01-10 22:04:31,908 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Przysiady
+
+2015-01-10 22:04:31,909 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Uginanie sztangi
+
+2015-01-10 22:04:31,909 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Uginanie hantli z supinacją
+
+2015-01-10 22:04:31,909 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Francuskie wyciskanie
+
+2015-01-10 22:04:31,909 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Podciąganie
+
+2015-01-10 22:04:31,909 - [DEBUG] - from application in play-akka.actor.default-dispatcher-161 
+Wspinanie na palce
+
+2015-01-10 22:05:10,469 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:05:10,469 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:05:10,469 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:05:10,469 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Martwy ciąg
+
+2015-01-10 22:05:10,470 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Arnoldki
+
+2015-01-10 22:05:10,470 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wyciskanie żołnierskie
+
+2015-01-10 22:05:10,470 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Przysiady
+
+2015-01-10 22:05:10,470 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Uginanie sztangi
+
+2015-01-10 22:05:10,471 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Uginanie hantli z supinacją
+
+2015-01-10 22:05:10,471 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Francuskie wyciskanie
+
+2015-01-10 22:05:10,471 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Podciąganie
+
+2015-01-10 22:05:10,471 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wspinanie na palce
+
+2015-01-10 22:05:24,150 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:05:24,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:05:24,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:05:24,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Martwy ciąg
+
+2015-01-10 22:05:24,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Arnoldki
+
+2015-01-10 22:05:24,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wyciskanie żołnierskie
+
+2015-01-10 22:05:24,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Przysiady
+
+2015-01-10 22:05:24,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Uginanie sztangi
+
+2015-01-10 22:05:24,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Uginanie hantli z supinacją
+
+2015-01-10 22:05:24,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Francuskie wyciskanie
+
+2015-01-10 22:05:24,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Podciąganie
+
+2015-01-10 22:05:24,153 - [DEBUG] - from application in play-akka.actor.default-dispatcher-163 
+Wspinanie na palce
+
+2015-01-10 22:07:34,145 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:07:34,146 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:07:34,146 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:07:34,146 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Martwy ciąg
+
+2015-01-10 22:07:34,146 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Arnoldki
+
+2015-01-10 22:07:34,146 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Wyciskanie żołnierskie
+
+2015-01-10 22:07:34,147 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Przysiady
+
+2015-01-10 22:07:34,147 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Uginanie sztangi
+
+2015-01-10 22:07:34,147 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Uginanie hantli z supinacją
+
+2015-01-10 22:07:34,147 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Francuskie wyciskanie
+
+2015-01-10 22:07:34,147 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Podciąganie
+
+2015-01-10 22:07:34,147 - [DEBUG] - from application in play-akka.actor.default-dispatcher-160 
+Wspinanie na palce
+
+2015-01-10 22:07:44,914 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:07:44,915 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:07:44,915 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:07:44,916 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Martwy ciąg
+
+2015-01-10 22:07:44,916 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Arnoldki
+
+2015-01-10 22:07:44,916 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Wyciskanie żołnierskie
+
+2015-01-10 22:07:44,916 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Przysiady
+
+2015-01-10 22:07:44,917 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Uginanie sztangi
+
+2015-01-10 22:07:44,917 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Uginanie hantli z supinacją
+
+2015-01-10 22:07:44,917 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Francuskie wyciskanie
+
+2015-01-10 22:07:44,917 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Podciąganie
+
+2015-01-10 22:07:44,917 - [DEBUG] - from application in play-akka.actor.default-dispatcher-172 
+Wspinanie na palce
+
+2015-01-10 22:08:19,951 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:08:19,951 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:08:19,952 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:08:19,952 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Martwy ciąg
+
+2015-01-10 22:08:19,953 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Arnoldki
+
+2015-01-10 22:08:19,953 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Wyciskanie żołnierskie
+
+2015-01-10 22:08:19,953 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Przysiady
+
+2015-01-10 22:08:19,954 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Uginanie sztangi
+
+2015-01-10 22:08:19,954 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Uginanie hantli z supinacją
+
+2015-01-10 22:08:19,954 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Francuskie wyciskanie
+
+2015-01-10 22:08:19,954 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Podciąganie
+
+2015-01-10 22:08:19,954 - [DEBUG] - from application in play-akka.actor.default-dispatcher-171 
+Wspinanie na palce
+
+2015-01-10 22:09:15,153 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:09:15,153 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:09:15,153 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:09:15,153 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Martwy ciąg
+
+2015-01-10 22:09:15,154 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Arnoldki
+
+2015-01-10 22:09:15,154 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Wyciskanie żołnierskie
+
+2015-01-10 22:09:15,154 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Przysiady
+
+2015-01-10 22:09:15,154 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Uginanie sztangi
+
+2015-01-10 22:09:15,154 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Uginanie hantli z supinacją
+
+2015-01-10 22:09:15,154 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Francuskie wyciskanie
+
+2015-01-10 22:09:15,154 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Podciąganie
+
+2015-01-10 22:09:15,155 - [DEBUG] - from application in play-akka.actor.default-dispatcher-175 
+Wspinanie na palce
+
+2015-01-10 22:09:56,563 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:09:56,563 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:09:56,564 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:09:56,564 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Martwy ciąg
+
+2015-01-10 22:09:56,564 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Arnoldki
+
+2015-01-10 22:09:56,564 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Wyciskanie żołnierskie
+
+2015-01-10 22:09:56,565 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Przysiady
+
+2015-01-10 22:09:56,565 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Uginanie sztangi
+
+2015-01-10 22:09:56,565 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Uginanie hantli z supinacją
+
+2015-01-10 22:09:56,565 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Francuskie wyciskanie
+
+2015-01-10 22:09:56,565 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Podciąganie
+
+2015-01-10 22:09:56,566 - [DEBUG] - from application in play-akka.actor.default-dispatcher-179 
+Wspinanie na palce
+
+2015-01-10 22:11:26,108 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:11:26,108 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:11:26,108 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:11:26,109 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Martwy ciąg
+
+2015-01-10 22:11:26,109 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Arnoldki
+
+2015-01-10 22:11:26,109 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Wyciskanie żołnierskie
+
+2015-01-10 22:11:26,109 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Przysiady
+
+2015-01-10 22:11:26,109 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Uginanie sztangi
+
+2015-01-10 22:11:26,109 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Uginanie hantli z supinacją
+
+2015-01-10 22:11:26,110 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Francuskie wyciskanie
+
+2015-01-10 22:11:26,110 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Podciąganie
+
+2015-01-10 22:11:26,110 - [DEBUG] - from application in play-akka.actor.default-dispatcher-183 
+Wspinanie na palce
+
+2015-01-10 22:12:42,048 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:12:42,048 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:12:42,048 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:12:42,048 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Martwy ciąg
+
+2015-01-10 22:12:42,049 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Arnoldki
+
+2015-01-10 22:12:42,049 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Wyciskanie żołnierskie
+
+2015-01-10 22:12:42,049 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Przysiady
+
+2015-01-10 22:12:42,049 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Uginanie sztangi
+
+2015-01-10 22:12:42,050 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Uginanie hantli z supinacją
+
+2015-01-10 22:12:42,050 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Francuskie wyciskanie
+
+2015-01-10 22:12:42,050 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Podciąganie
+
+2015-01-10 22:12:42,050 - [DEBUG] - from application in play-akka.actor.default-dispatcher-188 
+Wspinanie na palce
+
+2015-01-10 22:19:03,741 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/workout-organizer
+
+2015-01-10 22:19:03,744 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-01-10 22:19:10,130 - [INFO] - from application in play-akka.actor.default-dispatcher-194 
+User test logged in!
+
+2015-01-10 22:19:12,288 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:19:12,290 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:19:12,291 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:19:12,292 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Martwy ciąg
+
+2015-01-10 22:19:12,292 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Arnoldki
+
+2015-01-10 22:19:12,293 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Wyciskanie żołnierskie
+
+2015-01-10 22:19:12,293 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Przysiady
+
+2015-01-10 22:19:12,293 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Uginanie sztangi
+
+2015-01-10 22:19:12,293 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Uginanie hantli z supinacją
+
+2015-01-10 22:19:12,294 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Francuskie wyciskanie
+
+2015-01-10 22:19:12,294 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Podciąganie
+
+2015-01-10 22:19:12,294 - [DEBUG] - from application in play-akka.actor.default-dispatcher-194 
+Wspinanie na palce
+
+2015-01-10 22:20:09,120 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/workout-organizer
+
+2015-01-10 22:20:09,123 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-01-10 22:20:13,333 - [INFO] - from application in play-akka.actor.default-dispatcher-196 
+User test logged in!
+
+2015-01-10 22:21:24,593 - [INFO] - from application in play-akka.actor.default-dispatcher-198 
+User test logged in!
+
+2015-01-10 22:21:29,143 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Wyciskanie sztangi - płaska ławka
+
+2015-01-10 22:21:29,144 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Wyciskanie sztangi - incline
+
+2015-01-10 22:21:29,145 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Wyciskanie sztangi - decline
+
+2015-01-10 22:21:29,146 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Martwy ciąg
+
+2015-01-10 22:21:29,146 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Arnoldki
+
+2015-01-10 22:21:29,147 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Wyciskanie żołnierskie
+
+2015-01-10 22:21:29,147 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Przysiady
+
+2015-01-10 22:21:29,147 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Uginanie sztangi
+
+2015-01-10 22:21:29,148 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Uginanie hantli z supinacją
+
+2015-01-10 22:21:29,148 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Francuskie wyciskanie
+
+2015-01-10 22:21:29,148 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Podciąganie
+
+2015-01-10 22:21:29,148 - [DEBUG] - from application in play-akka.actor.default-dispatcher-202 
+Wspinanie na palce
+

@@ -59,7 +59,7 @@ public class SignController extends Controller {
 	
 	public static Result logout() {
 		session().clear();
-		return ok("LOGOUT");
+		return redirect(Application.LOGIN);
 	}
 	
 	private static boolean saveUser(User user) {
