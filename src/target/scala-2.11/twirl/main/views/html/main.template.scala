@@ -20,13 +20,13 @@ import play.mvc.Http.Context.Implicit._
 import views.html._
 
 /**/
-object main extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with play.twirl.api.Template2[String,Html,play.twirl.api.HtmlFormat.Appendable] {
+object main extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with play.twirl.api.Template3[String,String,Html,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(title: String)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(title: String, activeNavBar: String)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
       _display_ {
 
-Seq[Any](format.raw/*1.32*/("""
+Seq[Any](format.raw/*1.54*/("""
 """),format.raw/*2.1*/("""<!DOCTYPE html>
 
 <html>
@@ -34,38 +34,45 @@ Seq[Any](format.raw/*1.32*/("""
         <title>"""),_display_(/*6.17*/title),format.raw/*6.22*/("""</title>
         <link rel="stylesheet" media="screen" href="stylesheets/main.css">
         <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+        
+        <script type="text/javascript" src="javascripts/navigation.js"></script>
+        <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function(event) """),format.raw/*12.71*/("""{"""),format.raw/*12.72*/("""
+        	"""),format.raw/*13.10*/("""activateNavbar(""""),_display_(/*13.27*/activeNavBar),format.raw/*13.39*/("""");
+        """),format.raw/*14.9*/("""}"""),format.raw/*14.10*/(""");
+        </script>        
     </head>
     <body>
     	 <header>
 	    <div class="nav">
 	      <ul>
-	        <li class="home"><a class="active" href="#">Home</a></li>
-	        <li class="trainings"><a href="#">Training</a></li>
-	        <li class="exercises"><a href="#">Exercises</a></li>
-	        <li class="gyms"><a href="#">Gyms</a></li>
-	        <li class="account"><a href="#">Account</a></li>
+	        <li ><a id="nav-home" href="/home">Home</a></li>
+	        <li ><a id="nav-training" href="#">Training</a></li>
+	        <li ><a id="nav-exercises" href="/exercises">Exercises</a></li>
+	        <li ><a id="nav-gyms" href="#">Gyms</a></li>
+	        <li ><a id="nav-account" href="#">Account</a></li>
 	      </ul>
 	    </div>
 	  </header>
-        """),_display_(/*22.10*/content),format.raw/*22.17*/("""
-    """),format.raw/*23.5*/("""</body>
+        """),_display_(/*29.10*/content),format.raw/*29.17*/("""
+    """),format.raw/*30.5*/("""</body>
 </html>"""))}
   }
 
-  def render(title:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(content)
+  def render(title:String,activeNavBar:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title,activeNavBar)(content)
 
-  def f:((String) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title) => (content) => apply(title)(content)
+  def f:((String,String) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title,activeNavBar) => (content) => apply(title,activeNavBar)(content)
 
   def ref: this.type = this
 
 }
               /*
                   -- GENERATED --
-                  DATE: Sat Jan 10 14:04:16 CET 2015
+                  DATE: Sat Jan 10 17:52:06 CET 2015
                   SOURCE: /home/jakub/workspace/workout-organizer/src/app/views/main.scala.html
-                  HASH: ffca505759a05702d165755ca993bf067468047a
-                  MATRIX: 727->1|845->31|872->32|949->83|974->88|1583->670|1611->677|1643->682
-                  LINES: 26->1|29->1|30->2|34->6|34->6|50->22|50->22|51->23
+                  HASH: c842abff1545e3ff24c89c9493dba98a86c170a7
+                  MATRIX: 734->1|874->53|901->54|978->105|1003->110|1393->472|1422->473|1460->483|1504->500|1537->512|1576->524|1605->525|2088->981|2116->988|2148->993
+                  LINES: 26->1|29->1|30->2|34->6|34->6|40->12|40->12|41->13|41->13|41->13|42->14|42->14|57->29|57->29|58->30
                   -- GENERATED --
               */
           

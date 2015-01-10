@@ -28,7 +28,7 @@ object index extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,Form
 
 Seq[Any](format.raw/*1.20*/("""
 
-"""),_display_(/*3.2*/main("Workout organizer HOME")/*3.32*/ {_display_(Seq[Any](format.raw/*3.34*/("""
+"""),_display_(/*3.2*/main("Workout organizer HOME", "nav-home")/*3.44*/ {_display_(Seq[Any](format.raw/*3.46*/("""
 
   """),format.raw/*5.3*/("""<h1>Welcome """),_display_(/*5.16*/username),format.raw/*5.24*/("""!</h1>
 
@@ -44,10 +44,10 @@ Seq[Any](format.raw/*1.20*/("""
 }
               /*
                   -- GENERATED --
-                  DATE: Sat Jan 10 14:01:10 CET 2015
+                  DATE: Sat Jan 10 17:48:27 CET 2015
                   SOURCE: /home/jakub/workspace/workout-organizer/src/app/views/index.scala.html
-                  HASH: 45ed363240ee8bc9e1c6a366b5700228920438d1
-                  MATRIX: 723->1|829->19|857->22|895->52|934->54|964->58|1003->71|1031->79
+                  HASH: 5b52aff5f5319f3f219c369b814743e80dbbb864
+                  MATRIX: 723->1|829->19|857->22|907->64|946->66|976->70|1015->83|1043->91
                   LINES: 26->1|29->1|31->3|31->3|31->3|33->5|33->5|33->5
                   -- GENERATED --
               */

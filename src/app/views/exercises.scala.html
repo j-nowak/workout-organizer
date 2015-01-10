@@ -1,0 +1,23 @@
+@(exercises: List[Exercise])
+
+@main("Workout organizer EXERCISES", "nav-exercises") {
+
+	<div>
+		 <ul id="muslce-groups">
+			<li><a href="#">Chest</a></li>
+			<li><a href="#">Back</a></li>
+			<li><a href="#">Shoulders</a></li>
+			<li><a href="#">Bajceps</a></li>
+			<li><a href="#">Triceps</a></li>
+			<li><a href="#">ALL</a></li>
+		 </ul>
+	</div>
+	
+	<div class="exercises-container">
+		<ul id="exercises-list">
+			@for(ex <- exercises) {
+				<li>@ex.getName()</li>
+			}
+		</ul>
+	</div>
+}
