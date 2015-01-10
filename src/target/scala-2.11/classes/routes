@@ -3,10 +3,12 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.login()
+GET     /home                       controllers.Application.home()
 
 # Sign up and in
 POST	/register					controllers.SignController.registerUser()
+POST	/signin						controllers.SignController.loginUser()
+GET 	/logout						controllers.SignController.logout()
 
 # Map static resources from the /public folder to the /assets URL path
 GET		/login						controllers.Assets.at(path="/public/html", file="login.html")
@@ -14,3 +16,7 @@ GET		/login						controllers.Assets.at(path="/public/html", file="login.html")
 GET     /assets/login.css           controllers.Assets.at(path="/public/stylesheets", file="login.css")
 GET     /assets/login.js            controllers.Assets.at(path="/public/javascripts", file="login.js")
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+GET  	/javascripts/*file        		controllers.Assets.at(path="/public/javascripts", file)
+GET  	/images/*file             		controllers.Assets.at(path="/public/images", file)
+GET  	/stylesheets/*file             controllers.Assets.at(path="/public/stylesheets", file)

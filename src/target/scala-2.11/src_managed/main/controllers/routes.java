@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakub/workspace/workout-organizer/src/conf/routes
-// @HASH:37741441f65dd5d8c3c5d7c3bd9268c557f0e23d
-// @DATE:Mon Jan 05 19:58:41 CET 2015
+// @HASH:44d5803e1b3a2f0853e39c01e1cf8243491812b1
+// @DATE:Sat Jan 10 13:50:03 CET 2015
 
 package controllers;
 

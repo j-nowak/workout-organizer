@@ -13,12 +13,12 @@
 		<div class="wrapper">
 			<div class="container">
 				<div class="tabs">
-					<button id="signup" class="login-tab active">SIGNUP</button>
-					<button id="login" class="login-tab">LOGIN</button>
+					<button id="signup" class="login-tab">SIGNUP</button>
+					<button id="login" class="login-tab active">LOGIN</button>
 					<button id="forgot-pass" class="login-tab">FORGOT PASSWORD</button>
 				</div>
 				<div class="content">
-					<div id ="signup-container">
+					<div id ="signup-container" class="invisible">
 						<form  action="/register" method="post" autocomplete="on">
 							<p>
 								<label for="firstname" > Your first name </label> <br>
@@ -49,7 +49,7 @@
 						</form>
 					</div>
 					
-					<div id="login-container" class="invisible">
+					<div id="login-container">
 						<form  action="/signin" method ="post" autocomplete="on">
 							<p>
 								<label for="username" > Your login or email</label> <br>
@@ -57,7 +57,7 @@
 							</p>
 							<p>
 								<label for="password"> Password </label> <br>
-								<input class="field" name="email" required="required" type="password" placeholder="edzio"/>
+								<input class="field" name="password" required="required" type="password" placeholder="edzio"/>
 							</p>
 							
 							<input type="submit" value="Login">

@@ -1,0 +1,24 @@
+@(title: String)(content: Html)
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="stylesheets/main.css">
+        <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    </head>
+    <body>
+    	 <header>
+	    <div class="nav">
+	      <ul>
+	        <li class="home"><a class="active" href="#">Home</a></li>
+	        <li class="trainings"><a href="#">Training</a></li>
+	        <li class="exercises"><a href="#">Exercises</a></li>
+	        <li class="gyms"><a href="#">Gyms</a></li>
+	        <li class="account"><a href="#">Account</a></li>
+	      </ul>
+	    </div>
+	  </header>
+        @content
+    </body>
+</html>

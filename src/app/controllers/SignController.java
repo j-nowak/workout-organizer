@@ -38,6 +38,28 @@ public class SignController extends Controller {
 		}
 	}
 	
+	public static Result loginUser() {
+		DynamicForm requestData = Form.form().bindFromRequest();
+		String login = requestData.get(FORM_LOGIN);
+		String password = requestData.get(FORM_PASSWORD);
+		
+		User user = UsersDao.get().login(login, password);
+		
+		if (user != null) {
+			session().clear();
+			session(Application.USER_EMAIL, user.getEmail());
+			return redirect(Application.HOME);
+		}
+		else {
+			return ok("Incorrect login or password"); //TODO
+		}
+	}
+	
+	public static Result logout() {
+		session().clear();
+		return ok("LOGOUT");
+	}
+	
 	private static boolean saveUser(User user) {
 		return UsersDao.get().insert(user);
 	}
