@@ -14,7 +14,8 @@ public class User {
 		this.firstName = firstName;		
 		this.lastName = lastName;
 	}
-	
+
+	private int id;
 	private String login;
 	private String email;
 	private String password;
@@ -26,6 +27,14 @@ public class User {
 	private int height;
 	private double weight;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getLogin() {
 		return login;
 	}

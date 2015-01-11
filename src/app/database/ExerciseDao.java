@@ -5,9 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import models.Exercise;
+import models.MuscleGroup;
+import models.User;
 import play.db.DB;
 
 public class ExerciseDao {
@@ -23,17 +27,42 @@ public class ExerciseDao {
 		try {
 			connection = DB.getConnection();
 			Statement statement = connection.createStatement();
-			ResultSet exerciseSet = statement.executeQuery("SELECT * FROM exercises");
+			ResultSet exerciseSet = statement.executeQuery(
+					"SELECT exercises.*, rating, ratings_count, "
+					+ " ARRAY_AGG(muscle_name) AS target_muscles "
+					+ "FROM exercises "
+					+ "LEFT JOIN ("
+					+ "	SELECT exercise_id, AVG(rating) AS rating,"
+					+ "  COUNT(rating) AS ratings_count"
+					+ "	FROM exercise_ratings"
+					+ " GROUP BY exercise_id"
+					+ ") exercise_ratings USING (exercise_id) "
+					+ "LEFT JOIN target_muscles USING (exercise_id) "
+					+ "GROUP BY exercises.exercise_id, rating, ratings_count "
+					+ "ORDER BY exercises.exercise_name");
 			
 			while (exerciseSet.next()) {
 				Exercise e = new Exercise();
+				e.setId(exerciseSet.getInt("exercise_id"));
 				e.setName(exerciseSet.getString("exercise_name"));
 				e.setDescription(exerciseSet.getString("description"));
 				e.setMovieUri(exerciseSet.getString("movie_uri"));
-				int exerciseId = exerciseSet.getInt("exercise_id");
-				e.setRating(getExerciseRating(exerciseId));
-				//TODO - muscle groups
-				
+				e.setRating(exerciseSet.getDouble("rating"));
+				e.setRatingsCount(exerciseSet.getInt("ratings_count"));
+
+				ResultSet targetMuscleSet = exerciseSet.getArray("target_muscles").getResultSet();
+				Set<MuscleGroup> targetMuscles = new HashSet<MuscleGroup>();
+
+				while (targetMuscleSet.next()) {
+					MuscleGroup muscleGroup = new MuscleGroup();
+					muscleGroup.setMuscleName(targetMuscleSet.getString(2));
+
+					targetMuscles.add(muscleGroup);
+				}
+
+				targetMuscleSet.close();
+				e.setTargetMuscles(targetMuscles);
+
 				exercises.add(e);
 			}
 			
@@ -54,20 +83,14 @@ public class ExerciseDao {
 		return exercises;
 	}
 	
-	private double getExerciseRating(int exerciseId) {
-		double rating = 0;
+	public void rateExercise(User user, Exercise exercise) {
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT avg(rating) FROM exercise_ratings WHERE exercise_id = " + exerciseId);
-			
-			if (resultSet.next()) {
-				rating = resultSet.getDouble(1);
-			}
-			
-			resultSet.close();
-			statement.close();
+			String sql = connection.nativeSQL("INSERT INTO exercise_ratings(user_id, exercise_id) VALUES" + 
+					"  (" + user.getId() + ", " + exercise.getId() + ");");
+			play.Logger.info("Insert exercise_rating: " + sql);
+			connection.createStatement().execute(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -79,8 +102,6 @@ public class ExerciseDao {
 				}
 			}
 		}
-		
-		return rating;
 	}
 
 	private static final ExerciseDao INSTANCE = new ExerciseDao();

@@ -4,12 +4,22 @@ import java.util.Set;
 
 public class Exercise {
 	
+	private int id;
 	private String name;
 	private String description;
 	private String movieUri;
 	private Set<MuscleGroup> targetMuscles;
 	
 	private double rating;
+	private int ratingsCount;
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
 	
 	public String getName() {
 		return name;
@@ -51,4 +61,12 @@ public class Exercise {
 		this.rating = rating;
 	}
 	
+	public double getRatingsCount() {
+		return ratingsCount;
+	}
+
+	public void setRatingsCount(int ratingsCount) {
+		this.ratingsCount = ratingsCount;
+	}
+
 }

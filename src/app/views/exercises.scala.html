@@ -12,7 +12,7 @@
 			<li><a href="#">ALL</a></li>
 		 </ul>
 	</div>
-	
+
 	<div class="exercises-container">
 		<ul id="exercises-list">
 			@for(ex <- exercises) {
@@ -23,7 +23,8 @@
 					<div class="ex-content">
 						Description: @ex.getDescription() <br>
 						Movie: @ex.getMovieUri() <br>
-						Rating: @ex.getRating() <br>
+						Rating: @ex.getRating() (@ex.getRatingsCount()) <br>
+						Target muscles: @Arrays.toString(ex.getTargetMuscles.toArray())
 					</div>
 				</li>
 			}

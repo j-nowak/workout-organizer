@@ -12,4 +12,9 @@ public class MuscleGroup {
 		this.muscleName = muscleName;
 	}
 	
+	@Override
+	public String toString() {
+		return muscleName;
+	}
+
 }

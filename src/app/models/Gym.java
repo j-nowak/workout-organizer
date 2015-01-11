@@ -2,14 +2,20 @@ package models;
 
 public class Gym {
 	
+	private int id;
 	private String name;
 	private Address address;
 	private double rating;
+	private int ratingsCount;
 	private String url;
 	
-	public Gym(String name, Address address) {
+	public Gym(int id, String name, Address address) {
 		this.name = name;
 		this.address = address;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -34,6 +40,14 @@ public class Gym {
 
 	public void setRating(double rating) {
 		this.rating = rating;
+	}
+
+	public double getRatingsCount() {
+		return ratingsCount;
+	}
+
+	public void setRatingsCount(int ratingsCount) {
+		this.ratingsCount = ratingsCount;
 	}
 
 	public String getUrl() {

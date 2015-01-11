@@ -5,7 +5,7 @@
 	<div>
 		 GYMS
 	</div>
-	
+
 	<div class="gyms-container">
 		<ul id="gyms-list">
 			@for(g <- gyms) {
@@ -16,7 +16,7 @@
 					<div class="g-content">
 						City: @g.getAddress().getCity() <br>
 						Street: @g.getAddress().getStreet() <br>
-						Rating: @g.getRating() <br>
+						Rating: @g.getRating() (@g.getRatingsCount())  <br>
 					</div>
 				</li>
 			}

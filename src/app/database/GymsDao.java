@@ -10,6 +10,7 @@ import java.util.List;
 import models.Address;
 import models.Coordinates;
 import models.Gym;
+import models.User;
 import play.db.DB;
 
 public class GymsDao {
@@ -25,18 +26,24 @@ public class GymsDao {
 		try {
 			connection = DB.getConnection();
 			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM gyms");
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT gyms.*, AVG(rating) AS rating, COUNT(rating) as ratings_count "
+					+ "FROM gyms "
+					+ "LEFT JOIN gym_ratings USING (gym_id) "
+					+ "GROUP BY gyms.gym_id");
 			
 			while (resultSet.next()) {
+				int id = resultSet.getInt("gym_id");
 				String name = resultSet.getString("gym_name");
 				String city = resultSet.getString("city");
 				String street = resultSet.getString("street");
 				double longitude = resultSet.getDouble("longitude");
 				double latitude = resultSet.getDouble("latitude");
 				String url = resultSet.getString("url");
-				Gym g = new Gym(name, new Address(city, street, new Coordinates(longitude, latitude))); //TODO if not defined
+				Gym g = new Gym(id, name, new Address(city, street, new Coordinates(longitude, latitude))); //TODO if not defined
 				g.setUrl(url);
-				//TODO rating
+				g.setRating(resultSet.getDouble("rating"));
+				g.setRatingsCount(resultSet.getInt("ratings_count"));
 				gyms.add(g);
 			}
 			
@@ -57,6 +64,27 @@ public class GymsDao {
 		return gyms;
 	}
 	
+	public void rateGym(User user, Gym gym) {
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			String sql = connection.nativeSQL("INSERT INTO gym_ratings(user_id, gym_id) VALUES" + 
+					"  (" + user.getId() + ", " + gym.getId() + ");");
+			play.Logger.info("Insert gym_rating: " + sql);
+			connection.createStatement().execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 	private static final GymsDao INSTANCE = new GymsDao();
 	
 	private GymsDao() {}
