@@ -1,0 +1,26 @@
+@(gyms: List[Gym])
+
+@main("Workout organizer GYMS", "nav-gyms") {
+
+	<div>
+		 GYMS
+	</div>
+	
+	<div class="gyms-container">
+		<ul id="gyms-list">
+			@for(g <- gyms) {
+				<li>
+					<div class="g-name">
+						@g.getName()
+					</div>
+					<div class="g-content">
+						City: @g.getAddress().getCity() <br>
+						Street: @g.getAddress().getStreet() <br>
+						Rating: @g.getRating() <br>
+					</div>
+				</li>
+			}
+		</ul>
+	</div>
+
+}

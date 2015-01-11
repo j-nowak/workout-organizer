@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakub/workspace/workout-organizer/src/conf/routes
-// @HASH:50e166cf4e6f8069cf703a82b9edf0b5603f952a
-// @DATE:Sat Jan 10 18:07:56 CET 2015
+// @HASH:cc599bc2a072f2201f138af3426f4933ad323d10
+// @DATE:Sun Jan 11 13:24:25 CET 2015
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -15,40 +15,41 @@ import _root_.play.libs.F
 import Router.queryString
 
 
-// @LINE:23
+// @LINE:26
+// @LINE:25
+// @LINE:24
 // @LINE:22
-// @LINE:21
 // @LINE:19
+// @LINE:18
+// @LINE:17
 // @LINE:16
 // @LINE:15
-// @LINE:14
-// @LINE:13
 // @LINE:12
 // @LINE:9
 // @LINE:6
 package controllers {
 
-// @LINE:16
-// @LINE:15
-// @LINE:14
+// @LINE:19
+// @LINE:18
+// @LINE:17
 class ReverseSignController {
 
 
-// @LINE:14
+// @LINE:17
 def registerUser(): Call = {
    import ReverseRouteContext.empty
    Call("POST", _prefix + { _defaultPrefix } + "register")
 }
                         
 
-// @LINE:15
+// @LINE:18
 def loginUser(): Call = {
    import ReverseRouteContext.empty
    Call("POST", _prefix + { _defaultPrefix } + "signin")
 }
                         
 
-// @LINE:16
+// @LINE:19
 def logout(): Call = {
    import ReverseRouteContext.empty
    Call("GET", _prefix + { _defaultPrefix } + "logout")
@@ -58,44 +59,44 @@ def logout(): Call = {
 }
                           
 
-// @LINE:23
+// @LINE:26
+// @LINE:25
+// @LINE:24
 // @LINE:22
-// @LINE:21
-// @LINE:19
-// @LINE:13
-// @LINE:12
+// @LINE:16
+// @LINE:15
 class ReverseAssets {
 
 
-// @LINE:23
+// @LINE:26
+// @LINE:25
+// @LINE:24
 // @LINE:22
-// @LINE:21
-// @LINE:19
-// @LINE:13
-// @LINE:12
+// @LINE:16
+// @LINE:15
 def at(path:String, file:String): Call = {
    (path: @unchecked, file: @unchecked) match {
-// @LINE:12
+// @LINE:15
 case (path, file) if path == "/public/html" && file == "login.html" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public/html"), ("file", "login.html")))
   Call("GET", _prefix)
                                          
-// @LINE:19
+// @LINE:22
 case (path, file) if path == "/public" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public")))
   Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[PathBindable[String]].unbind("file", file))
                                          
-// @LINE:21
+// @LINE:24
 case (path, file) if path == "/public/javascripts" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public/javascripts")))
   Call("GET", _prefix + { _defaultPrefix } + "javascripts/" + implicitly[PathBindable[String]].unbind("file", file))
                                          
-// @LINE:22
+// @LINE:25
 case (path, file) if path == "/public/images" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public/images")))
   Call("GET", _prefix + { _defaultPrefix } + "images/" + implicitly[PathBindable[String]].unbind("file", file))
                                          
-// @LINE:23
+// @LINE:26
 case (path, file) if path == "/public/stylesheets" =>
   implicit val _rrc = new ReverseRouteContext(Map(("path", "/public/stylesheets")))
   Call("GET", _prefix + { _defaultPrefix } + "stylesheets/" + implicitly[PathBindable[String]].unbind("file", file))
@@ -107,10 +108,18 @@ case (path, file) if path == "/public/stylesheets" =>
 }
                           
 
+// @LINE:12
 // @LINE:9
 // @LINE:6
 class ReverseApplication {
 
+
+// @LINE:12
+def listAllGyms(): Call = {
+   import ReverseRouteContext.empty
+   Call("GET", _prefix + { _defaultPrefix } + "gyms")
+}
+                        
 
 // @LINE:9
 def listAllExercises(): Call = {
@@ -132,27 +141,28 @@ def home(): Call = {
                   
 
 
-// @LINE:23
+// @LINE:26
+// @LINE:25
+// @LINE:24
 // @LINE:22
-// @LINE:21
 // @LINE:19
+// @LINE:18
+// @LINE:17
 // @LINE:16
 // @LINE:15
-// @LINE:14
-// @LINE:13
 // @LINE:12
 // @LINE:9
 // @LINE:6
 package controllers.javascript {
 import ReverseRouteContext.empty
 
-// @LINE:16
-// @LINE:15
-// @LINE:14
+// @LINE:19
+// @LINE:18
+// @LINE:17
 class ReverseSignController {
 
 
-// @LINE:14
+// @LINE:17
 def registerUser : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.SignController.registerUser",
    """
@@ -163,7 +173,7 @@ def registerUser : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:15
+// @LINE:18
 def loginUser : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.SignController.loginUser",
    """
@@ -174,7 +184,7 @@ def loginUser : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:16
+// @LINE:19
 def logout : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.SignController.logout",
    """
@@ -188,21 +198,21 @@ def logout : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
-// @LINE:23
+// @LINE:26
+// @LINE:25
+// @LINE:24
 // @LINE:22
-// @LINE:21
-// @LINE:19
-// @LINE:13
-// @LINE:12
+// @LINE:16
+// @LINE:15
 class ReverseAssets {
 
 
-// @LINE:23
+// @LINE:26
+// @LINE:25
+// @LINE:24
 // @LINE:22
-// @LINE:21
-// @LINE:19
-// @LINE:13
-// @LINE:12
+// @LINE:16
+// @LINE:15
 def at : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Assets.at",
    """
@@ -233,10 +243,22 @@ def at : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
+// @LINE:12
 // @LINE:9
 // @LINE:6
 class ReverseApplication {
 
+
+// @LINE:12
+def listAllGyms : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Application.listAllGyms",
+   """
+      function() {
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "gyms"})
+      }
+   """
+)
+                        
 
 // @LINE:9
 def listAllExercises : JavascriptReverseRoute = JavascriptReverseRoute(
@@ -266,39 +288,40 @@ def home : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
-// @LINE:23
+// @LINE:26
+// @LINE:25
+// @LINE:24
 // @LINE:22
-// @LINE:21
 // @LINE:19
+// @LINE:18
+// @LINE:17
 // @LINE:16
 // @LINE:15
-// @LINE:14
-// @LINE:13
 // @LINE:12
 // @LINE:9
 // @LINE:6
 package controllers.ref {
 
 
-// @LINE:16
-// @LINE:15
-// @LINE:14
+// @LINE:19
+// @LINE:18
+// @LINE:17
 class ReverseSignController {
 
 
-// @LINE:14
+// @LINE:17
 def registerUser(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.SignController.registerUser(), HandlerDef(this.getClass.getClassLoader, "", "controllers.SignController", "registerUser", Seq(), "POST", """""", _prefix + """register""")
 )
                       
 
-// @LINE:15
+// @LINE:18
 def loginUser(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.SignController.loginUser(), HandlerDef(this.getClass.getClassLoader, "", "controllers.SignController", "loginUser", Seq(), "POST", """""", _prefix + """signin""")
 )
                       
 
-// @LINE:16
+// @LINE:19
 def logout(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.SignController.logout(), HandlerDef(this.getClass.getClassLoader, "", "controllers.SignController", "logout", Seq(), "GET", """""", _prefix + """logout""")
 )
@@ -307,16 +330,16 @@ def logout(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 }
                           
 
-// @LINE:23
+// @LINE:26
+// @LINE:25
+// @LINE:24
 // @LINE:22
-// @LINE:21
-// @LINE:19
-// @LINE:13
-// @LINE:12
+// @LINE:16
+// @LINE:15
 class ReverseAssets {
 
 
-// @LINE:12
+// @LINE:15
 def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Assets.at(path, file), HandlerDef(this.getClass.getClassLoader, "", "controllers.Assets", "at", Seq(classOf[String], classOf[String]), "GET", """ Sign up and in""", _prefix + """""")
 )
@@ -325,10 +348,17 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 }
                           
 
+// @LINE:12
 // @LINE:9
 // @LINE:6
 class ReverseApplication {
 
+
+// @LINE:12
+def listAllGyms(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Application.listAllGyms(), HandlerDef(this.getClass.getClassLoader, "", "controllers.Application", "listAllGyms", Seq(), "GET", """ Gyms""", _prefix + """gyms""")
+)
+                      
 
 // @LINE:9
 def listAllExercises(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(

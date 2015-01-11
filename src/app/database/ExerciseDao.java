@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Exercise;
-import play.Logger;
 import play.db.DB;
 
 public class ExerciseDao {

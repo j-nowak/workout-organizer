@@ -3,7 +3,9 @@ package controllers;
 import java.util.List;
 
 import database.ExerciseDao;
+import database.GymsDao;
 import models.Exercise;
+import models.Gym;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
@@ -29,5 +31,10 @@ public class Application extends Controller {
     	List<Exercise> exercisesList = ExerciseDao.get().getAll();    	
 		return ok(exercises.render(exercisesList));
 	}
+    
+    public static Result listAllGyms() {
+    	List<Gym> gymsList = GymsDao.get().getAll();
+    	return ok(gyms.render(gymsList));
+    }
 
 }

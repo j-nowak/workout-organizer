@@ -49,7 +49,7 @@ Seq[Any](format.raw/*1.54*/("""
 	        <li ><a id="nav-home" href="/home">Home</a></li>
 	        <li ><a id="nav-training" href="#">Training</a></li>
 	        <li ><a id="nav-exercises" href="/exercises">Exercises</a></li>
-	        <li ><a id="nav-gyms" href="#">Gyms</a></li>
+	        <li ><a id="nav-gyms" href="/gyms">Gyms</a></li>
 	        <li ><a id="nav-account" href="#">Account</a></li>
 	        <li ><a id="nav-logout" href="/logout">Logout</a></li>
 	      </ul>
@@ -69,10 +69,10 @@ Seq[Any](format.raw/*1.54*/("""
 }
               /*
                   -- GENERATED --
-                  DATE: Sat Jan 10 22:19:03 CET 2015
+                  DATE: Sun Jan 11 13:25:51 CET 2015
                   SOURCE: /home/jakub/workspace/workout-organizer/src/app/views/main.scala.html
-                  HASH: b1536a34892fde4e63776702a08e41e03020bb5d
-                  MATRIX: 734->1|874->53|901->54|978->105|1003->110|1393->472|1422->473|1460->483|1504->500|1537->512|1576->524|1605->525|2152->1045|2180->1052|2212->1057
+                  HASH: cc5c284286362c36217eb358147d53e588796bfc
+                  MATRIX: 734->1|874->53|901->54|978->105|1003->110|1393->472|1422->473|1460->483|1504->500|1537->512|1576->524|1605->525|2156->1049|2184->1056|2216->1061
                   LINES: 26->1|29->1|30->2|34->6|34->6|40->12|40->12|41->13|41->13|41->13|42->14|42->14|58->30|58->30|59->31
                   -- GENERATED --
               */
