@@ -62,7 +62,7 @@ public class UsersDao {
 			
 			User user = null;
 			if (resultUser.next()) {
-				Logger.info("User " + resultUser.getString("login") + " logged in!"); //TODO
+				Logger.info("User " + resultUser.getString("login") + " logged in!");
 				user = new User();
 				user.setId(resultUser.getInt("user_id"));
 				user.setLogin(resultUser.getString("login"));
@@ -90,12 +90,118 @@ public class UsersDao {
 		}
 	}
 	
-	public static String byteArrayToHexString(byte[] b) {
+	private static String byteArrayToHexString(byte[] b) {
 		String result = "";
 		for (int i = 0; i < b.length; i++) {
 			result += Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1);
 		}
 		return result;
+	}
+
+	public User getById(String userId) { //TODO change to userId
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			Statement getuserStatement = connection.createStatement();
+			ResultSet resultUser = getuserStatement.executeQuery("SELECT * FROM users "
+					+ "WHERE email = '" + userId + "'");
+			
+			User user = null;
+			if (resultUser.next()) {
+				user = new User();
+				user.setId(resultUser.getInt("user_id"));
+				user.setLogin(resultUser.getString("login"));
+				user.setEmail(resultUser.getString("email"));
+				user.setFirstName(resultUser.getString("first_name"));
+				user.setLastName(resultUser.getString("last_name"));
+				user.setDateOfBirth(resultUser.getDate("date_of_birth"));
+				user.setHeight(resultUser.getInt("height"));
+				user.setWeight(resultUser.getDouble("weight"));
+			}
+			
+			resultUser.close();
+			getuserStatement.close();
+			
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public boolean checkPasswordForUser(String userId, String password) {
+		Connection connection = null;
+		try {
+			String passwordDigest = byteArrayToHexString(MessageDigest
+					.getInstance("SHA-1").digest(password.getBytes()));
+			
+			connection = DB.getConnection();
+			Statement getuserStatement = connection.createStatement();
+			ResultSet resultUser = getuserStatement.executeQuery("SELECT * FROM users "
+					+ "WHERE email = '" + userId + "' AND password_digest = '" + passwordDigest + "'");
+			
+			boolean result;
+			if (resultUser.next()) {
+				result = true;
+			}
+			else {
+				result = false;
+			}
+			
+			resultUser.close();
+			getuserStatement.close();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void changePassword(String userId, String password) {
+		Connection connection = null;
+		try {
+			String passwordDigest = byteArrayToHexString(MessageDigest
+					.getInstance("SHA-1").digest(password.getBytes()));
+			
+			connection = DB.getConnection();
+			Statement statement = connection.createStatement();
+			String sql = "UPDATE users SET password_digest = '"+ passwordDigest + "' where email = '" + userId + "';";
+			statement.executeUpdate(sql);
+			play.Logger.info("Password changed!");
+			
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }

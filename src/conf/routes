@@ -11,6 +11,10 @@ GET		/exercises					controllers.Application.listAllExercises()
 # Gyms
 GET		/gyms						controllers.Application.listAllGyms()
 
+# Account
+GET		/account					controllers.Application.editAccountSettings()
+POST	/changePassword				controllers.AccountController.changePassword()
+
 # Sign up and in
 GET		/							controllers.Assets.at(path="/public/html", file="login.html")
 GET		/login						controllers.Assets.at(path="/public/html", file="login.html")

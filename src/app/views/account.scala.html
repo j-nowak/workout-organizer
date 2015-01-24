@@ -1,0 +1,34 @@
+@(user: User)
+
+@main("Workout organizer Account", "nav-account") {
+	<div>
+		<form name="changePassword"  >
+			 Old password : <input type="password" id="old" name="oldPassword"><br>
+			 New password : <input type="password" id="new" name="newPassword"><br>
+			 Repeat password : <input type="password" id="repeated" name="repeatedPassword"><br>
+			 <input type="submit" value="Change Password"><br>
+			 
+			 <script>
+			 	$("form[name=changePassword]").submit(function() {
+			 		$.ajax({
+			 			url: '/changePassword',
+			 			type: 'POST',
+			 			data: {
+			 				oldPassword: $('#old').val(),
+			 				newPassword: $('#new').val(),
+			 				repeatedPassword: $('#repeated').val()
+			 			},
+			 			success: function() {
+			 				alert('Password changed!');
+			 			},
+			 			error: function(xhr, ajaxOptions, thrownError) {
+			 				alert('Error!');
+			 			}
+			 		});
+			 		return false;
+			 	});
+			 </script>
+		</form>
+	</div>
+	<hr>
+}
