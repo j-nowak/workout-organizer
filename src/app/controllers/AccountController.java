@@ -1,5 +1,9 @@
 package controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import database.UsersDao;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -25,6 +29,33 @@ public class AccountController extends Controller {
 		}
 		else {
 			return badRequest("New and repeated passwords are different!");
+		}
+	}
+	
+	public static Result changeUserInfo() {
+		String userId = session(Application.USER_EMAIL);
+		DynamicForm requestData = Form.form().bindFromRequest();
+		String weight = requestData.get("weight");
+		String height = requestData.get("height");
+		String dateOfBirth = requestData.get("dateOfBirth");
+
+		Map<String, String> toUpdate = new HashMap<String, String>();
+		if (!weight.equals("")) {
+			toUpdate.put("weight", weight);
+		}
+		if (!height.equals("")) {
+			toUpdate.put("height", height);
+		}
+		if (!dateOfBirth.equals("")) {
+			toUpdate.put("date_of_birth", dateOfBirth);
+		}
+		
+
+		if (toUpdate.size() > 0 && UsersDao.get().update(userId, toUpdate)) {
+			return ok();
+		}
+		else {
+			return badRequest();
 		}
 	}
 }

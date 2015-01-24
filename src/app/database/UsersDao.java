@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import models.User;
 import play.Logger;
@@ -193,6 +195,38 @@ public class UsersDao {
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public boolean update(String userId, Map<String, String> toUpdate) {
+		Connection connection = null;
+		try {	
+			connection = DB.getConnection();
+			Statement statement = connection.createStatement();
+			String sql = "UPDATE users SET ";
+			for (Entry<String, String> entry : toUpdate.entrySet()) {
+				sql += entry.getKey() + " = '" + entry.getValue() + "', ";
+			}
+			sql = sql.substring(0, sql.length() - 2);
+			sql += " where email = '" + userId + "';";
+			
+			play.Logger.info(sql);
+			statement.executeUpdate(sql);
+			
+			
+			statement.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		} finally {
 			if (connection != null) {
 				try {
