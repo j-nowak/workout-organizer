@@ -106,7 +106,7 @@ public class UsersDao {
 			connection = DB.getConnection();
 			Statement getuserStatement = connection.createStatement();
 			ResultSet resultUser = getuserStatement.executeQuery("SELECT * FROM users "
-					+ "WHERE email = '" + userId + "'");
+					+ "WHERE user_id = '" + userId + "'");
 			
 			User user = null;
 			if (resultUser.next()) {
@@ -148,7 +148,7 @@ public class UsersDao {
 			connection = DB.getConnection();
 			Statement getuserStatement = connection.createStatement();
 			ResultSet resultUser = getuserStatement.executeQuery("SELECT * FROM users "
-					+ "WHERE email = '" + userId + "' AND password_digest = '" + passwordDigest + "'");
+					+ "WHERE user_id = '" + userId + "' AND password_digest = '" + passwordDigest + "'");
 			
 			boolean result;
 			if (resultUser.next()) {
@@ -186,7 +186,7 @@ public class UsersDao {
 			
 			connection = DB.getConnection();
 			Statement statement = connection.createStatement();
-			String sql = "UPDATE users SET password_digest = '"+ passwordDigest + "' where email = '" + userId + "';";
+			String sql = "UPDATE users SET password_digest = '"+ passwordDigest + "' where user_id = '" + userId + "';";
 			statement.executeUpdate(sql);
 			play.Logger.info("Password changed!");
 			
@@ -216,7 +216,7 @@ public class UsersDao {
 				sql += entry.getKey() + " = '" + entry.getValue() + "', ";
 			}
 			sql = sql.substring(0, sql.length() - 2);
-			sql += " where email = '" + userId + "';";
+			sql += " where user_id = '" + userId + "';";
 			
 			play.Logger.info(sql);
 			statement.executeUpdate(sql);

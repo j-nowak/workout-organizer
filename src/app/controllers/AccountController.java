@@ -2,13 +2,12 @@ package controllers;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-import database.UsersDao;
 import play.data.DynamicForm;
 import play.data.Form;
-import play.mvc.Result;
 import play.mvc.Controller;
+import play.mvc.Result;
+import database.UsersDao;
 
 public class AccountController extends Controller {
 	
@@ -33,7 +32,7 @@ public class AccountController extends Controller {
 	}
 	
 	public static Result changeUserInfo() {
-		String userId = session(Application.USER_EMAIL);
+		String userId = session(Application.USER_ID);
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String weight = requestData.get("weight");
 		String height = requestData.get("height");
