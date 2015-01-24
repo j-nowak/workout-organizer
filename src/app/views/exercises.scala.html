@@ -19,6 +19,8 @@
 				<li>
 					<div class="ex-name">
 						@ex.getName()
+						<div class="ex-rating" data-average="@ex.getRating()" data-id="@ex.getId()">
+						</div>
 					</div>
 					<div class="ex-content">
 						Description: @ex.getDescription() <br>
@@ -30,4 +32,20 @@
 			}
 		</ul>
 	</div>
+	
+	<script>
+		$('.ex-rating').jRating({
+			length: 10,
+			step: true,
+			rateMax: 10,
+			onClick: function (el, rate) {
+				var id = $(el).data('id');
+				$.ajax({
+					method: 'POST',
+					url: "/exercises/" + id,
+					data: { rating: rate }
+				})
+			}
+		});
+	</script>
 }
