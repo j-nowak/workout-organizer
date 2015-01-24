@@ -16,6 +16,7 @@ POST	/gyms/:gymId				controllers.GymsController.rate(gymId: Int)
 # Account
 GET		/account					controllers.Application.editAccountSettings()
 POST	/changePassword				controllers.AccountController.changePassword()
+POST	/changeUserInfo				controllers.AccountController.changeUserInfo()
 
 # Sign up and in
 GET		/							controllers.Assets.at(path="/public/html", file="login.html")
