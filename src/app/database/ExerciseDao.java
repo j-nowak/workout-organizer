@@ -83,12 +83,12 @@ public class ExerciseDao {
 		return exercises;
 	}
 	
-	public void rateExercise(User user, Exercise exercise) {
+	public void rateExercise(int userId, int exerciseId, int rating) {
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
-			String sql = connection.nativeSQL("INSERT INTO exercise_ratings(user_id, exercise_id) VALUES" + 
-					"  (" + user.getId() + ", " + exercise.getId() + ");");
+			String sql = connection.nativeSQL("INSERT INTO exercise_ratings(user_id, exercise_id, rating) VALUES" + 
+					"  (" + userId + ", " + exerciseId + ", " + rating + ");");
 			play.Logger.info("Insert exercise_rating: " + sql);
 			connection.createStatement().execute(sql);
 		} catch (SQLException e) {

@@ -19,8 +19,8 @@ public class AccountController extends Controller {
 		String repeatedPassword = requestData.get("repeatedPassword");
 		
 		if (newPassword.equals(repeatedPassword)) {
-			if (UsersDao.get().checkPasswordForUser(session().get(Application.USER_EMAIL), oldPassword)) {
-				UsersDao.get().changePassword(session().get(Application.USER_EMAIL), newPassword);
+			if (UsersDao.get().checkPasswordForUser(session().get(Application.USER_ID), oldPassword)) {
+				UsersDao.get().changePassword(session().get(Application.USER_ID), newPassword);
 				return ok();
 			}
 			else {

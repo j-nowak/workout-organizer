@@ -64,12 +64,12 @@ public class GymsDao {
 		return gyms;
 	}
 	
-	public void rateGym(User user, Gym gym) {
+	public void rateGym(int userId, int gymId, int rating) {
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
-			String sql = connection.nativeSQL("INSERT INTO gym_ratings(user_id, gym_id) VALUES" + 
-					"  (" + user.getId() + ", " + gym.getId() + ");");
+			String sql = connection.nativeSQL("INSERT INTO gym_ratings(user_id, gym_id, rating) VALUES" + 
+					"  (" + userId + ", " + gymId + ", " + rating + ");");
 			play.Logger.info("Insert gym_rating: " + sql);
 			connection.createStatement().execute(sql);
 		} catch (SQLException e) {

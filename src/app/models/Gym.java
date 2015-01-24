@@ -10,6 +10,7 @@ public class Gym {
 	private String url;
 	
 	public Gym(int id, String name, Address address) {
+		this.id = id;
 		this.name = name;
 		this.address = address;
 	}

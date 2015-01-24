@@ -6,10 +6,12 @@
 GET     /home                       controllers.Application.home()
 
 # Exercises
-GET		/exercises					controllers.Application.listAllExercises()
+GET		/exercises					controllers.ExercisesController.listAllExercises()
+POST	/exercises/:exerciseId		controllers.ExercisesController.rate(exerciseId: Int)
 
 # Gyms
-GET		/gyms						controllers.Application.listAllGyms()
+GET		/gyms						controllers.GymsController.listAllGyms()
+POST	/gyms/:gymId				controllers.GymsController.rate(gymId: Int)
 
 # Account
 GET		/account					controllers.Application.editAccountSettings()

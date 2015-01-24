@@ -32,7 +32,7 @@ public class SignController extends Controller {
 		User user = new User(login, email, password, firstName, lastName);
 		if (saveUser(user)) {
 			session().clear();
-			session(Application.USER_EMAIL, user.getEmail());
+			session(Application.USER_ID, "" + user.getId());
 			return redirect(Application.HOME);
 		}
 		else {
@@ -49,7 +49,7 @@ public class SignController extends Controller {
 		
 		if (user != null) {
 			session().clear();
-			session(Application.USER_EMAIL, user.getEmail());
+			session(Application.USER_ID, "" + user.getId());
 			return redirect(Application.HOME);
 		}
 		else {

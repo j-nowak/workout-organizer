@@ -12,6 +12,8 @@
 				<li>
 					<div class="g-name">
 						@g.getName()
+						<div class="g-rating" data-average="@g.getRating()" data-id="@g.getId()">
+						</div>
 					</div>
 					<div class="g-content">
 						City: @g.getAddress().getCity() <br>
@@ -23,4 +25,19 @@
 		</ul>
 	</div>
 
+	<script>
+		$('.g-rating').jRating({
+			length: 10,
+			step: true,
+			rateMax: 10,
+			onClick: function (el, rate) {
+				var id = $(el).data('id');
+				$.ajax({
+					method: 'POST',
+					url: "/gyms/" + id,
+					data: { rating: rate }
+				})
+			}
+		});
+	</script>
 }
