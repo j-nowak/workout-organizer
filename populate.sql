@@ -89,6 +89,11 @@ INSERT INTO likes(user_id, workout_id) VALUES
   (1, 3)
 ;
 
+INSERT INTO comments(user_id, workout_id, content, created_at) VALUES
+  (2, 2, 'Jest pompa!', '2015-01-04 12:34:56'::timestamp),
+  (3, 2, 'Njie ma opjierdalanjia sie!', '2015-01-04 12:36:15'::timestamp)
+;
+
 INSERT INTO gym_ratings(user_id, gym_id, rating) VALUES
   (1, 3, 10),
   (2, 1, 4),

@@ -1,5 +1,3 @@
-CREATE SCHEMA workout_organizer;
-
 CREATE TABLE exercises (
 	exercise_id          serial  NOT NULL,
 	exercise_name        varchar(100)  NOT NULL,
@@ -21,18 +19,29 @@ CREATE TABLE gyms (
 
 CREATE TABLE muscle_groups (
 	muscle_name          varchar(100)  NOT NULL,
-	image                bytea  ,
+	image_path           varchar(255)  ,
 	CONSTRAINT pk_muscle_groups PRIMARY KEY ( muscle_name )
  );
 
-CREATE TABLE target_muscles (
+CREATE TABLE exercise_muscle_groups (
 	exercise_id          integer  NOT NULL,
 	muscle_name          varchar(100)  NOT NULL
  );
 
-CREATE INDEX idx_target_muscles ON target_muscles ( muscle_name );
+CREATE TABLE equipment (
+  equipment_name       varchar(100)  NOT NULL,
+  image_path           varchar(255)  ,
+  CONSTRAINT pk_equipment PRIMARY KEY ( equipment_name )
+ );
 
-CREATE INDEX idx_target_muscles_0 ON target_muscles ( exercise_id );
+CREATE TABLE exercise_equipment (
+  exercise_id          integer  NOT NULL,
+  equipment_name       varchar(100)  NOT NULL
+ );
+
+CREATE INDEX idx_exercise_muscle_groups ON exercise_muscle_groups ( muscle_name );
+
+CREATE INDEX idx_exercise_muscle_groups_0 ON exercise_muscle_groups ( exercise_id );
 
 CREATE TABLE users (
 	user_id              serial  NOT NULL,
@@ -59,14 +68,11 @@ CREATE TABLE workouts (
 	gym_id               integer  ,
 	started_at           timestamp DEFAULT current_timestamp NOT NULL,
 	finished_at          timestamp  NOT NULL,
-	weight               numeric(5,2)  ,
 	note                 varchar(300)  ,
 	CONSTRAINT pk_workouts PRIMARY KEY ( workout_id )
  );
 
 ALTER TABLE workouts ADD CONSTRAINT time_check CHECK ( started_at < finished_at );
-
-ALTER TABLE workouts ADD CONSTRAINT weight_chk CHECK ( weight > 0 );
 
 CREATE INDEX idx_workouts ON workouts ( user_id );
 
@@ -103,9 +109,17 @@ CREATE TABLE gym_ratings (
 ALTER TABLE gym_ratings ADD CONSTRAINT rating_chk CHECK ( rating BETWEEN 1 AND 10 );
 
 CREATE TABLE likes (
-	user_id              integer  NOT NULL,
-	workout_id           integer  NOT NULL,
-	CONSTRAINT idx_likes UNIQUE ( user_id, workout_id )
+  user_id              integer  NOT NULL,
+  workout_id           integer  NOT NULL,
+  CONSTRAINT idx_likes UNIQUE ( user_id, workout_id )
+ );
+
+CREATE TABLE comments (
+  comment_id           serial  NOT NULL,
+  user_id              integer  NOT NULL,
+  workout_id           integer  NOT NULL,
+  content              text,
+  created_at           timestamp DEFAULT current_timestamp NOT NULL
  );
 
 CREATE TABLE workout_entries (
@@ -116,6 +130,14 @@ CREATE TABLE workout_entries (
 	weight               numeric(5,2)  ,
 	CONSTRAINT idx_workout_entry PRIMARY KEY ( workout_id, exercise_id )
  );
+
+CREATE TABLE weights (
+  weight_id            serial NOT NULL,
+  user_id              integer NOT NULL,
+  workout_id           integer,
+  weight               numeric(5, 2) NOT NULL,
+  created_at           timestamp DEFAULT current_timestamp NOT NULL
+);
 
 ALTER TABLE workout_entries ADD CONSTRAINT non_negative_chk CHECK ( set_count > 0 AND reps_per_set > 0 AND weight >= 0 );
 
@@ -135,7 +157,7 @@ JOIN workouts w USING (user_id)
 LEFT JOIN gyms g USING (gym_id)
 LEFT JOIN workout_entries we USING (workout_id)
 LEFT JOIN exercises e USING (exercise_id)
-LEFT JOIN target_muscles tm USING (exercise_id)
+LEFT JOIN exercise_muscle_groups tm USING (exercise_id)
 LEFT JOIN likes l USING (workout_id)
 GROUP BY u.user_id, f.first_user_id, f.second_user_id, w.workout_id, g.gym_id
 ORDER BY w.finished_at DESC;
@@ -168,29 +190,14 @@ CREATE OR REPLACE FUNCTION insert_friendship() RETURNS TRIGGER AS $$
     END
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION update_weight() RETURNS TRIGGER AS $$
-    DECLARE
-        newer_workouts_count int;
-    BEGIN
-        newer_workouts_count = (SELECT COUNT(*) FROM workouts WHERE user_id = NEW.user_id AND finished_at > NEW.finished_at);
-        IF newer_workouts_count = 0 THEN
-            UPDATE users SET weight = NEW.weight WHERE user_id = NEW.user_id;
-        END IF;
-
-        RETURN NEW;
-    END
-$$ LANGUAGE plpgsql;
-
 CREATE TRIGGER insert_friendship_trigger
     BEFORE INSERT ON friendships
     FOR EACH ROW
     EXECUTE PROCEDURE insert_friendship();
 
-CREATE TRIGGER update_weight_trigger
-    AFTER INSERT OR UPDATE ON workouts
-    FOR EACH ROW
-    WHEN (NEW.weight IS NOT NULL)
-    EXECUTE PROCEDURE update_weight();
+ALTER TABLE comments ADD CONSTRAINT fk_comments_users FOREIGN KEY ( user_id ) REFERENCES users( user_id ) ON DELETE CASCADE;
+
+ALTER TABLE comments ADD CONSTRAINT fk_comments_workouts FOREIGN KEY ( workout_id ) REFERENCES workouts( workout_id ) ON DELETE CASCADE;
 
 ALTER TABLE exercise_ratings ADD CONSTRAINT fk_exercises_ratings_users FOREIGN KEY ( user_id ) REFERENCES users( user_id ) ON DELETE CASCADE;
 
@@ -208,9 +215,13 @@ ALTER TABLE likes ADD CONSTRAINT fk_likes_users FOREIGN KEY ( user_id ) REFERENC
 
 ALTER TABLE likes ADD CONSTRAINT fk_likes_workouts FOREIGN KEY ( workout_id ) REFERENCES workouts( workout_id ) ON DELETE CASCADE;
 
-ALTER TABLE target_muscles ADD CONSTRAINT fk_target_muscles FOREIGN KEY ( muscle_name ) REFERENCES muscle_groups( muscle_name ) ON DELETE CASCADE;
+ALTER TABLE exercise_muscle_groups ADD CONSTRAINT fk_exercise_muscle_groups FOREIGN KEY ( muscle_name ) REFERENCES muscle_groups( muscle_name ) ON DELETE CASCADE;
 
-ALTER TABLE target_muscles ADD CONSTRAINT fk_target_muscles_exercises FOREIGN KEY ( exercise_id ) REFERENCES exercises( exercise_id );
+ALTER TABLE exercise_muscle_groups ADD CONSTRAINT fk_exercise_muscle_groups_exercises FOREIGN KEY ( exercise_id ) REFERENCES exercises( exercise_id ) ON DELETE CASCADE;
+
+ALTER TABLE exercise_equipment ADD CONSTRAINT fk_exercise_equipment FOREIGN KEY ( equipment_name ) REFERENCES equipment( equipment_name ) ON DELETE CASCADE;
+
+ALTER TABLE exercise_equipment ADD CONSTRAINT fk_exercise_equipment_exercises FOREIGN KEY ( exercise_id ) REFERENCES exercises( exercise_id ) ON DELETE CASCADE;
 
 ALTER TABLE workout_entries ADD CONSTRAINT fk_workout_entry_workouts FOREIGN KEY ( workout_id ) REFERENCES workouts( workout_id );
 
@@ -253,7 +264,7 @@ INSERT INTO exercises(exercise_name) VALUES
   ('Wspinanie na palce')
 ;
 
-INSERT INTO target_muscles(exercise_id, muscle_name) VALUES
+INSERT INTO exercise_muscle_groups(exercise_id, muscle_name) VALUES
   (1, 'klata'), (1, 'triceps'),
   (2, 'klata'), (2, 'triceps'),
   (3, 'klata'), (3, 'triceps'),
