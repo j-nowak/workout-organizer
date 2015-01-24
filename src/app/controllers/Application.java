@@ -2,10 +2,8 @@ package controllers;
 
 import java.util.List;
 
-import database.ExerciseDao;
-import database.GymsDao;
-import models.Exercise;
-import models.Gym;
+import database.UsersDao;
+import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
@@ -25,6 +23,11 @@ public class Application extends Controller {
     	else {
     		return ok(index.render(userId));
     	}
+    }
+    
+    public static Result editAccountSettings() {
+    	User user = UsersDao.get().getById(session(USER_ID)); //TODO change session to userId
+    	return ok(account.render(user));
     }
 
 }

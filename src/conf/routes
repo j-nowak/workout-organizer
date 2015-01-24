@@ -13,6 +13,10 @@ POST	/exercises/:exerciseId		controllers.ExercisesController.rate(exerciseId: In
 GET		/gyms						controllers.GymsController.listAllGyms()
 POST	/gyms/:gymId				controllers.GymsController.rate(gymId: Int)
 
+# Account
+GET		/account					controllers.Application.editAccountSettings()
+POST	/changePassword				controllers.AccountController.changePassword()
+
 # Sign up and in
 GET		/							controllers.Assets.at(path="/public/html", file="login.html")
 GET		/login						controllers.Assets.at(path="/public/html", file="login.html")
