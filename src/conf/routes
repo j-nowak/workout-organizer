@@ -9,6 +9,7 @@ POST	/addFriend					controllers.FriendsController.addFriend()
 # Exercises
 GET		/exercises					controllers.ExercisesController.listAllExercises()
 POST	/exercises/:exerciseId		controllers.ExercisesController.rate(exerciseId: Int)
+GET		/fileterExercises			controllers.ExercisesController.listFileteredExercises()
 
 # Gyms
 GET		/gyms						controllers.GymsController.listAllGyms()

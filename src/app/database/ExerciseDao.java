@@ -11,7 +11,6 @@ import java.util.Set;
 
 import models.Exercise;
 import models.MuscleGroup;
-import models.User;
 import play.db.DB;
 
 public class ExerciseDao {
@@ -81,6 +80,17 @@ public class ExerciseDao {
 		}
 
 		return exercises;
+	}
+	
+	public List<Exercise> filter(String muscleName) {
+		MuscleGroup muscle = new MuscleGroup(muscleName);
+		List<Exercise> result = new ArrayList<Exercise>();
+		for (Exercise ex : getAll()) {
+			if (ex.getTargetMuscles().contains(muscle)) {
+				result.add(ex);
+			}
+		}		
+		return result;
 	}
 	
 	public void rateExercise(int userId, int exerciseId, int rating) {

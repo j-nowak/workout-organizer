@@ -2,22 +2,27 @@ package controllers;
 
 import java.util.List;
 
-import database.ExerciseDao;
-import database.GymsDao;
 import models.Exercise;
-import models.Gym;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import views.html.exercises;
+import database.ExerciseDao;
 
 public class ExercisesController extends Controller {
 	
     private static final String RATING = "rating";
+    private static final String MUSCLES = "muscles";
 
-	public static Result listAllExercises() {
+	public static Result listAllExercises() {	
     	List<Exercise> exercisesList = ExerciseDao.get().getAll(); 
+		return ok(exercises.render(exercisesList));
+	}
+	
+	public static Result listFileteredExercises() {
+		String muscle = request().queryString().get(MUSCLES)[0];
+    	List<Exercise> exercisesList = ExerciseDao.get().filter(muscle); 
 		return ok(exercises.render(exercisesList));
 	}
     
