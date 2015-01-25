@@ -4,6 +4,7 @@
 
 # Home page
 GET     /home                       controllers.Application.home()
+POST	/addFriend					controllers.FriendsController.addFriend()
 
 # Exercises
 GET		/exercises					controllers.ExercisesController.listAllExercises()

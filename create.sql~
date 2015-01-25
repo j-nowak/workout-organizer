@@ -163,9 +163,9 @@ GROUP BY u.user_id, f.first_user_id, f.second_user_id, w.workout_id, g.gym_id
 ORDER BY w.finished_at DESC;
 
 CREATE OR REPLACE FUNCTION random_strangers_of_user(uid int)
-RETURNS TABLE(id int, first_name varchar(100), last_name varchar(100)) AS
+RETURNS TABLE(first_name varchar(100), last_name varchar(100)) AS
 $$
-SELECT user_id, first_name, last_name
+SELECT first_name, last_name
 FROM USERS
 WHERE user_id != uid AND user_id NOT IN
 	(SELECT (CASE WHEN first_user_id = uid THEN second_user_id ELSE first_user_id END) AS friend_id

@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import database.UsersDao;
+import models.Stranger;
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -21,7 +22,8 @@ public class Application extends Controller {
     		return redirect(LOGIN);
     	}
     	else {
-    		return ok(index.render(userId));
+    		List<Stranger> strangers = UsersDao.get().getStrangersForUser(Integer.parseInt(userId));
+    		return ok(index.render(strangers));
     	}
     }
     

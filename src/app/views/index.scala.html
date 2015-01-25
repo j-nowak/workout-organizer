@@ -1,7 +1,31 @@
-@(username: String)
+@(strangers: List[Stranger])
 
 @main("Workout organizer HOME", "nav-home") {
 
-  <h1>Welcome @username!</h1>
+  <div id="strangers">
+  	@for((s, index) <- strangers.zipWithIndex) {
+				<li>
+					@s.getFirstName() @s.getLastName()<br>
+					<button id="add-@index">Add friend!</button>
+					<script type="text/javascript">
+						$('#add-@index').click(function() {
+							$.ajax({
+								url: '/addFriend',
+								type: 'POST',
+								data: {
+									strangerId: @s.getId()
+								},
+								success: function() {
+									alert('Request sent');
+								},
+								error: function(xhr, ajaxOptions, thrownError) {
+									alert('Error!');
+								}
+							});
+						})
+					</script>
+				</li>
+			}
+  </div>
 
 }

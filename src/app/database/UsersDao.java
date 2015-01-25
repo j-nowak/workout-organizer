@@ -6,9 +6,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import models.Stranger;
 import models.User;
 import play.Logger;
 import play.db.DB;
@@ -32,8 +35,19 @@ public class UsersDao {
 					.getInstance("SHA-1").digest(user.getPassword().getBytes()));
 			String sql = connection.nativeSQL("INSERT INTO users(login, email, password_digest, first_name, last_name) VALUES" + 
 					"  ('" + user.getLogin() + "','" + user.getEmail() + "','" + passwordDigest + "','" + user.getFirstName() + "','" + user.getLastName() + "')");
+			
 			play.Logger.info("Insert user: " + sql);
 			connection.createStatement().execute(sql);
+			
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery("SELECT * FROM users WHERE login = '" + user.getLogin() +"'");
+			if (result.next()){
+				user.setId(result.getInt("user_id"));				
+			}
+			else {
+				throw new SQLException("Insert error");
+			}
+			
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -236,6 +250,41 @@ public class UsersDao {
 				}
 			}
 		}
+	}
+	
+	public List<Stranger> getStrangersForUser(int userId) {
+		List<Stranger> strangers = new ArrayList<>();
+		
+		Connection connection = null;
+		try {	
+			connection = DB.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM random_strangers_of_user(" + userId + ")");
+			
+			Stranger stranger = null;
+			while (resultSet.next()) {
+				stranger = new Stranger();
+				stranger.setId(resultSet.getInt("id"));
+				stranger.setFirstName(resultSet.getString("first_name"));
+				stranger.setLastName(resultSet.getString("last_name"));
+				strangers.add(stranger);
+			}
+			
+			resultSet.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return strangers;
 	}
 
 }
