@@ -69,4 +69,5 @@ local.properties
 
 # Database scripts
 *.bak
+*.sql~
 
