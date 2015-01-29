@@ -15,6 +15,11 @@ GET		/fileterExercises			controllers.ExercisesController.listFileteredExercises(
 GET		/gyms						controllers.GymsController.listAllGyms()
 POST	/gyms/:gymId				controllers.GymsController.rate(gymId: Int)
 
+# Workouts
+GET		/workouts					controllers.WorkoutsController.index()
+GET		/workouts/new				controllers.WorkoutsController.buildNew()
+POST	/workouts					controllers.WorkoutsController.create()
+
 # Account
 GET		/account					controllers.Application.editAccountSettings()
 POST	/changePassword				controllers.AccountController.changePassword()

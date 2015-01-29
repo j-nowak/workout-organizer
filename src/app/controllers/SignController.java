@@ -5,7 +5,6 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import database.UsersDao;
 
 public class SignController extends Controller {
@@ -36,7 +35,7 @@ public class SignController extends Controller {
 			return redirect(Application.HOME);
 		}
 		else {
-			throw new NotImplementedException(); //TODO invalid inserts
+			throw new RuntimeException("Not implemented");
 		}
 	}
 	
