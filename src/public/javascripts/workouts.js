@@ -30,9 +30,9 @@ $("a#addEntry").click(function() {
 
   tableRow = $('<tr class="entry"></tr>')
     .append(createInputCell('entries[][exerciseId]', $('#exerciseId').val(), $('#exerciseId').find(':selected').text()))
-    .append(createInputCell('entries[][setsCount]', $('#setsCount').val())
-    .append(createInputCell('entries[][repsPerSet]', $('#repsPerSet').val())
-    .append(createInputCell('entries[][weight]', $('#weight').val());
+    .append(createInputCell('entries[][setsCount]', $('#setsCount').val()))
+    .append(createInputCell('entries[][repsPerSet]', $('#repsPerSet').val()))
+    .append(createInputCell('entries[][weight]', $('#weight').val()));
 
   $('#exerciseId, #setsCount, #repsPerSet, #weight').val(null);
   $('#workoutEntries').append(tableRow);
