@@ -25,11 +25,9 @@ public class SignController extends Controller {
 		String email = requestData.get(FORM_EMAIL);
 		String password = requestData.get(FORM_PASSWORD);
 		String repeatedPassword = requestData.get(FORM_REPEATED_PASSWORD);
-		
-//		//TODO validation (maybe online?)
-		
+				
 		User user = new User(login, email, password, firstName, lastName);
-		if (saveUser(user)) {
+		if (password.equals(repeatedPassword) && saveUser(user)) {
 			session().clear();
 			session(Application.USER_ID, "" + user.getId());
 			return redirect(Application.HOME);

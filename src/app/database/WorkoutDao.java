@@ -1,21 +1,15 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Address;
-import models.Coordinates;
-import models.Gym;
 import models.Workout;
 import models.WorkoutEntry;
 import play.db.DB;

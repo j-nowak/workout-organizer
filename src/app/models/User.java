@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class User {
 	
-	@Deprecated
 	public User() {}
 	
 	public User(String login, String email, String password, String firstName, String lastName) {

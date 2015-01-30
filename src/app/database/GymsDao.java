@@ -10,7 +10,6 @@ import java.util.List;
 import models.Address;
 import models.Coordinates;
 import models.Gym;
-import models.User;
 import play.db.DB;
 
 public class GymsDao {

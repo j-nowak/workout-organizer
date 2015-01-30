@@ -2,15 +2,13 @@ package controllers;
 
 import java.util.List;
 
-import database.ExerciseDao;
-import database.GymsDao;
-import models.Exercise;
 import models.Gym;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import views.html.gyms;
+import database.GymsDao;
 
 public class GymsController extends Controller {
 	

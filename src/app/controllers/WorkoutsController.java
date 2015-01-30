@@ -1,26 +1,20 @@
 package controllers;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 
 import models.Exercise;
 import models.Gym;
 import models.Workout;
 import models.WorkoutEntry;
-import database.ExerciseDao;
-import database.GymsDao;
-import database.UsersDao;
-import database.WorkoutDao;
-import play.data.DynamicForm;
-import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import views.html.workouts_index;
+import views.html.workouts_new;
+import database.ExerciseDao;
+import database.GymsDao;
+import database.WorkoutDao;
 
 public class WorkoutsController extends Controller {
 	

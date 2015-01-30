@@ -1,8 +1,7 @@
 package models;
 
-import java.util.ArrayList;
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Workout {
