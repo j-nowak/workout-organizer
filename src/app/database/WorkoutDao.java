@@ -154,4 +154,48 @@ public class WorkoutDao {
 
 		return workouts;
 	}
+
+	public int like(int workoutId, int userId) {
+
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement p;
+			try {
+				p = connection.prepareStatement("INSERT INTO "
+						+ "likes(user_id, workout_id) "
+						+ "VALUES (?, ?)");
+	
+				p.setInt(1, userId);
+				p.setInt(2, workoutId);
+				p.execute();
+				p.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			p = connection.prepareStatement("SELECT count(*) "
+					+ "FROM likes "
+					+ "WHERE workout_id = ?");
+			p.setInt(1, workoutId);
+			p.execute();
+			ResultSet resultSet = p.getResultSet();
+			resultSet.next();
+			int likesCount = resultSet.getInt(1);
+			p.close();
+			
+			return likesCount;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }

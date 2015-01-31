@@ -2,7 +2,9 @@ package controllers;
 
 import java.util.List;
 
+import database.NewsDao;
 import database.UsersDao;
+import models.News;
 import models.Stranger;
 import models.User;
 import play.mvc.Controller;
@@ -23,7 +25,8 @@ public class Application extends Controller {
     	}
     	else {
     		List<Stranger> strangers = UsersDao.get().getStrangersForUser(Integer.parseInt(userId));
-    		return ok(index.render(strangers));
+    		List<News> news = NewsDao.get().getNews(Integer.parseInt(userId));
+    		return ok(index.render(news, strangers));
     	}
     }
     

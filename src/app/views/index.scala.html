@@ -1,4 +1,4 @@
-@(strangers: List[Stranger])
+@(news: List[News], strangers: List[Stranger])
 
 @main("Workout organizer HOME", "nav-home") {
 
@@ -27,5 +27,40 @@
 				</li>
 			}
   </div>
+  
+	<div class="news-feed">
+		@for(n <- news) {
+			<div class="news">
+				<div class="news-header">
+					<a href="/users/@n.getFriendId()" class="news-link">
+						@n.getFirstName()
+						@n.getLastName()
+					</a>
+					was doing
+					@n.listMuscles()
+					at
+					<a href="/gyms/@n.getGymId()" class="news-link">
+						@n.getGymName()
+					</a>
+				</div>
+				<div class="news-date">
+					@n.getStartedAt()
+					-
+					@n.getFinishedAt()
+				</div>
+				<div class="news-note">
+					@n.getNote()
+				</div>
+				<div class="news-likes">
+					Likes: <span class="news-likes-count">@n.getLikesCount()</span>
+					@if(!n.isLiked()) {
+						<a class="news-like news-link" data-id="@n.getWorkoutId()">Like!</a>
+					} else {
+						<span>Liked!</span>
+					}
+				</div>
+			</div>
+		}
+	</div>
 
 }

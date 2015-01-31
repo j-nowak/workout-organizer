@@ -19,6 +19,7 @@ POST	/gyms/:gymId				controllers.GymsController.rate(gymId: Int)
 GET		/workouts					controllers.WorkoutsController.index()
 GET		/workouts/new				controllers.WorkoutsController.buildNew()
 POST	/workouts					controllers.WorkoutsController.create()
+POST 	/workouts/:id/like			controllers.WorkoutsController.like(id: Int)
 
 # Account
 GET		/account					controllers.Application.editAccountSettings()

@@ -145,21 +145,21 @@ CREATE INDEX idx_workout_entry_0 ON workout_entries ( workout_id );
 
 CREATE INDEX idx_workout_entry_1 ON workout_entries ( exercise_id );
 
-CREATE VIEW detailed_news AS SELECT u.user_id as friend_id, u.first_name, u.last_name,
+CREATE VIEW detailed_news AS SELECT u.user_id AS friend_id, u.first_name, u.last_name,
   f.first_user_id, f.second_user_id,
   g.gym_id, g.gym_name,
-  w.started_at, w.finished_at, w.note,
-  array_agg(DISTINCT tm.muscle_name ORDER BY tm.muscle_name) as muscles_names,
-  count(l) as likes_count
+  w.workout_id, w.started_at, w.finished_at, w.note,
+  array_agg(DISTINCT tm.muscle_name ORDER BY tm.muscle_name) AS muscles_names,
+  l.count AS likes_count, CASE WHEN l2.user_id IS NULL THEN FALSE ELSE TRUE END AS liked
 FROM users u
 JOIN friendships f ON u.user_id IN (f.first_user_id, f.second_user_id)
 JOIN workouts w USING (user_id)
 LEFT JOIN gyms g USING (gym_id)
 LEFT JOIN workout_entries we USING (workout_id)
-LEFT JOIN exercises e USING (exercise_id)
 LEFT JOIN exercise_muscle_groups tm USING (exercise_id)
-LEFT JOIN likes l USING (workout_id)
-GROUP BY u.user_id, f.first_user_id, f.second_user_id, w.workout_id, g.gym_id
+LEFT JOIN (SELECT count(*), workout_id FROM likes GROUP BY workout_id) l USING (workout_id)
+LEFT JOIN likes l2 ON l2.workout_id = w.workout_id AND l2.user_id IN (f.first_user_id, f.second_user_id) AND l2.user_id != u.user_id
+GROUP BY u.user_id, f.first_user_id, f.second_user_id, w.workout_id, g.gym_id, l.count, l2.user_id
 ORDER BY w.finished_at DESC;
 
 CREATE OR REPLACE FUNCTION random_strangers_of_user(uid int)
