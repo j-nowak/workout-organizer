@@ -67,19 +67,15 @@ public class WorkoutsController extends Controller {
 			workout.setNote(note);
 			
 			for (int i = 0; i < exerciseId.length; ++i) {
-				try {
-					WorkoutEntry entry = new WorkoutEntry();
-					
-					entry.setExerciseId(Integer.parseInt(exerciseId[i]));
-					entry.setSetsCount(Integer.parseInt(setsCount[i]));
-					if (!repsPerSet[i].isEmpty())
-						entry.setRepsPerSet(Integer.parseInt(repsPerSet[i]));
-					if (!weight[i].isEmpty())
-						entry.setWeight(Double.parseDouble(weight[i]));
-					workout.addWorkoutEntry(entry);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				WorkoutEntry entry = new WorkoutEntry();
+				
+				entry.setExerciseId(Integer.parseInt(exerciseId[i]));
+				entry.setSetsCount(Integer.parseInt(setsCount[i]));
+				if (!repsPerSet[i].isEmpty())
+					entry.setRepsPerSet(Integer.parseInt(repsPerSet[i]));
+				if (!weight[i].isEmpty())
+					entry.setWeight(Double.parseDouble(weight[i]));
+				workout.addWorkoutEntry(entry);
 			}
 			
 			WorkoutDao.get().create(workout);

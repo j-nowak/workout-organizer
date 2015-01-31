@@ -12,6 +12,7 @@ import java.util.List;
 
 import models.Workout;
 import models.WorkoutEntry;
+import play.Logger;
 import play.db.DB;
 
 public class WorkoutDao {
@@ -94,8 +95,9 @@ public class WorkoutDao {
 			}
 			connection.commit();
 			return true;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			play.Logger.info("ROLLBACK");
 			try {
 				if (connection != null) {
 					connection.rollback();
