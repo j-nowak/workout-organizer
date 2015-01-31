@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import models.Exercise;
+import models.ExerciseResult;
 import models.MuscleGroup;
 import play.db.DB;
 
@@ -117,5 +118,40 @@ public class ExerciseDao {
 	private static final ExerciseDao INSTANCE = new ExerciseDao();
 	
 	private ExerciseDao() {}
+
+	public ExerciseResult getBestForUser(String userId, int exerciseId) {
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT weight, set_count, reps_per_set" + 
+					"		FROM workout_entries" + 
+					"		JOIN workouts USING (workout_id)" + 
+					"		WHERE user_id = " + userId + " AND exercise_id = " + exerciseId + 
+					"		ORDER BY weight" + 
+					"		LIMIT 1;");
+			ExerciseResult result = null;
+			if (resultSet.next()) {
+				result = new ExerciseResult();
+				result.setRepsPerSet(resultSet.getInt("reps_per_set"));
+				result.setSetCount(resultSet.getInt("set_count"));
+				result.setWeight(resultSet.getInt("weight"));
+				
+			}
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	
 }

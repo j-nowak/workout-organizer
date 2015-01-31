@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.Exercise;
+import models.ExerciseResult;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -14,6 +15,7 @@ public class ExercisesController extends Controller {
 	
     private static final String RATING = "rating";
     private static final String MUSCLES = "muscles";
+    private static final String EXERCISE_ID = "exerciseId";
 
 	public static Result listAllExercises() {	
     	List<Exercise> exercisesList = ExerciseDao.get().getAll(); 
@@ -44,4 +46,25 @@ public class ExercisesController extends Controller {
     	}
     }
 
+    public static Result showBestResult() {
+    	DynamicForm requestData = Form.form().bindFromRequest();
+    	try {
+    		String userId = session(Application.USER_ID);
+    		int exerciseId = Integer.parseInt(requestData.get(EXERCISE_ID));
+    		ExerciseResult result = ExerciseDao.get().getBestForUser(userId, exerciseId);
+    		
+    		String returnData;
+    		if (result == null) {
+    			returnData = "You haven't done this exercise yet.";
+    		}
+    		else {
+    			returnData = "Weight: " + result.getWeight() + ", reps: " + result.getRepsPerSet() + ", sets: " + result.getSetCount();
+    		}
+    		
+    		return ok(returnData);
+    	} catch (NumberFormatException e) {
+    		return badRequest();
+    	}
+    	
+    }
 }

@@ -21,6 +21,7 @@
 						@ex.getName()
 						<div class="ex-rating" data-average="@ex.getRating()" data-id="@ex.getId()">
 						</div>
+						<button id="showBest-@ex.getId()">Show your best!</button>
 					</div>
 					<div class="ex-content">
 						Description: @ex.getDescription() <br>
@@ -29,6 +30,24 @@
 						Target muscles: @Arrays.toString(ex.getTargetMuscles.toArray())
 					</div>
 				</li>
+				
+				<script>
+					$('#showBest-@ex.getId()').click(function() {
+						$.ajax({
+							url: '/showBest',
+							type: 'POST',
+							data: {
+								exerciseId: @ex.getId()
+							},
+							success: function(data) {
+								alert(data);
+							},
+							error: function(xhr, ajaxOptions, thrownError) {
+								alert('Error!');
+							}
+						});
+					});
+				</script>
 			}
 		</ul>
 	</div>
