@@ -4,7 +4,11 @@
 
 # Home page
 GET     /home                       controllers.Application.home()
-POST	/addFriend					controllers.FriendsController.addFriend()
+
+# Users
+POST	/users/:id/invite			controllers.UsersController.invite(id: Int)
+POST	/users/:id/accept			controllers.UsersController.invite(id: Int)
+POST	/users/:id/decline			controllers.UsersController.decline(id: Int)
 
 # Exercises
 GET		/exercises					controllers.ExercisesController.listAllExercises()

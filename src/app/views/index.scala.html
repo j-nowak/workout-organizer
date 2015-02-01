@@ -1,32 +1,28 @@
-@(news: List[News], strangers: List[Stranger])
+@(news: List[News], strangers: List[Stranger], requests: List[User])
 
 @main("Workout organizer HOME", "nav-home") {
 
-  <div id="strangers">
-  	@for((s, index) <- strangers.zipWithIndex) {
-				<li>
-					@s.getFirstName() @s.getLastName()<br>
-					<button id="add-@index">Add friend!</button>
-					<script type="text/javascript">
-						$('#add-@index').click(function() {
-							$.ajax({
-								url: '/addFriend',
-								type: 'POST',
-								data: {
-									strangerId: @s.getId()
-								},
-								success: function() {
-									alert('Request sent');
-								},
-								error: function(xhr, ajaxOptions, thrownError) {
-									alert('Error!');
-								}
-							});
-						});
-					</script>
-				</li>
-			}
-  </div>
+	<div id="right-pane">
+		<h4>Friendship recommendations</h4>
+		<ul class="strangers">
+		@for((s, index) <- strangers.zipWithIndex) {
+			<li>
+				@s.getFirstName() @s.getLastName()<br>
+				<button class="invite" data-id="@s.getId()">Add friend!</button>
+			</li>
+		}
+		</ul>
+		<h4>Friendship requests</h4>
+		<ul class="friendship-requests">
+		@for(r <- requests) {
+			<li>
+				<span class="user-name">@r.getFirstName() @r.getLastName()</span><br>
+				<button class="accept-invitation" data-id="@r.getId()">Accept</button>
+				<button class="decline-invitation" data-id="@r.getId()">Decline</button>
+			</li>
+		}
+		</ul>
+	</div>
   
 	<div class="news-feed">
 		@for(n <- news) {

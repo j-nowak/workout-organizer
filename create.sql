@@ -92,12 +92,18 @@ CREATE INDEX idx_exercises_ratings ON exercise_ratings ( user_id );
 CREATE INDEX idx_exercises_ratings_0 ON exercise_ratings ( exercise_id );
 
 CREATE TABLE friendships (
-	first_user_id        integer  NOT NULL,
-	second_user_id       integer  NOT NULL,
-	CONSTRAINT unique_friendships_rel UNIQUE ( first_user_id, second_user_id )
+  first_user_id        integer  NOT NULL,
+  second_user_id       integer  NOT NULL,
+  CONSTRAINT unique_friendships_rel UNIQUE ( first_user_id, second_user_id )
  );
 
 ALTER TABLE friendships ADD CONSTRAINT proper_rel_check CHECK ( first_user_id < second_user_id );
+
+CREATE TABLE friendship_requests (
+  first_user_id        integer  NOT NULL,
+  second_user_id       integer  NOT NULL,
+  CONSTRAINT unique_friendship_requests_rel UNIQUE ( first_user_id, second_user_id )
+ );
 
 CREATE TABLE gym_ratings (
 	gym_id               integer  NOT NULL,
@@ -208,6 +214,29 @@ CREATE TRIGGER insert_friendship_trigger
     FOR EACH ROW
     EXECUTE PROCEDURE insert_friendship();
 
+CREATE OR REPLACE FUNCTION insert_friendship_request() RETURNS TRIGGER AS $$
+    DECLARE
+        _first_user_id int;
+        _second_user_id int;
+    BEGIN
+        _first_user_id = least(NEW.first_user_id, NEW.second_user_id);
+        _second_user_id = greatest(NEW.first_user_id, NEW.second_user_id);
+
+        IF EXISTS (SELECT * FROM friendship_requests WHERE first_user_id = NEW.second_user_id AND second_user_id = NEW.first_user_id) THEN
+          DELETE FROM friendship_requests WHERE first_user_id = NEW.second_user_id AND second_user_id = NEW.first_user_id;
+          INSERT INTO friendships(first_user_id, second_user_id) VALUES (_first_user_id, _second_user_id);
+          RETURN NULL;
+        ELSE
+          RETURN NEW;
+        END IF;
+    END
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER insert_friendship_request_trigger
+    BEFORE INSERT ON friendship_requests
+    FOR EACH ROW
+    EXECUTE PROCEDURE insert_friendship_request();
+
 ALTER TABLE comments ADD CONSTRAINT fk_comments_users FOREIGN KEY ( user_id ) REFERENCES users( user_id ) ON DELETE CASCADE;
 
 ALTER TABLE comments ADD CONSTRAINT fk_comments_workouts FOREIGN KEY ( workout_id ) REFERENCES workouts( workout_id ) ON DELETE CASCADE;
@@ -219,6 +248,10 @@ ALTER TABLE exercise_ratings ADD CONSTRAINT fk_exercises_ratings_exercises FOREI
 ALTER TABLE friendships ADD CONSTRAINT fk_friendships_users FOREIGN KEY ( first_user_id ) REFERENCES users( user_id );
 
 ALTER TABLE friendships ADD CONSTRAINT fk_friendships_users2 FOREIGN KEY ( second_user_id ) REFERENCES users( user_id );
+
+ALTER TABLE friendship_requests ADD CONSTRAINT fk_friendships_users FOREIGN KEY ( first_user_id ) REFERENCES users( user_id );
+
+ALTER TABLE friendship_requests ADD CONSTRAINT fk_friendships_users2 FOREIGN KEY ( second_user_id ) REFERENCES users( user_id );
 
 ALTER TABLE gym_ratings ADD CONSTRAINT fk_gym_ratings FOREIGN KEY ( gym_id ) REFERENCES gyms( gym_id ) ON DELETE CASCADE;
 
@@ -248,7 +281,7 @@ ALTER TABLE workouts ADD CONSTRAINT fk_workouts_gyms FOREIGN KEY ( gym_id ) REFE
 
 INSERT INTO users(login, email, password_digest, first_name, last_name, height, weight, date_of_birth) VALUES
   ('kuba', 'kuba@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Kuba', 'Kowalski', 175, 83, '1992-02-29'::date),
-  ('edzio', 'edzio@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Edward', 'Szypta', 180, 90, '1967-05-15'::date),
+  ('edzio', 'edzio@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Edward', 'Szczypta', 180, 90, '1967-05-15'::date),
   ('hardkorowy_koksu', 'hardkorowy_koksu@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Robert', 'Burneika', 186, 130, '1984-10-03'::date),
   ('gruby', 'gruby@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Mateusz', 'Boczek', 170, 128, '1976-04-21'::date),
   ('lamer', 'lama@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Kamil', 'Pietruszka', 184, 85, '1994-06-26'::date)

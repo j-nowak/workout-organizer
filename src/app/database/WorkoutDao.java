@@ -12,7 +12,6 @@ import java.util.List;
 
 import models.Workout;
 import models.WorkoutEntry;
-import play.Logger;
 import play.db.DB;
 
 public class WorkoutDao {

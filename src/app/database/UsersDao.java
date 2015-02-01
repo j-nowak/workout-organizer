@@ -3,6 +3,7 @@ package database;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -285,6 +286,95 @@ public class UsersDao {
 		}
 		
 		return strangers;
+	}
+	
+	public void inviteUser(int userId, int requestedUserId) {
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement p = connection.prepareStatement("INSERT INTO "
+						+ "friendship_requests (first_user_id, second_user_id) "
+						+ "VALUES (?, ?)");
+
+			p.setInt(1, userId);
+			p.setInt(2, requestedUserId);
+			p.execute();
+			p.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void removeRequest(int userId, int requestingUserId) {
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement p = connection.prepareStatement(""
+					+ "DELETE FROM friendship_requests "
+					+ "WHERE first_user_id = ? AND second_user_id = ?");
+
+			p.setInt(1, requestingUserId);
+			p.setInt(2, userId);
+			p.execute();
+			p.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public List<User> getFriendshipRequests(int userId) {
+		List<User> users = new ArrayList<User>();
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement statement = connection.prepareStatement(
+					"SELECT user_id, first_name, last_name "
+					+ "FROM friendship_requests "
+					+ "JOIN users ON first_user_id = user_id "
+					+ "WHERE second_user_id = ?");
+			
+			statement.setInt(1, userId);
+			ResultSet resultSet = statement.executeQuery();
+			play.Logger.debug("aaa");
+			
+			while (resultSet.next()) {
+				User u = new User();
+				u.setId(resultSet.getInt("user_id"));
+				u.setFirstName(resultSet.getString("first_name"));
+				u.setLastName(resultSet.getString("last_name"));
+				users.add(u);
+			}
+			
+			resultSet.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return users;
 	}
 
 }

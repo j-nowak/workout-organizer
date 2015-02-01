@@ -39,7 +39,6 @@ public class NewsDao {
 			ResultSet resultSet = statement.executeQuery();
 			
 			while (resultSet.next()) {
-				play.Logger.debug("news");
 				News n = new News();
 				n.setFriendId(resultSet.getInt("friend_id"));
 				n.setFirstName(resultSet.getString("first_name"));

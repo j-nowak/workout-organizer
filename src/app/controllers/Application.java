@@ -25,8 +25,9 @@ public class Application extends Controller {
     	}
     	else {
     		List<Stranger> strangers = UsersDao.get().getStrangersForUser(Integer.parseInt(userId));
+    		List<User> friendshipRequests = UsersDao.get().getFriendshipRequests(Integer.parseInt(userId));
     		List<News> news = NewsDao.get().getNews(Integer.parseInt(userId));
-    		return ok(index.render(news, strangers));
+    		return ok(index.render(news, strangers, friendshipRequests));
     	}
     }
     
