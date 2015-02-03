@@ -1,5 +1,3 @@
-﻿CREATE SCHEMA "public";
-
 CREATE SEQUENCE "public".comments_comment_id_seq START WITH 1;
 
 CREATE SEQUENCE "public".exercises_exercise_id_seq START WITH 1;
@@ -220,13 +218,8 @@ CREATE VIEW "public".simple_news AS  SELECT u.user_id AS friend_id,
   GROUP BY u.user_id, f.first_user_id, f.second_user_id, g.gym_id, w.workout_id
   ORDER BY w.finished_at DESC;;
 
-CREATE TRIGGER insert_friendship_request_trigger BEFORE INSERT ON friendship_requests FOR EACH ROW EXECUTE PROCEDURE insert_friendship_request();
-
-CREATE TRIGGER insert_friendship_trigger BEFORE INSERT ON friendships FOR EACH ROW EXECUTE PROCEDURE insert_friendship();
-
-CREATE OR REPLACE FUNCTION public.insert_friendship()
+CREATE OR REPLACE FUNCTION insert_friendship()
  RETURNS trigger
- LANGUAGE plpgsql
 AS $function$
     DECLARE
         first_user_id int;
@@ -239,10 +232,10 @@ AS $function$
         RETURN NEW;
     END
 $function$
+ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION public.insert_friendship_request()
+CREATE OR REPLACE FUNCTION insert_friendship_request()
  RETURNS trigger
- LANGUAGE plpgsql
 AS $function$
     DECLARE
         _first_user_id int;
@@ -259,10 +252,10 @@ AS $function$
         END IF;
     END
 $function$
+ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION public.random_strangers_of_user(uid integer)
+CREATE OR REPLACE FUNCTION random_strangers_of_user(uid integer)
  RETURNS TABLE(id integer, first_name character varying, last_name character varying)
- LANGUAGE sql
 AS $function$
 SELECT user_id, first_name, last_name
 FROM USERS
@@ -272,6 +265,12 @@ WHERE user_id != uid AND user_id NOT IN
 	WHERE first_user_id = uid OR second_user_id = uid)
 LIMIT 5;
 $function$
+ LANGUAGE sql;
+
+CREATE TRIGGER insert_friendship_request_trigger BEFORE INSERT ON friendship_requests FOR EACH ROW EXECUTE PROCEDURE insert_friendship_request();
+
+CREATE TRIGGER insert_friendship_trigger BEFORE INSERT ON friendships FOR EACH ROW EXECUTE PROCEDURE insert_friendship();
+
 
 ALTER TABLE "public".comments ADD CONSTRAINT fk_comments_users FOREIGN KEY ( user_id ) REFERENCES "public".users( user_id ) ON DELETE CASCADE;
 
@@ -316,6 +315,7 @@ ALTER TABLE "public".workout_entries ADD CONSTRAINT fk_workout_entry_workouts FO
 ALTER TABLE "public".workouts ADD CONSTRAINT fk_workouts_gyms FOREIGN KEY ( gym_id ) REFERENCES "public".gyms( gym_id );
 
 ALTER TABLE "public".workouts ADD CONSTRAINT fk_workouts_users FOREIGN KEY ( user_id ) REFERENCES "public".users( user_id );
+
 -- DEMO POPULATION
 
 INSERT INTO users(login, email, password_digest, first_name, last_name, height, weight, date_of_birth) VALUES
