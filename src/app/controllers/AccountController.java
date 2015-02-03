@@ -1,7 +1,6 @@
 package controllers;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Date;
 
 import models.Secured;
 import play.data.DynamicForm;
@@ -19,10 +18,17 @@ public class AccountController extends Controller {
 		String oldPassword = requestData.get("oldPassword");
 		String newPassword = requestData.get("newPassword");
 		String repeatedPassword = requestData.get("repeatedPassword");
+		int userId;
+		try {
+			userId = Integer.parseInt(session(Application.USER_ID));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return badRequest();
+		}
 		
 		if (newPassword.equals(repeatedPassword)) {
-			if (UsersDao.get().checkPasswordForUser(session().get(Application.USER_ID), oldPassword)) {
-				UsersDao.get().changePassword(session().get(Application.USER_ID), newPassword);
+			if (UsersDao.get().checkPasswordForUser(userId, oldPassword)) {
+				UsersDao.get().changePassword(userId, newPassword);
 				return ok();
 			}
 			else {
@@ -35,28 +41,32 @@ public class AccountController extends Controller {
 	}
 	
 	public static Result changeUserInfo() {
-		String userId = session(Application.USER_ID);
 		DynamicForm requestData = Form.form().bindFromRequest();
-		String weight = requestData.get("weight");
-		String height = requestData.get("height");
-		String dateOfBirth = requestData.get("dateOfBirth");
+		Double weight = null;
+		Double height = null;
+		Date dateOfBirth = null;
+		int userId;
+		try {
+			userId = Integer.parseInt(session(Application.USER_ID));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return badRequest();
+		}
 
-		Map<String, String> toUpdate = new HashMap<String, String>();
-		if (!weight.equals("")) {
-			toUpdate.put("weight", weight);
-		}
-		if (!height.equals("")) {
-			toUpdate.put("height", height);
-		}
-		if (!dateOfBirth.equals("")) {
-			toUpdate.put("date_of_birth", dateOfBirth);
-		}
-		
+		if (!requestData.get("weight").equals(""))
+			weight = Double.valueOf(requestData.get("weight"));
+		if (!requestData.get("height").equals(""))
+			height = Double.valueOf(requestData.get("height"));
+		if (!requestData.get("dateOfBirth").equals(""))
+			dateOfBirth = Date.valueOf(requestData.get("dateOfBirth"));
 
-		if (toUpdate.size() > 0 && UsersDao.get().update(userId, toUpdate)) {
-			return ok();
-		}
-		else {
+		try {
+			if (UsersDao.get().update(userId, weight, height, dateOfBirth))
+				return ok();
+			else
+				return badRequest();
+		} catch (Exception e) {
+			e.printStackTrace();
 			return badRequest();
 		}
 	}

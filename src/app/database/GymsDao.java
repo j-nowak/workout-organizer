@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -67,10 +68,12 @@ public class GymsDao {
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
-			String sql = connection.nativeSQL("INSERT INTO gym_ratings(user_id, gym_id, rating) VALUES" + 
-					"  (" + userId + ", " + gymId + ", " + rating + ");");
-			play.Logger.info("Insert gym_rating: " + sql);
-			connection.createStatement().execute(sql);
+			PreparedStatement p = connection.prepareStatement("INSERT INTO gym_ratings(user_id, gym_id, rating) VALUES (?, ?, ?)");
+			p.setInt(1, userId);
+			p.setInt(2, gymId);
+			p.setInt(3, rating);
+			p.executeQuery();
+			p.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

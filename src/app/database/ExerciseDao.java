@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -98,10 +99,13 @@ public class ExerciseDao {
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
-			String sql = connection.nativeSQL("INSERT INTO exercise_ratings(user_id, exercise_id, rating) VALUES" + 
-					"  (" + userId + ", " + exerciseId + ", " + rating + ");");
-			play.Logger.info("Insert exercise_rating: " + sql);
-			connection.createStatement().execute(sql);
+			PreparedStatement p = connection.prepareStatement("INSERT INTO exercise_ratings(user_id, exercise_id, rating) VALUES (?, ?, ?);");
+			p.setInt(1, userId);
+			p.setInt(2, exerciseId);
+			p.setInt(3, rating);
+			
+			p.executeQuery();
+			p.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -123,13 +127,13 @@ public class ExerciseDao {
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT weight, set_count, reps_per_set" + 
-					"		FROM workout_entries" + 
-					"		JOIN workouts USING (workout_id)" + 
-					"		WHERE user_id = " + userId + " AND exercise_id = " + exerciseId + 
-					"		ORDER BY weight" + 
-					"		LIMIT 1;");
+			PreparedStatement p = connection.prepareStatement("SELECT weight, set_count, reps_per_set"
+					+ "FROM workout_entries "
+					+ "JOIN workouts USING (workout_id) "
+					+ "WHERE user_id = ? AND exercise_id = ? "
+					+ "ORDER BY weight"
+					+ "LIMIT 1;");
+			ResultSet resultSet = p.executeQuery();
 			ExerciseResult result = null;
 			if (resultSet.next()) {
 				result = new ExerciseResult();
@@ -138,7 +142,8 @@ public class ExerciseDao {
 				result.setWeight(resultSet.getInt("weight"));
 				
 			}
-			
+			resultSet.close();
+			p.close();
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();

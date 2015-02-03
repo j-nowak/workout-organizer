@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -25,18 +24,55 @@ public class WorkoutDao {
 	private WorkoutDao() {}
 	
 	public List<Workout> getAll() {
-		return getWorkouts("SELECT workouts.*, gyms.gym_name "
-				+ "FROM workouts "
-				+ "LEFT JOIN gyms using (gym_id) "
-				+ "ORDER BY workouts.finished_at DESC");
+		List<Workout> workouts = new ArrayList<Workout>();
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement p = connection.prepareStatement("SELECT workouts.*, gyms.gym_name "
+					+ "FROM workouts "
+					+ "LEFT JOIN gyms using (gym_id) "
+					+ "ORDER BY workouts.finished_at DESC");
+			workouts = buildWorkouts(p.executeQuery());
+			p.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return workouts;
 	}
 	
 	public List<Workout> getUserWorkouts(int userId) {
-		return getWorkouts("SELECT workouts.*, gyms.gym_name "
-				+ "FROM workouts "
-				+ "LEFT JOIN gyms using (gym_id) "
-				+ "WHERE user_id = " + userId + " "
-				+ "ORDER BY workouts.finished_at DESC");
+		List<Workout> workouts = new ArrayList<Workout>();
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement p = connection.prepareStatement("SELECT workouts.*, gyms.gym_name "
+					+ "FROM workouts "
+					+ "LEFT JOIN gyms using (gym_id) "
+					+ "WHERE user_id = ? "
+					+ "ORDER BY workouts.finished_at DESC");
+			p.setInt(1, userId);
+			workouts = buildWorkouts(p.executeQuery());
+			p.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return workouts;
 	}
 	
 	public boolean create(Workout workout) {
@@ -116,15 +152,10 @@ public class WorkoutDao {
 		}
 	}
 	
-	private List<Workout> getWorkouts(String sql) {
+	private List<Workout> buildWorkouts(ResultSet resultSet) {
 		List<Workout> workouts = new ArrayList<Workout>();
-		
-		Connection connection = null;
+
 		try {
-			connection = DB.getConnection();
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
-			
 			while (resultSet.next()) {
 				int id = resultSet.getInt("workout_id");
 				int userId = resultSet.getInt("user_id");
@@ -138,19 +169,9 @@ public class WorkoutDao {
 				w.setNote(note);
 				workouts.add(w);
 			}
-			
 			resultSet.close();
-			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return workouts;

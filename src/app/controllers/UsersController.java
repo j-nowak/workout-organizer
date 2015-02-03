@@ -30,7 +30,7 @@ public class UsersController extends Controller {
 	
 	public static Result showUser(int foreignerId) {
 		int userId = Integer.parseInt(session("user_id"));
-		User user = UsersDao.get().getById(foreignerId + "");
+		User user = UsersDao.get().getById(foreignerId);
 		boolean isYourFriend = UsersDao.get().areFriends(userId, foreignerId);
 		if (user != null) {
 			return ok(user_info.render(user, isYourFriend));			

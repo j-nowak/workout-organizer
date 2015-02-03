@@ -36,8 +36,13 @@ public class Application extends Controller {
     }
     
     public static Result editAccountSettings() {
-    	User user = UsersDao.get().getById(session(USER_ID)); //TODO change session to userId
-    	return ok(account.render(user));
+    	try {
+	    	User user = UsersDao.get().getById(Integer.parseInt(session(USER_ID))); //TODO change session to userId
+	    	return ok(account.render(user));
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return badRequest();
+    	}
     }
 
 }

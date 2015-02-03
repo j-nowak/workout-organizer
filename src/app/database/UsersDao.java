@@ -3,14 +3,12 @@ package database;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import models.Stranger;
 import models.User;
@@ -34,21 +32,26 @@ public class UsersDao {
 			connection = DB.getConnection();
 			String passwordDigest = byteArrayToHexString(MessageDigest
 					.getInstance("SHA-1").digest(user.getPassword().getBytes()));
-			String sql = connection.nativeSQL("INSERT INTO users(login, email, password_digest, first_name, last_name) VALUES" + 
-					"  ('" + user.getLogin() + "','" + user.getEmail() + "','" + passwordDigest + "','" + user.getFirstName() + "','" + user.getLastName() + "')");
+			PreparedStatement p = connection.prepareStatement("INSERT INTO users(login, email, password_digest, first_name, last_name) VALUES (?, ?, ?, ?, ?)");
+			p.setString(1, user.getLogin());
+			p.setString(2, user.getEmail());
+			p.setString(3, passwordDigest);
+			p.setString(4, user.getFirstName());
+			p.setString(5, user.getLastName());
+			p.executeQuery();
+			p.close();
 			
-			play.Logger.info("Insert user: " + sql);
-			connection.createStatement().execute(sql);
-			
-			Statement statement = connection.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM users WHERE login = '" + user.getLogin() +"'");
+			p = connection.prepareStatement("SELECT * FROM users WHERE login = ?");
+			p.setString(1, user.getLogin());
+			ResultSet result = p.executeQuery();
 			if (result.next()){
 				user.setId(result.getInt("user_id"));				
 			}
 			else {
 				throw new SQLException("Insert error");
 			}
-			
+			result.close();
+			p.close();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,11 +74,13 @@ public class UsersDao {
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
-			Statement getuserStatement = connection.createStatement();
 			String passwordDigest = byteArrayToHexString(MessageDigest
 					.getInstance("SHA-1").digest(password.getBytes()));
-			ResultSet resultUser = getuserStatement.executeQuery("SELECT * FROM users "
-					+ "WHERE (login = '" + login + "' OR email = '" + login + "') AND password_digest = '" + passwordDigest + "'");
+			PreparedStatement p = connection.prepareStatement("SELECT * FROM users WHERE (login = ? OR email = ?) AND password_digest = ?");
+			p.setString(1, login);
+			p.setString(2, login);
+			p.setString(3, passwordDigest);
+			ResultSet resultUser = p.executeQuery();
 			
 			User user = null;
 			if (resultUser.next()) {
@@ -87,7 +92,7 @@ public class UsersDao {
 			}
 			
 			resultUser.close();
-			getuserStatement.close();
+			p.close();
 			
 			return user;
 		} catch (SQLException e) {
@@ -115,13 +120,14 @@ public class UsersDao {
 		return result;
 	}
 
-	public User getById(String userId) { //TODO change to userId
+	public User getById(int userId) {
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
-			Statement getuserStatement = connection.createStatement();
-			ResultSet resultUser = getuserStatement.executeQuery("SELECT * FROM users "
-					+ "WHERE user_id = '" + userId + "'");
+			PreparedStatement p = connection.prepareStatement("SELECT * FROM users WHERE user_id = ?");
+			p.setInt(1, userId);
+			
+			ResultSet resultUser = p.executeQuery();
 			
 			User user = null;
 			if (resultUser.next()) {
@@ -137,7 +143,7 @@ public class UsersDao {
 			}
 			
 			resultUser.close();
-			getuserStatement.close();
+			p.close();
 			
 			return user;
 		} catch (SQLException e) {
@@ -154,16 +160,17 @@ public class UsersDao {
 		}
 	}
 
-	public boolean checkPasswordForUser(String userId, String password) {
+	public boolean checkPasswordForUser(int userId, String password) {
 		Connection connection = null;
 		try {
 			String passwordDigest = byteArrayToHexString(MessageDigest
 					.getInstance("SHA-1").digest(password.getBytes()));
 			
 			connection = DB.getConnection();
-			Statement getuserStatement = connection.createStatement();
-			ResultSet resultUser = getuserStatement.executeQuery("SELECT * FROM users "
-					+ "WHERE user_id = '" + userId + "' AND password_digest = '" + passwordDigest + "'");
+			PreparedStatement p = connection.prepareStatement("SELECT * FROM users WHERE user_id = ? AND password_digest = ?");
+			p.setInt(1, userId);
+			p.setString(2, passwordDigest);
+			ResultSet resultUser = p.executeQuery();
 			
 			boolean result;
 			if (resultUser.next()) {
@@ -174,7 +181,7 @@ public class UsersDao {
 			}
 			
 			resultUser.close();
-			getuserStatement.close();
+			p.close();
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -193,19 +200,20 @@ public class UsersDao {
 		}
 	}
 
-	public void changePassword(String userId, String password) {
+	public void changePassword(int userId, String password) {
 		Connection connection = null;
 		try {
 			String passwordDigest = byteArrayToHexString(MessageDigest
 					.getInstance("SHA-1").digest(password.getBytes()));
 			
 			connection = DB.getConnection();
-			Statement statement = connection.createStatement();
-			String sql = "UPDATE users SET password_digest = '"+ passwordDigest + "' where user_id = '" + userId + "';";
-			statement.executeUpdate(sql);
+			PreparedStatement p = connection.prepareStatement("UPDATE users SET password_digest = ? where user_id = ?");
+			p.setString(1, passwordDigest);;
+			p.setInt(2, userId);
+			p.executeQuery();
+			p.close();
 			play.Logger.info("Password changed!");
 			
-			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
@@ -221,23 +229,38 @@ public class UsersDao {
 		}
 	}
 
-	public boolean update(String userId, Map<String, String> toUpdate) {
+	public boolean update(int userId, Double weight, Double height, Date dateOfBirth) {
 		Connection connection = null;
 		try {	
 			connection = DB.getConnection();
-			Statement statement = connection.createStatement();
-			String sql = "UPDATE users SET ";
-			for (Entry<String, String> entry : toUpdate.entrySet()) {
-				sql += entry.getKey() + " = '" + entry.getValue() + "', ";
-			}
+			String sql = "UPDATE users SET   ";
+			if (weight != null)
+				sql += "weight = ?, ";
+			if (height != null)
+				sql += "height = ?, ";
+			if (dateOfBirth != null)
+				sql += "date_of_birth = ?, ";
 			sql = sql.substring(0, sql.length() - 2);
-			sql += " where user_id = '" + userId + "';";
+			sql += " WHERE user_id = ?";
 			
+			PreparedStatement p = connection.prepareStatement(sql);
+
+			int i = 1;
+			if (weight != null)
+				p.setDouble(i++, weight);
+			if (height != null)
+				p.setDouble(i++, height);
+			if (dateOfBirth != null)
+				p.setDate(i++, dateOfBirth);
+			
+			p.setInt(i, userId);
+
 			play.Logger.info(sql);
-			statement.executeUpdate(sql);
+
+			if (i > 1)
+				p.executeUpdate();
 			
-			
-			statement.close();
+			p.close();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -259,8 +282,9 @@ public class UsersDao {
 		Connection connection = null;
 		try {	
 			connection = DB.getConnection();
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM random_strangers_of_user(" + userId + ")");
+			PreparedStatement p = connection.prepareStatement("SELECT * FROM random_strangers_of_user(?)");
+			p.setInt(1, userId);
+			ResultSet resultSet = p.executeQuery();
 			
 			Stranger stranger = null;
 			while (resultSet.next()) {
@@ -272,7 +296,7 @@ public class UsersDao {
 			}
 			
 			resultSet.close();
-			statement.close();
+			p.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
