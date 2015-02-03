@@ -38,7 +38,7 @@ public class UsersDao {
 			p.setString(3, passwordDigest);
 			p.setString(4, user.getFirstName());
 			p.setString(5, user.getLastName());
-			p.executeQuery();
+			p.executeUpdate();
 			p.close();
 			
 			p = connection.prepareStatement("SELECT * FROM users WHERE login = ?");
@@ -210,7 +210,7 @@ public class UsersDao {
 			PreparedStatement p = connection.prepareStatement("UPDATE users SET password_digest = ? where user_id = ?");
 			p.setString(1, passwordDigest);;
 			p.setInt(2, userId);
-			p.executeQuery();
+			p.executeUpdate();
 			p.close();
 			play.Logger.info("Password changed!");
 			

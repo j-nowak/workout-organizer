@@ -104,7 +104,7 @@ public class ExerciseDao {
 			p.setInt(2, exerciseId);
 			p.setInt(3, rating);
 			
-			p.executeQuery();
+			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -123,16 +123,17 @@ public class ExerciseDao {
 	
 	private ExerciseDao() {}
 
-	public ExerciseResult getBestForUser(String userId, int exerciseId) {
+	public ExerciseResult getBestForUser(String id, int exerciseId) {
 		Connection connection = null;
 		try {
+			int userId = Integer.parseInt(id);
 			connection = DB.getConnection();
-			PreparedStatement p = connection.prepareStatement("SELECT weight, set_count, reps_per_set"
+			PreparedStatement p = connection.prepareStatement("SELECT weight, set_count, reps_per_set "
 					+ "FROM workout_entries "
 					+ "JOIN workouts USING (workout_id) "
-					+ "WHERE user_id = ? AND exercise_id = ? "
-					+ "ORDER BY weight"
-					+ "LIMIT 1;");
+					+ "WHERE user_id = " + userId + " AND exercise_id = " + exerciseId
+					+ " ORDER BY weight "
+					+ "LIMIT 1");
 			ResultSet resultSet = p.executeQuery();
 			ExerciseResult result = null;
 			if (resultSet.next()) {
@@ -145,7 +146,7 @@ public class ExerciseDao {
 			resultSet.close();
 			p.close();
 			return result;
-		} catch (SQLException e) {
+		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
