@@ -16,7 +16,7 @@
 			@for(g <- gyms) {
 				<li>
 					<div class="g-name">
-						@g.getName()
+						<a href="/gyms/@g.getId()">@g.getName()</a>
 						<div class="g-rating" data-average="@g.getRating()" data-id="@g.getId()">
 						</div>
 					</div>

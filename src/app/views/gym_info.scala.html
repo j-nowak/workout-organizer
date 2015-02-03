@@ -1,6 +1,11 @@
 @(g: Gym)
 
-@main("Workout organizer Gym info", "") {
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYoNvTvKRqBDnTHRs3DBmXBoXpzSNP7Rs"></script>
+ <style type="text/css">
+ 	#map-canvas { height: 300px; width: 400px; margin: 10px; padding: 0;}
+ </style>
+
+@main("Workout organizer Gym info", "nav-gyms") {
 	<div class="gyms-container">
 		<ul id="gyms-list">
 				<li>
@@ -17,4 +22,40 @@
 				</li>
 		</ul>
 	</div>
+	<div id="map-canvas"></div>
+	
+	<script type="text/javascript">
+		var map;
+	
+		function initialize() {
+			var mapOptions = {
+		    	center: { 
+		    		lat: 51,
+		    		lng: 20
+		    	},
+		    	zoom: 12
+		  	};
+			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+			
+			@if(g.getAddress().getCoords().getLatitude() != 0.0) {
+				var latLng = new google.maps.LatLng(@g.getAddress().getCoords().getLatitude(), @g.getAddress().getCoords().getLongitude());
+				var marker = new google.maps.Marker({
+				    position: latLng,
+				    title: '@g.getName()',
+				    map: map
+				});
+				map.setCenter(latLng);
+			}
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+		
+		function get_location() {
+		  	if (navigator.geolocation) {
+		    	navigator.geolocation.getCurrentPosition(show_map);
+		  	}
+		}
+		function show_map (position) {
+		 	map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+		}
+	</script>
 }

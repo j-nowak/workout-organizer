@@ -325,10 +325,10 @@ INSERT INTO exercise_muscle_groups(exercise_id, muscle_name) VALUES
   (12, 'łydki')
 ;
 
-INSERT INTO gyms(gym_name, city, street) VALUES
-  ('Platinium', 'Kraków', 'Pawia 3'),
-  ('PowerGym', 'Liszki', 'Piekary 6'),
-  ('Body Paradise', 'Kraków', 'Pachońskiego 10')
+INSERT INTO gyms(gym_name, city, street, latitude, longitude) VALUES
+  ('Platinium', 'Kraków', 'Pawia 9', 50.067500, 19.945987),
+  ('PowerGym', 'Liszki', 'Piekary 6', 50.019904, 19.786889),
+  ('Body Paradise', 'Kraków', 'Pachońskiego 8', 50.094514, 19.927536)
 ;
 
 INSERT INTO workouts(user_id, gym_id, started_at, finished_at, note) VALUES
