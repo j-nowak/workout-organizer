@@ -377,4 +377,35 @@ public class UsersDao {
 		return users;
 	}
 
+	public boolean areFriends(int userId, int foreignerId) {
+		int firstUser = Math.min(userId, foreignerId);
+		int secondUser = Math.max(foreignerId, userId);
+		
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement statement = connection.prepareStatement(
+					"SELECT * FROM friendships WHERE first_user_id = " + firstUser + " AND second_user_id = " + secondUser);			
+			ResultSet resultSet = statement.executeQuery();
+			
+			boolean areFriends = resultSet.next();
+			
+			resultSet.close();
+			statement.close();
+			
+			return areFriends;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 }

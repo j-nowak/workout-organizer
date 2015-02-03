@@ -3,12 +3,15 @@ package controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import models.Secured;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import database.UsersDao;
 
+@Security.Authenticated(Secured.class)
 public class AccountController extends Controller {
 	
 	public static Result changePassword() {

@@ -2,15 +2,19 @@ package controllers;
 
 import java.util.List;
 
-import database.NewsDao;
-import database.UsersDao;
 import models.News;
+import models.Secured;
 import models.Stranger;
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import play.mvc.Security;
+import views.html.account;
+import views.html.index;
+import database.NewsDao;
+import database.UsersDao;
 
+@Security.Authenticated(Secured.class)
 public class Application extends Controller {
 	
 	public static final String USER_ID = "user_id";

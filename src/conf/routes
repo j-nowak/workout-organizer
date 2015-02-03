@@ -9,6 +9,7 @@ GET     /home                       controllers.Application.home()
 POST	/users/:id/invite			controllers.UsersController.invite(id: Int)
 POST	/users/:id/accept			controllers.UsersController.invite(id: Int)
 POST	/users/:id/decline			controllers.UsersController.decline(id: Int)
+GET		/users/:id					controllers.UsersController.showUser(id: Int)
 
 # Exercises
 GET		/exercises					controllers.ExercisesController.listAllExercises()
@@ -19,6 +20,7 @@ POST	/showBest					controllers.ExercisesController.showBestResult()
 # Gyms
 GET		/gyms						controllers.GymsController.listAllGyms()
 POST	/gyms/:gymId				controllers.GymsController.rate(gymId: Int)
+GET		/gyms/:id					controllers.GymsController.showGym(id: Int)
 
 # Workouts
 GET		/workouts					controllers.WorkoutsController.index()

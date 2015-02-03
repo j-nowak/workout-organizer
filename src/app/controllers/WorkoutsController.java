@@ -6,16 +6,19 @@ import java.util.Map;
 
 import models.Exercise;
 import models.Gym;
+import models.Secured;
 import models.Workout;
 import models.WorkoutEntry;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.workouts_index;
 import views.html.workouts_new;
 import database.ExerciseDao;
 import database.GymsDao;
 import database.WorkoutDao;
 
+@Security.Authenticated(Secured.class)
 public class WorkoutsController extends Controller {
 	
 	public static Result buildNew() {

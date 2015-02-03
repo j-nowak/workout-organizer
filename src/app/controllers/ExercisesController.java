@@ -4,13 +4,16 @@ import java.util.List;
 
 import models.Exercise;
 import models.ExerciseResult;
+import models.Secured;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.exercises;
 import database.ExerciseDao;
 
+@Security.Authenticated(Secured.class)
 public class ExercisesController extends Controller {
 	
     private static final String RATING = "rating";

@@ -3,13 +3,17 @@ package controllers;
 import java.util.List;
 
 import models.Gym;
+import models.Secured;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
+import views.html.gym_info;
 import views.html.gyms;
 import database.GymsDao;
 
+@Security.Authenticated(Secured.class)
 public class GymsController extends Controller {
 	
     private static final String RATING = "rating";
@@ -38,4 +42,13 @@ public class GymsController extends Controller {
     	}
     }
 
+    public static Result showGym(int id) {
+    	Gym g = GymsDao.get().getById(id);
+    	if (g != null) {
+    		return ok(gym_info.render(g));    		
+    	}
+    	else {
+    		return badRequest();
+    	}
+    }
 }

@@ -1,8 +1,10 @@
 package controllers;
 
-import database.UsersDao;
+import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
+import database.UsersDao;
+import views.html.user_info;
 
 public class UsersController extends Controller {
 
@@ -22,6 +24,18 @@ public class UsersController extends Controller {
 			UsersDao.get().removeRequest(userId, requesingUserId);
 			return ok();
 		} catch (Exception e) {
+			return badRequest();
+		}
+	}
+	
+	public static Result showUser(int foreignerId) {
+		int userId = Integer.parseInt(session("user_id"));
+		User user = UsersDao.get().getById(foreignerId + "");
+		boolean isYourFriend = UsersDao.get().areFriends(userId, foreignerId);
+		if (user != null) {
+			return ok(user_info.render(user, isYourFriend));			
+		}
+		else {
 			return badRequest();
 		}
 	}
