@@ -2,7 +2,7 @@
 
 @main("Workout organizer Workout", "nav-training") {
 	
-	<a href="/workouts/new">Add new workout</a><br>
+	<a href="/workouts/new">Add new workout</a><br><br>
 
 	@for(w <- workouts) {
 		<div class="workout" data-id="@w.getId()">
@@ -10,7 +10,7 @@
 			Started at: @w.getStartedAt<br>
 			Finished at: @w.getFinishedAt<br>
 			Note: @w.getNote()<br>
-		</div>
+		</div> <br>
 	}
 	
 	<script type="text/javascript" src="/javascripts/workouts.js"></script>
