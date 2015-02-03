@@ -166,3 +166,12 @@ ul#exercises-list li {
 	font-style: italic;
 	line-height: 24px;
 }
+
+a.toggle-entries {
+  color: #6BABEA;
+  text-decoration: none;
+}
+
+a.toggle-entries:hover {
+  cursor: pointer;
+}

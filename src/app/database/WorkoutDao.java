@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import models.Workout;
 import models.WorkoutEntry;
@@ -23,43 +25,52 @@ public class WorkoutDao {
 	
 	private WorkoutDao() {}
 	
-	public List<Workout> getAll() {
-		List<Workout> workouts = new ArrayList<Workout>();
-		Connection connection = null;
-		try {
-			connection = DB.getConnection();
-			PreparedStatement p = connection.prepareStatement("SELECT workouts.*, gyms.gym_name "
-					+ "FROM workouts "
-					+ "LEFT JOIN gyms using (gym_id) "
-					+ "ORDER BY workouts.finished_at DESC");
-			workouts = buildWorkouts(p.executeQuery());
-			p.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return workouts;
-	}
-	
 	public List<Workout> getUserWorkouts(int userId) {
 		List<Workout> workouts = new ArrayList<Workout>();
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
-			PreparedStatement p = connection.prepareStatement("SELECT workouts.*, gyms.gym_name "
+			PreparedStatement p = connection.prepareStatement("SELECT workouts.*, gyms.gym_name, workout_entries.*, exercises.exercise_name "
 					+ "FROM workouts "
-					+ "LEFT JOIN gyms using (gym_id) "
+					+ "LEFT JOIN gyms USING (gym_id) "
+					+ "LEFT JOIN workout_entries USING (workout_id) "
+					+ "LEFT JOIN exercises USING (exercise_id) "
 					+ "WHERE user_id = ? "
 					+ "ORDER BY workouts.finished_at DESC");
 			p.setInt(1, userId);
-			workouts = buildWorkouts(p.executeQuery());
+			ResultSet resultSet = p.executeQuery();
+			TreeMap<Integer, Workout> workoutsTree = new TreeMap<Integer, Workout>();
+
+			while (resultSet.next()) {
+				int id = resultSet.getInt("workout_id");
+				Workout w;
+				if (!workoutsTree.containsKey(id)) {
+					int gymId = resultSet.getInt("gym_id");
+					Timestamp startedAt = resultSet.getTimestamp("started_at");
+					Timestamp finishedAt = resultSet.getTimestamp("finished_at");
+					String note = resultSet.getString("note");
+					w = new Workout(userId, gymId, startedAt, finishedAt);
+					w.setId(id);
+					w.setGymName(resultSet.getString("gym_name"));
+					w.setNote(note);
+					workoutsTree.put(id, w);
+				} else
+					w = workoutsTree.get(id);
+				int exerciseId = resultSet.getInt("exercise_id");
+				if (!resultSet.wasNull()) {
+					WorkoutEntry we = new WorkoutEntry();
+					we.setExerciseId(exerciseId);
+					we.setRepsPerSet(resultSet.getInt("reps_per_set"));
+					we.setSetsCount(resultSet.getInt("set_count"));
+					we.setWeight(resultSet.getDouble("weight"));
+					we.setExerciseName(resultSet.getString("exercise_name"));
+					w.addWorkoutEntry(we);
+				}
+			}
+			for (Entry<Integer, Workout> e : workoutsTree.entrySet()) {
+				workouts.add(e.getValue());
+			}
+			resultSet.close();
 			p.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -150,31 +161,6 @@ public class WorkoutDao {
 				}
 			}
 		}
-	}
-	
-	private List<Workout> buildWorkouts(ResultSet resultSet) {
-		List<Workout> workouts = new ArrayList<Workout>();
-
-		try {
-			while (resultSet.next()) {
-				int id = resultSet.getInt("workout_id");
-				int userId = resultSet.getInt("user_id");
-				int gymId = resultSet.getInt("gym_id");
-				Timestamp startedAt = resultSet.getTimestamp("started_at");
-				Timestamp finishedAt = resultSet.getTimestamp("finished_at");
-				String note = resultSet.getString("note");
-				Workout w = new Workout(userId, gymId, startedAt, finishedAt);
-				w.setId(id);
-				w.setGymName(resultSet.getString("gym_name"));
-				w.setNote(note);
-				workouts.add(w);
-			}
-			resultSet.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return workouts;
 	}
 
 	public int like(int workoutId, int userId) {

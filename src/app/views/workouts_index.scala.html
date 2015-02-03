@@ -11,6 +11,19 @@
 			Finished at: @w.getFinishedAt<br>
 			Note: @w.getNote()<br>
 		</div> <br>
+		<a class="toggle-entries" data-id="@w.getId()">Show/hide details</a>
+		<div class="workout-entries" data-id="@w.getId()" style="display: none;">
+			<ul>
+			@for(we <- w.getWorkoutEntries()) {
+				<li>
+					Exercise: @we.getExerciseName()<br>
+					Sets count: @we.getSetsCount()<br>
+					Reps per set: @we.getRepsPerSet()<br>
+					Weight: @we.getWeight()
+				</li>
+			}
+			</ul>
+		</div>
 	}
 	
 	<script type="text/javascript" src="/javascripts/workouts.js"></script>

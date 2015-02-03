@@ -7,6 +7,7 @@ public class WorkoutEntry {
 	private int setsCount;
 	private Integer repsPerSet;
 	private Double weight;
+	private String exerciseName;
 	
 	public WorkoutEntry() {
 		
@@ -41,6 +42,14 @@ public class WorkoutEntry {
 	}
 	public void setWeight(Double weight) {
 		this.weight = weight;
+	}
+
+	public String getExerciseName() {
+		return exerciseName;
+	}
+
+	public void setExerciseName(String exerciseName) {
+		this.exerciseName = exerciseName;
 	}
 
 }

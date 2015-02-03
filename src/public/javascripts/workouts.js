@@ -39,3 +39,8 @@ $("a#addEntry").click(function() {
 
   return false;
 });
+
+$('.toggle-entries').click(function() {
+  var id = $(this).data('id');
+  $('.workout-entries[data-id=' + id + ']').toggle()
+})
