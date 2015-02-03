@@ -33,7 +33,7 @@ public class SignController extends Controller {
 			return redirect(Application.HOME);
 		}
 		else {
-			throw new RuntimeException("Not implemented");
+			return redirect(Application.LOGIN);
 		}
 	}
 	

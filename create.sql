@@ -1,4 +1,24 @@
-CREATE TABLE exercises (
+﻿CREATE SCHEMA "public";
+
+CREATE SEQUENCE "public".comments_comment_id_seq START WITH 1;
+
+CREATE SEQUENCE "public".exercises_exercise_id_seq START WITH 1;
+
+CREATE SEQUENCE "public".gyms_gym_id_seq START WITH 1;
+
+CREATE SEQUENCE "public".users_user_id_seq START WITH 1;
+
+CREATE SEQUENCE "public".weights_weight_id_seq START WITH 1;
+
+CREATE SEQUENCE "public".workouts_workout_id_seq START WITH 1;
+
+CREATE TABLE "public".equipment ( 
+	equipment_name       varchar(100)  NOT NULL,
+	image_path           varchar(255)  ,
+	CONSTRAINT pk_equipment PRIMARY KEY ( equipment_name )
+ );
+
+CREATE TABLE "public".exercises ( 
 	exercise_id          serial  NOT NULL,
 	exercise_name        varchar(100)  NOT NULL,
 	description          text  ,
@@ -6,7 +26,7 @@ CREATE TABLE exercises (
 	CONSTRAINT pk_exercises PRIMARY KEY ( exercise_id )
  );
 
-CREATE TABLE gyms (
+CREATE TABLE "public".gyms ( 
 	gym_id               serial  NOT NULL,
 	gym_name             varchar(100)  NOT NULL,
 	city                 varchar(100)  NOT NULL,
@@ -17,33 +37,13 @@ CREATE TABLE gyms (
 	CONSTRAINT pk_gyms PRIMARY KEY ( gym_id )
  );
 
-CREATE TABLE muscle_groups (
+CREATE TABLE "public".muscle_groups ( 
 	muscle_name          varchar(100)  NOT NULL,
 	image_path           varchar(255)  ,
 	CONSTRAINT pk_muscle_groups PRIMARY KEY ( muscle_name )
  );
 
-CREATE TABLE exercise_muscle_groups (
-	exercise_id          integer  NOT NULL,
-	muscle_name          varchar(100)  NOT NULL
- );
-
-CREATE TABLE equipment (
-  equipment_name       varchar(100)  NOT NULL,
-  image_path           varchar(255)  ,
-  CONSTRAINT pk_equipment PRIMARY KEY ( equipment_name )
- );
-
-CREATE TABLE exercise_equipment (
-  exercise_id          integer  NOT NULL,
-  equipment_name       varchar(100)  NOT NULL
- );
-
-CREATE INDEX idx_exercise_muscle_groups ON exercise_muscle_groups ( muscle_name );
-
-CREATE INDEX idx_exercise_muscle_groups_0 ON exercise_muscle_groups ( exercise_id );
-
-CREATE TABLE users (
+CREATE TABLE "public".users ( 
 	user_id              serial  NOT NULL,
 	login                varchar(20)  NOT NULL,
 	email                varchar(50)  NOT NULL,
@@ -55,80 +55,107 @@ CREATE TABLE users (
 	date_of_birth        date  ,
 	CONSTRAINT pk_users PRIMARY KEY ( user_id ),
 	CONSTRAINT unique_login UNIQUE ( login ) ,
-	CONSTRAINT unique_mail UNIQUE ( email )
+	CONSTRAINT unique_mail UNIQUE ( email ) 
  );
 
-ALTER TABLE users ADD CONSTRAINT height_chk CHECK ( height > 0 AND height < 300 );
+ALTER TABLE "public".users ADD CONSTRAINT weight_ckh CHECK ( weight > (0)::numeric );
 
-ALTER TABLE users ADD CONSTRAINT weight_ckh CHECK ( weight > 0 );
+ALTER TABLE "public".users ADD CONSTRAINT height_chk CHECK ( (height > 0) AND (height < 300) );
 
-CREATE TABLE workouts (
+CREATE TABLE "public".workouts ( 
 	workout_id           serial  NOT NULL,
 	user_id              integer  NOT NULL,
 	gym_id               integer  ,
-	started_at           timestamp DEFAULT current_timestamp NOT NULL,
+	started_at           timestamp DEFAULT now() NOT NULL,
 	finished_at          timestamp  NOT NULL,
 	note                 varchar(300)  ,
 	CONSTRAINT pk_workouts PRIMARY KEY ( workout_id )
  );
 
-ALTER TABLE workouts ADD CONSTRAINT time_check CHECK ( started_at < finished_at );
+ALTER TABLE "public".workouts ADD CONSTRAINT time_check CHECK ( started_at < finished_at );
 
-CREATE INDEX idx_workouts ON workouts ( user_id );
+CREATE INDEX idx_workouts ON "public".workouts ( user_id );
 
-CREATE INDEX idx_workouts_0 ON workouts ( gym_id );
+CREATE INDEX idx_workouts_0 ON "public".workouts ( gym_id );
 
-CREATE TABLE exercise_ratings (
+CREATE TABLE "public".comments ( 
+	comment_id           serial  NOT NULL,
+	user_id              integer  NOT NULL,
+	workout_id           integer  NOT NULL,
+	content              text  ,
+	created_at           timestamp DEFAULT now() NOT NULL
+ );
+
+CREATE TABLE "public".exercise_equipment ( 
+	exercise_id          integer  NOT NULL,
+	equipment_name       varchar(100)  NOT NULL,
+	CONSTRAINT idx_exercise_equipment UNIQUE ( exercise_id, equipment_name ) 
+ );
+
+CREATE TABLE "public".exercise_muscle_groups ( 
+	exercise_id          integer  NOT NULL,
+	muscle_name          varchar(100)  NOT NULL
+ );
+
+CREATE INDEX idx_exercise_muscle_groups ON "public".exercise_muscle_groups ( muscle_name );
+
+CREATE INDEX idx_exercise_muscle_groups_0 ON "public".exercise_muscle_groups ( exercise_id );
+
+CREATE TABLE "public".exercise_ratings ( 
 	user_id              integer  NOT NULL,
 	exercise_id          integer  NOT NULL,
-	rating               integer  NOT NULL,
-	CONSTRAINT pk_exercises_ratings PRIMARY KEY ( user_id, exercise_id )
+	rating               integer  NOT NULL
  );
 
-ALTER TABLE exercise_ratings ADD CONSTRAINT rating_chk CHECK ( rating BETWEEN 1 AND 10 );
+ALTER TABLE "public".exercise_ratings ADD CONSTRAINT rating_chk CHECK ( (rating >= 1) AND (rating <= 10) );
 
-CREATE INDEX idx_exercises_ratings ON exercise_ratings ( user_id );
+CREATE INDEX idx_exercises_ratings ON "public".exercise_ratings ( user_id );
 
-CREATE INDEX idx_exercises_ratings_0 ON exercise_ratings ( exercise_id );
+CREATE INDEX idx_exercises_ratings_0 ON "public".exercise_ratings ( exercise_id );
 
-CREATE TABLE friendships (
-  first_user_id        integer  NOT NULL,
-  second_user_id       integer  NOT NULL,
-  CONSTRAINT unique_friendships_rel UNIQUE ( first_user_id, second_user_id )
+CREATE TABLE "public".friendship_requests ( 
+	first_user_id        integer  NOT NULL,
+	second_user_id       integer  NOT NULL,
+	CONSTRAINT unique_friendship_requests_rel UNIQUE ( first_user_id, second_user_id ) 
  );
 
-ALTER TABLE friendships ADD CONSTRAINT proper_rel_check CHECK ( first_user_id < second_user_id );
-
-CREATE TABLE friendship_requests (
-  first_user_id        integer  NOT NULL,
-  second_user_id       integer  NOT NULL,
-  CONSTRAINT unique_friendship_requests_rel UNIQUE ( first_user_id, second_user_id )
+CREATE TABLE "public".friendships ( 
+	first_user_id        integer  NOT NULL,
+	second_user_id       integer  NOT NULL,
+	CONSTRAINT unique_friendships_rel UNIQUE ( first_user_id, second_user_id ) 
  );
 
-CREATE TABLE gym_ratings (
+ALTER TABLE "public".friendships ADD CONSTRAINT proper_rel_check CHECK ( first_user_id < second_user_id );
+
+CREATE TABLE "public".gym_ratings ( 
 	gym_id               integer  NOT NULL,
 	user_id              integer  NOT NULL,
 	rating               integer  NOT NULL,
-	CONSTRAINT idx_gym_ratings PRIMARY KEY ( gym_id, user_id )
+	CONSTRAINT idx_gym_ratings UNIQUE ( gym_id, user_id ) 
  );
 
-ALTER TABLE gym_ratings ADD CONSTRAINT rating_chk CHECK ( rating BETWEEN 1 AND 10 );
+ALTER TABLE "public".gym_ratings ADD CONSTRAINT rating_chk CHECK ( (rating >= 1) AND (rating <= 10) );
 
-CREATE TABLE likes (
-  user_id              integer  NOT NULL,
-  workout_id           integer  NOT NULL,
-  CONSTRAINT idx_likes UNIQUE ( user_id, workout_id )
+CREATE TABLE "public".likes ( 
+	user_id              integer  NOT NULL,
+	workout_id           integer  NOT NULL,
+	CONSTRAINT idx_likes UNIQUE ( user_id, workout_id ) 
  );
 
-CREATE TABLE comments (
-  comment_id           serial  NOT NULL,
-  user_id              integer  NOT NULL,
-  workout_id           integer  NOT NULL,
-  content              text,
-  created_at           timestamp DEFAULT current_timestamp NOT NULL
+CREATE TABLE "public".weights ( 
+	weight_id            serial  NOT NULL,
+	user_id              integer  NOT NULL,
+	workout_id           integer  ,
+	weight               numeric(5,2)  NOT NULL,
+	created_at           timestamp DEFAULT now() NOT NULL,
+	CONSTRAINT idx_weights_1 PRIMARY KEY ( weight_id )
  );
 
-CREATE TABLE workout_entries (
+CREATE INDEX idx_weights ON "public".weights ( user_id );
+
+CREATE INDEX idx_weights_0 ON "public".weights ( workout_id );
+
+CREATE TABLE "public".workout_entries ( 
 	workout_id           integer  NOT NULL,
 	exercise_id          integer  NOT NULL,
 	set_count            integer  NOT NULL,
@@ -137,91 +164,92 @@ CREATE TABLE workout_entries (
 	CONSTRAINT idx_workout_entry PRIMARY KEY ( workout_id, exercise_id )
  );
 
-CREATE TABLE weights (
-  weight_id            serial NOT NULL,
-  user_id              integer NOT NULL,
-  workout_id           integer,
-  weight               numeric(5, 2) NOT NULL,
-  created_at           timestamp DEFAULT current_timestamp NOT NULL
-);
+ALTER TABLE "public".workout_entries ADD CONSTRAINT non_negative_chk CHECK ( ((set_count > 0) AND (reps_per_set > 0)) AND (weight >= (0)::numeric) );
 
-ALTER TABLE workout_entries ADD CONSTRAINT non_negative_chk CHECK ( set_count > 0 AND reps_per_set > 0 AND weight >= 0 );
+CREATE INDEX idx_workout_entry_0 ON "public".workout_entries ( workout_id );
 
-CREATE INDEX idx_workout_entry_0 ON workout_entries ( workout_id );
+CREATE INDEX idx_workout_entry_1 ON "public".workout_entries ( exercise_id );
 
-CREATE INDEX idx_workout_entry_1 ON workout_entries ( exercise_id );
+CREATE VIEW "public".detailed_news AS  SELECT u.user_id AS friend_id,
+    u.first_name,
+    u.last_name,
+    f.first_user_id,
+    f.second_user_id,
+    g.gym_id,
+    g.gym_name,
+    w.workout_id,
+    w.started_at,
+    w.finished_at,
+    w.note,
+    array_agg(DISTINCT tm.muscle_name ORDER BY tm.muscle_name) AS muscles_names,
+    l.count AS likes_count,
+        CASE
+            WHEN (l2.user_id IS NULL) THEN false
+            ELSE true
+        END AS liked
+   FROM (((((((users u
+     JOIN friendships f ON (((u.user_id = f.first_user_id) OR (u.user_id = f.second_user_id))))
+     JOIN workouts w USING (user_id))
+     LEFT JOIN gyms g USING (gym_id))
+     LEFT JOIN workout_entries we USING (workout_id))
+     LEFT JOIN exercise_muscle_groups tm USING (exercise_id))
+     LEFT JOIN ( SELECT count(*) AS count,
+            likes.workout_id
+           FROM likes
+          GROUP BY likes.workout_id) l USING (workout_id))
+     LEFT JOIN likes l2 ON ((((l2.workout_id = w.workout_id) AND ((l2.user_id = f.first_user_id) OR (l2.user_id = f.second_user_id))) AND (l2.user_id <> u.user_id))))
+  GROUP BY u.user_id, f.first_user_id, f.second_user_id, w.workout_id, g.gym_id, l.count, l2.user_id
+  ORDER BY w.finished_at DESC;;
 
-CREATE VIEW detailed_news AS SELECT u.user_id AS friend_id, u.first_name, u.last_name,
-  f.first_user_id, f.second_user_id,
-  g.gym_id, g.gym_name,
-  w.workout_id, w.started_at, w.finished_at, w.note,
-  array_agg(DISTINCT tm.muscle_name ORDER BY tm.muscle_name) AS muscles_names,
-  l.count AS likes_count, CASE WHEN l2.user_id IS NULL THEN FALSE ELSE TRUE END AS liked
-FROM users u
-JOIN friendships f ON u.user_id IN (f.first_user_id, f.second_user_id)
-JOIN workouts w USING (user_id)
-LEFT JOIN gyms g USING (gym_id)
-LEFT JOIN workout_entries we USING (workout_id)
-LEFT JOIN exercise_muscle_groups tm USING (exercise_id)
-LEFT JOIN (SELECT count(*), workout_id FROM likes GROUP BY workout_id) l USING (workout_id)
-LEFT JOIN likes l2 ON l2.workout_id = w.workout_id AND l2.user_id IN (f.first_user_id, f.second_user_id) AND l2.user_id != u.user_id
-GROUP BY u.user_id, f.first_user_id, f.second_user_id, w.workout_id, g.gym_id, l.count, l2.user_id
-ORDER BY w.finished_at DESC;
-
-CREATE OR REPLACE FUNCTION random_strangers_of_user(uid int)
-RETURNS TABLE(id int, first_name varchar(100), last_name varchar(100)) AS
-$$
-SELECT user_id, first_name, last_name
-FROM USERS
-WHERE user_id != uid AND user_id NOT IN
-	(SELECT (CASE WHEN first_user_id = uid THEN second_user_id ELSE first_user_id END) AS friend_id
-	FROM friendships
-	WHERE first_user_id = uid OR second_user_id = uid)
-LIMIT 5;
-$$
-LANGUAGE sql;
-
-CREATE VIEW simple_news AS SELECT u.user_id AS friend_id, u.first_name, u.last_name,
-    f.first_user_id, f.second_user_id,
-    g.gym_id, g.gym_name,
-    w.started_at, w.finished_at, w.note,
-    count(l) as likes_count
-  FROM users u
-  JOIN friendships f ON u.user_id IN (f.first_user_id, f.second_user_id)
-  JOIN workouts w ON u.user_id = w.user_id
-  LEFT JOIN gyms g ON g.gym_id = w.gym_id
-  LEFT JOIN likes l ON l.workout_id = w.workout_id
+CREATE VIEW "public".simple_news AS  SELECT u.user_id AS friend_id,
+    u.first_name,
+    u.last_name,
+    f.first_user_id,
+    f.second_user_id,
+    g.gym_id,
+    g.gym_name,
+    w.started_at,
+    w.finished_at,
+    w.note,
+    count(l.*) AS likes_count
+   FROM ((((users u
+     JOIN friendships f ON (((u.user_id = f.first_user_id) OR (u.user_id = f.second_user_id))))
+     JOIN workouts w ON ((u.user_id = w.user_id)))
+     LEFT JOIN gyms g ON ((g.gym_id = w.gym_id)))
+     LEFT JOIN likes l ON ((l.workout_id = w.workout_id)))
   GROUP BY u.user_id, f.first_user_id, f.second_user_id, g.gym_id, w.workout_id
-  ORDER BY w.finished_at DESC;
+  ORDER BY w.finished_at DESC;;
 
-CREATE OR REPLACE FUNCTION insert_friendship() RETURNS TRIGGER AS $$
+CREATE TRIGGER insert_friendship_request_trigger BEFORE INSERT ON friendship_requests FOR EACH ROW EXECUTE PROCEDURE insert_friendship_request();
+
+CREATE TRIGGER insert_friendship_trigger BEFORE INSERT ON friendships FOR EACH ROW EXECUTE PROCEDURE insert_friendship();
+
+CREATE OR REPLACE FUNCTION public.insert_friendship()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
     DECLARE
         first_user_id int;
         second_user_id int;
     BEGIN
         first_user_id = least(NEW.first_user_id, NEW.second_user_id);
         second_user_id = greatest(NEW.first_user_id, NEW.second_user_id);
-
         NEW.first_user_id = first_user_id;
         NEW.second_user_id = second_user_id;
-
         RETURN NEW;
     END
-$$ LANGUAGE plpgsql;
+$function$
 
-CREATE TRIGGER insert_friendship_trigger
-    BEFORE INSERT ON friendships
-    FOR EACH ROW
-    EXECUTE PROCEDURE insert_friendship();
-
-CREATE OR REPLACE FUNCTION insert_friendship_request() RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION public.insert_friendship_request()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
     DECLARE
         _first_user_id int;
         _second_user_id int;
     BEGIN
         _first_user_id = least(NEW.first_user_id, NEW.second_user_id);
         _second_user_id = greatest(NEW.first_user_id, NEW.second_user_id);
-
         IF EXISTS (SELECT * FROM friendship_requests WHERE first_user_id = NEW.second_user_id AND second_user_id = NEW.first_user_id) THEN
           DELETE FROM friendship_requests WHERE first_user_id = NEW.second_user_id AND second_user_id = NEW.first_user_id;
           INSERT INTO friendships(first_user_id, second_user_id) VALUES (_first_user_id, _second_user_id);
@@ -230,53 +258,64 @@ CREATE OR REPLACE FUNCTION insert_friendship_request() RETURNS TRIGGER AS $$
           RETURN NEW;
         END IF;
     END
-$$ LANGUAGE plpgsql;
+$function$
 
-CREATE TRIGGER insert_friendship_request_trigger
-    BEFORE INSERT ON friendship_requests
-    FOR EACH ROW
-    EXECUTE PROCEDURE insert_friendship_request();
+CREATE OR REPLACE FUNCTION public.random_strangers_of_user(uid integer)
+ RETURNS TABLE(id integer, first_name character varying, last_name character varying)
+ LANGUAGE sql
+AS $function$
+SELECT user_id, first_name, last_name
+FROM USERS
+WHERE user_id != uid AND user_id NOT IN
+	(SELECT (CASE WHEN first_user_id = uid THEN second_user_id ELSE first_user_id END) AS friend_id
+	FROM friendships
+	WHERE first_user_id = uid OR second_user_id = uid)
+LIMIT 5;
+$function$
 
-ALTER TABLE comments ADD CONSTRAINT fk_comments_users FOREIGN KEY ( user_id ) REFERENCES users( user_id ) ON DELETE CASCADE;
+ALTER TABLE "public".comments ADD CONSTRAINT fk_comments_users FOREIGN KEY ( user_id ) REFERENCES "public".users( user_id ) ON DELETE CASCADE;
 
-ALTER TABLE comments ADD CONSTRAINT fk_comments_workouts FOREIGN KEY ( workout_id ) REFERENCES workouts( workout_id ) ON DELETE CASCADE;
+ALTER TABLE "public".comments ADD CONSTRAINT fk_comments_workouts FOREIGN KEY ( workout_id ) REFERENCES "public".workouts( workout_id ) ON DELETE CASCADE;
 
-ALTER TABLE exercise_ratings ADD CONSTRAINT fk_exercises_ratings_users FOREIGN KEY ( user_id ) REFERENCES users( user_id ) ON DELETE CASCADE;
+ALTER TABLE "public".exercise_equipment ADD CONSTRAINT fk_exercise_equipment FOREIGN KEY ( equipment_name ) REFERENCES "public".equipment( equipment_name ) ON DELETE CASCADE;
 
-ALTER TABLE exercise_ratings ADD CONSTRAINT fk_exercises_ratings_exercises FOREIGN KEY ( exercise_id ) REFERENCES exercises( exercise_id ) ON DELETE CASCADE;
+ALTER TABLE "public".exercise_equipment ADD CONSTRAINT fk_exercise_equipment_exercises FOREIGN KEY ( exercise_id ) REFERENCES "public".exercises( exercise_id ) ON DELETE CASCADE;
 
-ALTER TABLE friendships ADD CONSTRAINT fk_friendships_users FOREIGN KEY ( first_user_id ) REFERENCES users( user_id );
+ALTER TABLE "public".exercise_muscle_groups ADD CONSTRAINT fk_exercise_muscle_groups_exercises FOREIGN KEY ( exercise_id ) REFERENCES "public".exercises( exercise_id ) ON DELETE CASCADE;
 
-ALTER TABLE friendships ADD CONSTRAINT fk_friendships_users2 FOREIGN KEY ( second_user_id ) REFERENCES users( user_id );
+ALTER TABLE "public".exercise_muscle_groups ADD CONSTRAINT fk_exercise_muscle_groups FOREIGN KEY ( muscle_name ) REFERENCES "public".muscle_groups( muscle_name ) ON DELETE CASCADE;
 
-ALTER TABLE friendship_requests ADD CONSTRAINT fk_friendships_users FOREIGN KEY ( first_user_id ) REFERENCES users( user_id );
+ALTER TABLE "public".exercise_ratings ADD CONSTRAINT fk_exercises_ratings_exercises FOREIGN KEY ( exercise_id ) REFERENCES "public".exercises( exercise_id ) ON DELETE CASCADE;
 
-ALTER TABLE friendship_requests ADD CONSTRAINT fk_friendships_users2 FOREIGN KEY ( second_user_id ) REFERENCES users( user_id );
+ALTER TABLE "public".exercise_ratings ADD CONSTRAINT fk_exercises_ratings_users FOREIGN KEY ( user_id ) REFERENCES "public".users( user_id ) ON DELETE CASCADE;
 
-ALTER TABLE gym_ratings ADD CONSTRAINT fk_gym_ratings FOREIGN KEY ( gym_id ) REFERENCES gyms( gym_id ) ON DELETE CASCADE;
+ALTER TABLE "public".friendship_requests ADD CONSTRAINT fk_friendships_users FOREIGN KEY ( first_user_id ) REFERENCES "public".users( user_id );
 
-ALTER TABLE gym_ratings ADD CONSTRAINT fk_gym_ratings_0 FOREIGN KEY ( user_id ) REFERENCES users( user_id ) ON DELETE CASCADE;
+ALTER TABLE "public".friendship_requests ADD CONSTRAINT fk_friendships_users2 FOREIGN KEY ( second_user_id ) REFERENCES "public".users( user_id );
 
-ALTER TABLE likes ADD CONSTRAINT fk_likes_users FOREIGN KEY ( user_id ) REFERENCES users( user_id ) ON DELETE CASCADE;
+ALTER TABLE "public".friendships ADD CONSTRAINT fk_friendships_users FOREIGN KEY ( first_user_id ) REFERENCES "public".users( user_id );
 
-ALTER TABLE likes ADD CONSTRAINT fk_likes_workouts FOREIGN KEY ( workout_id ) REFERENCES workouts( workout_id ) ON DELETE CASCADE;
+ALTER TABLE "public".friendships ADD CONSTRAINT fk_friendships_users2 FOREIGN KEY ( second_user_id ) REFERENCES "public".users( user_id );
 
-ALTER TABLE exercise_muscle_groups ADD CONSTRAINT fk_exercise_muscle_groups FOREIGN KEY ( muscle_name ) REFERENCES muscle_groups( muscle_name ) ON DELETE CASCADE;
+ALTER TABLE "public".gym_ratings ADD CONSTRAINT fk_gym_ratings FOREIGN KEY ( gym_id ) REFERENCES "public".gyms( gym_id ) ON DELETE CASCADE;
 
-ALTER TABLE exercise_muscle_groups ADD CONSTRAINT fk_exercise_muscle_groups_exercises FOREIGN KEY ( exercise_id ) REFERENCES exercises( exercise_id ) ON DELETE CASCADE;
+ALTER TABLE "public".gym_ratings ADD CONSTRAINT fk_gym_ratings_0 FOREIGN KEY ( user_id ) REFERENCES "public".users( user_id ) ON DELETE CASCADE;
 
-ALTER TABLE exercise_equipment ADD CONSTRAINT fk_exercise_equipment FOREIGN KEY ( equipment_name ) REFERENCES equipment( equipment_name ) ON DELETE CASCADE;
+ALTER TABLE "public".likes ADD CONSTRAINT fk_likes_users FOREIGN KEY ( user_id ) REFERENCES "public".users( user_id ) ON DELETE CASCADE;
 
-ALTER TABLE exercise_equipment ADD CONSTRAINT fk_exercise_equipment_exercises FOREIGN KEY ( exercise_id ) REFERENCES exercises( exercise_id ) ON DELETE CASCADE;
+ALTER TABLE "public".likes ADD CONSTRAINT fk_likes_workouts FOREIGN KEY ( workout_id ) REFERENCES "public".workouts( workout_id ) ON DELETE CASCADE;
 
-ALTER TABLE workout_entries ADD CONSTRAINT fk_workout_entry_workouts FOREIGN KEY ( workout_id ) REFERENCES workouts( workout_id );
+ALTER TABLE "public".weights ADD CONSTRAINT fk_weights_users FOREIGN KEY ( user_id ) REFERENCES "public".users( user_id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE workout_entries ADD CONSTRAINT fk_workout_entry_exercises FOREIGN KEY ( exercise_id ) REFERENCES exercises( exercise_id );
+ALTER TABLE "public".weights ADD CONSTRAINT fk_weights_workouts FOREIGN KEY ( workout_id ) REFERENCES "public".workouts( workout_id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE workouts ADD CONSTRAINT fk_workouts_users FOREIGN KEY ( user_id ) REFERENCES users( user_id );
+ALTER TABLE "public".workout_entries ADD CONSTRAINT fk_workout_entry_exercises FOREIGN KEY ( exercise_id ) REFERENCES "public".exercises( exercise_id );
 
-ALTER TABLE workouts ADD CONSTRAINT fk_workouts_gyms FOREIGN KEY ( gym_id ) REFERENCES gyms( gym_id );
+ALTER TABLE "public".workout_entries ADD CONSTRAINT fk_workout_entry_workouts FOREIGN KEY ( workout_id ) REFERENCES "public".workouts( workout_id );
 
+ALTER TABLE "public".workouts ADD CONSTRAINT fk_workouts_gyms FOREIGN KEY ( gym_id ) REFERENCES "public".gyms( gym_id );
+
+ALTER TABLE "public".workouts ADD CONSTRAINT fk_workouts_users FOREIGN KEY ( user_id ) REFERENCES "public".users( user_id );
 -- DEMO POPULATION
 
 INSERT INTO users(login, email, password_digest, first_name, last_name, height, weight, date_of_birth) VALUES
