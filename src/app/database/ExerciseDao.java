@@ -38,7 +38,7 @@ public class ExerciseDao {
 					+ "	FROM exercise_ratings"
 					+ " GROUP BY exercise_id"
 					+ ") exercise_ratings USING (exercise_id) "
-					+ "LEFT JOIN target_muscles USING (exercise_id) "
+					+ "LEFT JOIN exercise_muscle_groups USING (exercise_id) "
 					+ "GROUP BY exercises.exercise_id, rating, ratings_count "
 					+ "ORDER BY exercises.exercise_name");
 			
