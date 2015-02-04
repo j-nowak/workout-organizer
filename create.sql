@@ -1,15 +1,3 @@
-CREATE SEQUENCE "public".comments_comment_id_seq START WITH 1;
-
-CREATE SEQUENCE "public".exercises_exercise_id_seq START WITH 1;
-
-CREATE SEQUENCE "public".gyms_gym_id_seq START WITH 1;
-
-CREATE SEQUENCE "public".users_user_id_seq START WITH 1;
-
-CREATE SEQUENCE "public".weights_weight_id_seq START WITH 1;
-
-CREATE SEQUENCE "public".workouts_workout_id_seq START WITH 1;
-
 CREATE TABLE "public".equipment ( 
 	equipment_name       varchar(100)  NOT NULL,
 	image_path           varchar(255)  ,

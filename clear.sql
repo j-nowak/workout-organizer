@@ -18,7 +18,6 @@ DROP TABLE IF EXISTS weights CASCADE;
 DROP VIEW IF EXISTS detailed_news;
 DROP VIEW IF EXISTS simple_news;
 
--- DROP FUNCTION IF EXISTS update_weight();
 DROP FUNCTION IF EXISTS insert_friendship();
 DROP FUNCTION IF EXISTS insert_friendship_request();
 DROP FUNCTION IF EXISTS random_strangers_of_user(uid int);
