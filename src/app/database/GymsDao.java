@@ -72,7 +72,7 @@ public class GymsDao {
 			p.setInt(1, userId);
 			p.setInt(2, gymId);
 			p.setInt(3, rating);
-			p.executeQuery();
+			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

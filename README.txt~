@@ -30,7 +30,6 @@ Wymagania:
 https://jdbc.postgresql.org/download/postgresql-9.4-1200.jdbc41.jar
 
 -stworzyć plik application.conf według wzoru (adres bazy, usera i hasło):
-
 #begin
 application.secret="/vqXV_IjArDXQ`BMmk__m[6:5p<=RhOfLej2GhmoX<w2baKdrHsP@L5maKlP[7fy"
 application.langs="en"
