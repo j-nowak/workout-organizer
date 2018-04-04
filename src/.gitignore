@@ -75,3 +75,4 @@ local.properties
 # Database scripts
 *.bak
 
+src/.idea/
