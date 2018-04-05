@@ -2,8 +2,10 @@ package controllers;
 
 import java.util.List;
 
+import com.google.gson.Gson;
 import models.Gym;
 import models.Secured;
+import play.api.libs.json.Json;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -13,7 +15,7 @@ import views.html.gym_info;
 import views.html.gyms;
 import database.GymsDao;
 
-@Security.Authenticated(Secured.class)
+//@Security.Authenticated(Secured.class)
 public class GymsController extends Controller {
 	
     private static final String RATING = "rating";
@@ -23,6 +25,12 @@ public class GymsController extends Controller {
     	List<Gym> gymsList = GymsDao.get().getAll();
     	return ok(gyms.render(gymsList));
     }
+
+	public static Result listAllGyms_react() {
+		List<Gym> gymsList = GymsDao.get().getAll();
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		return ok(new Gson().toJson(gymsList));
+	}
     
     public static Result rate(int gymId) {
     	String userId = session(Application.USER_ID);

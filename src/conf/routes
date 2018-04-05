@@ -46,3 +46,6 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET  	/javascripts/*file        	controllers.Assets.at(path="/public/javascripts", file)
 GET  	/images/*file             	controllers.Assets.at(path="/public/images", file)
 GET  	/stylesheets/*file          controllers.Assets.at(path="/public/stylesheets", file)
+
+# React
+GET		/react/gyms						controllers.GymsController.listAllGyms_react()
