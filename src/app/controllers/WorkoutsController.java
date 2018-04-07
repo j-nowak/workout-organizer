@@ -88,4 +88,43 @@ public class WorkoutsController extends Controller {
 			return badRequest();
 		}
 	}
+
+	public static Result create_react() {
+		Map<String, String[]> params = request().body().asFormUrlEncoded();
+
+		try {
+			String userId = session().get(Application.USER_ID);
+			String gymId = params.get("gymId")[0];
+			String startedAt =  params.get("startedAt")[0];
+			String finishedAt = params.get("finishedAt")[0];
+			String note = params.get("note")[0];
+			String[] exerciseId = params.get("entries[][exerciseId]");
+			String[] setsCount = params.get("entries[][setsCount]");
+			String[] repsPerSet = params.get("entries[][repsPerSet]");
+			String[] weight = params.get("entries[][weight]");
+
+			startedAt = startedAt.replace("T", " ") + ":00";
+			finishedAt = finishedAt.replace("T", " ") + ":00";
+			Workout workout = new Workout(Integer.parseInt(userId), Integer.parseInt(gymId), Timestamp.valueOf(startedAt), Timestamp.valueOf(finishedAt));
+			workout.setNote(note);
+
+			for (int i = 0; i < exerciseId.length; ++i) {
+				WorkoutEntry entry = new WorkoutEntry();
+
+				entry.setExerciseId(Integer.parseInt(exerciseId[i]));
+				entry.setSetsCount(Integer.parseInt(setsCount[i]));
+				if (!repsPerSet[i].isEmpty())
+					entry.setRepsPerSet(Integer.parseInt(repsPerSet[i]));
+				if (!weight[i].isEmpty())
+					entry.setWeight(Double.parseDouble(weight[i]));
+				workout.addWorkoutEntry(entry);
+			}
+
+			WorkoutDao.get().create(workout);
+			return ok();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return badRequest();
+		}
+	}
 }
