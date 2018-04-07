@@ -4,7 +4,8 @@ import {
   NavLink,
   HashRouter
 } from "react-router-dom";
-import Home from "./components/Home.jsx";
+import './App.css';
+import Home from "./components/home/Home.jsx";
 import Workouts from "./components/training/Workouts.jsx";
 import NewWorkout from "./components/training/NewWorkout.jsx";
 import Exercises from "./components/exercise/Exercises.jsx";
@@ -21,8 +22,6 @@ class App extends Component {
     return (
         <HashRouter>
         <div className="App">
-          <h1>Workout organizer</h1>
-
           <nav className="navbar navbar-inverse">
             <ul className="nav navbar-nav">
               <li className="nav-item active"><NavLink to="/">Home</NavLink></li>
@@ -73,6 +72,8 @@ class App extends Component {
             <Route exact path="/account/measurements" component={Measurements}/>
             <Route exact path="/account/profile" component={Profile}/>
             <Route exact path="/account/password" component={ChangePassword}/>
+
+            <Route path="/users/:userId" component={Profile}/>
           </div>
         </div>
       </HashRouter>

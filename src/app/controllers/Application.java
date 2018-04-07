@@ -42,7 +42,7 @@ public class Application extends Controller {
 		List<News> news = NewsDao.get().getNews(1);
 
 		List<News> fakeNews = new ArrayList<>();
-		for (int i = 0; i < 100; ++i) {
+		for (int i = 0; i < 10; ++i) {
 			fakeNews.addAll(news);
 		}
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
+import News from "./News.jsx";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -54,9 +56,9 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div className="data-container">
+        <div className="news-feed">
           {this.state.data.map(d =>
-            <div>Training of {d.firstName} {d.lastName}</div>)}
+            <News news={d} />)}
         </div>
         {(() => {
           if (this.state.requestSent) {

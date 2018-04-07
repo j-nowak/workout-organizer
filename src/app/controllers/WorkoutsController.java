@@ -18,7 +18,7 @@ import database.ExerciseDao;
 import database.GymsDao;
 import database.WorkoutDao;
 
-@Security.Authenticated(Secured.class)
+//@Security.Authenticated(Secured.class)
 public class WorkoutsController extends Controller {
 	
 	public static Result buildNew() {
@@ -49,6 +49,21 @@ public class WorkoutsController extends Controller {
 			return internalServerError();
 		}
 	}
+
+    public static Result like_react(int workoutId) {
+        response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        return ok("" + 8);
+
+
+//        try {
+//            int userId = Integer.parseInt(session().get(Application.USER_ID));
+//            int likesCount = WorkoutDao.get().like(workoutId, userId);
+//            return ok("" + likesCount);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return internalServerError();
+//        }
+    }
 	
 	public static Result create() {
 		Map<String, String[]> params = request().body().asFormUrlEncoded();

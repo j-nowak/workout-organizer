@@ -56,3 +56,4 @@ GET		/react/gyms/:id 			controllers.GymsController.showGym_react(id: Int)
 POST	/react/changePassword		controllers.AccountController.changePassword_react()
 
 POST	/react/workouts				controllers.WorkoutsController.create_react()
+POST 	/react/workouts/:id/like	controllers.WorkoutsController.like_react(id: Int)
