@@ -49,3 +49,6 @@ GET  	/stylesheets/*file          controllers.Assets.at(path="/public/stylesheet
 
 # React
 GET		/react/gyms						controllers.GymsController.listAllGyms_react()
+
+POST	/react/changePassword				controllers.AccountController.changePassword_react()
+
