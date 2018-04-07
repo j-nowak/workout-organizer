@@ -1,7 +1,9 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
 import models.News;
 import models.Secured;
 import models.Stranger;
@@ -14,7 +16,7 @@ import views.html.index;
 import database.NewsDao;
 import database.UsersDao;
 
-@Security.Authenticated(Secured.class)
+//@Security.Authenticated(Secured.class)
 public class Application extends Controller {
 	
 	public static final String USER_ID = "user_id";
@@ -34,6 +36,21 @@ public class Application extends Controller {
     		return ok(index.render(news, strangers, friendshipRequests));
     	}
     }
+
+	public static Result home_react() throws InterruptedException {
+		// TODO: userId
+		List<News> news = NewsDao.get().getNews(1);
+
+		List<News> fakeNews = new ArrayList<>();
+		for (int i = 0; i < 100; ++i) {
+			fakeNews.addAll(news);
+		}
+
+		Thread.sleep(2000);
+
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		return ok(new Gson().toJson(fakeNews));
+	}
     
     public static Result editAccountSettings() {
     	try {
