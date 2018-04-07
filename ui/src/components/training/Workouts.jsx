@@ -1,13 +1,13 @@
 import React, { Component } from "react";
  
-class Account extends Component {
+class Workouts extends Component {
   render() {
     return (
       <div>
-        ACCOUNT
+        Workouts
       </div>
     );
   }
 }
  
-export default Account;
+export default Workouts;
