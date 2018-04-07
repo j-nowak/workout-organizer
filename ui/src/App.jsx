@@ -13,6 +13,7 @@ import ChangePassword from "./components/account/ChangePassword.jsx";
 import Measurements from "./components/account/Measurements.jsx";
 import Profile from "./components/account/Profile.jsx";
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
 class App extends Component {
   render() {
@@ -60,16 +61,16 @@ class App extends Component {
           <div className="content">
             <Route exact path="/" component={Home}/>
 
-            <Route path="/workouts" component={Workouts}/>
-            <Route path="/workouts/new" component={NewWorkout}/>
+            <Route exact path="/workouts" component={Workouts}/>
+            <Route exact path="/workouts/new" component={NewWorkout}/>
 
             <Route path="/exercises" component={Exercises}/>
 
             <Route path="/gyms" component={Gyms}/>
 
-            <Route path="/account/measurements" component={Measurements}/>
-            <Route path="/account/profile" component={Profile}/>
-            <Route path="/account/password" component={ChangePassword}/>
+            <Route exact path="/account/measurements" component={Measurements}/>
+            <Route exact path="/account/profile" component={Profile}/>
+            <Route exact path="/account/password" component={ChangePassword}/>
           </div>
         </div>
       </HashRouter>
