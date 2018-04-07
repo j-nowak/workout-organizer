@@ -27,7 +27,6 @@ class ChangePassword extends Component {
     bodyFormData.set('newPassword', this.state.newPassword);
     bodyFormData.set('repeatedPassword', this.state.repeatedPassword);
 
-
     axios({
       method: 'post',
       url: 'http://localhost:9000/react/changePassword',

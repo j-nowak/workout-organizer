@@ -45,7 +45,7 @@ public class AccountController extends Controller {
 		String oldPassword = requestData.get("oldPassword");
 		String newPassword = requestData.get("newPassword");
 		String repeatedPassword = requestData.get("repeatedPassword");
-        
+
         // TODO: Get userId.
 
         response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");

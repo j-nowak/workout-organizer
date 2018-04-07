@@ -59,4 +59,16 @@ public class GymsController extends Controller {
     		return badRequest();
     	}
     }
+
+	public static Result showGym_react(int id) {
+		Gym g = GymsDao.get().getById(id);
+
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		if (g != null) {
+			return ok(new Gson().toJson(g));
+		}
+		else {
+			return badRequest();
+		}
+	}
 }

@@ -9,6 +9,7 @@ import Workouts from "./components/training/Workouts.jsx";
 import NewWorkout from "./components/training/NewWorkout.jsx";
 import Exercises from "./components/exercise/Exercises.jsx";
 import Gyms from "./components/gym/Gyms.jsx";
+import GymPage from "./components/gym/GymPage.jsx";
 import ChangePassword from "./components/account/ChangePassword.jsx";
 import Measurements from "./components/account/Measurements.jsx";
 import Profile from "./components/account/Profile.jsx";
@@ -66,7 +67,8 @@ class App extends Component {
 
             <Route path="/exercises" component={Exercises}/>
 
-            <Route path="/gyms" component={Gyms}/>
+            <Route exact path="/gyms" component={Gyms}/>
+            <Route path="/gyms/:gymId" component={GymPage}/>
 
             <Route exact path="/account/measurements" component={Measurements}/>
             <Route exact path="/account/profile" component={Profile}/>

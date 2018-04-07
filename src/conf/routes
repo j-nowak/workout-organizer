@@ -48,7 +48,8 @@ GET  	/images/*file             	controllers.Assets.at(path="/public/images", fi
 GET  	/stylesheets/*file          controllers.Assets.at(path="/public/stylesheets", file)
 
 # React
-GET		/react/gyms						controllers.GymsController.listAllGyms_react()
+GET		/react/gyms						    controllers.GymsController.listAllGyms_react()
+GET		/react/gyms/:id 				    controllers.GymsController.showGym_react(id: Int)
 
 POST	/react/changePassword				controllers.AccountController.changePassword_react()
 
