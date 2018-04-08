@@ -52,6 +52,7 @@ GET     /react/home                 controllers.Application.home_react()
 
 GET		/react/gyms					controllers.GymsController.listAllGyms_react()
 GET		/react/gyms/:id 			controllers.GymsController.showGym_react(id: Int)
+GET		/react/gyms/:id/thumbnails 	controllers.GymsController.gymThumbnails_react(id: Int)
 
 POST	/react/changePassword		controllers.AccountController.changePassword_react()
 

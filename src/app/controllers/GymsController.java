@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -70,5 +71,17 @@ public class GymsController extends Controller {
 		else {
 			return badRequest();
 		}
+	}
+
+	public static Result gymThumbnails_react(int id) {
+		List<String> thumbnails = Arrays.asList(
+				"https://pbs.twimg.com/profile_images/630811593882882053/gXk6482G_400x400.jpg",
+				"https://pbs.twimg.com/profile_images/3272164622/57e509aa3f4a336544ef591ddbbba459.jpeg",
+				"http://recsports.ufl.edu/images/made/uploads/images/IMG_6445_256_256_80_c1.jpg",
+				"https://pbs.twimg.com/profile_images/731125654264139776/j0Y2fhVy.jpg"
+		);
+
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		return ok(new Gson().toJson(thumbnails));
 	}
 }

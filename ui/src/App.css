@@ -8,3 +8,9 @@ html, body, #root {
   background-color: #e9ebee;
   min-height: 100%;
 }
+
+.data-loading {
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+}

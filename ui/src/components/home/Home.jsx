@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 
 import News from "./News.jsx";
+import LoadingSpinner from "../LoadingSpinner.jsx";
 
 class Home extends Component {
   constructor(props) {
@@ -63,13 +64,7 @@ class Home extends Component {
         {(() => {
           if (this.state.requestSent) {
             return(
-              <div className="data-loading">
-                Loading...
-              </div>
-            );
-          } else {
-            return(
-              <div className="data-loading"></div>
+              <LoadingSpinner />
             );
           }
         })()}
