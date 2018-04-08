@@ -27,7 +27,7 @@ class News extends Component {
     .catch(function (response) {
         //handle error
         console.log(response);
-    }.bind(this));
+    });
   }
 
   render() {

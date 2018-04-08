@@ -32,6 +32,7 @@ class Gallery extends React.Component {
       <div>
         <img
           src={imageUrl}
+          alt=''
           onLoad={this.handleImageChange}
           onError={this.handleImageChange}
         />
