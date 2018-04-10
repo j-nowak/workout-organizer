@@ -39,7 +39,7 @@ class App extends Component {
 
               <li className="nav-item"><NavLink to="/exercises" >Exercises</NavLink></li>
 
-              <li className="nav-item"><NavLink to="/gyms">Gyms</NavLink></li>
+              <li className="nav-item"><NavLink to="/gyms?page=1">Gyms</NavLink></li>
 
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

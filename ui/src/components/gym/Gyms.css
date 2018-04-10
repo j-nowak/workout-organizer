@@ -1,0 +1,9 @@
+div .gyms-listing-container {
+  width: 100%;
+  margin: 0px;
+}
+
+div .gyms-listing {
+  height: 600px;
+  text-align: center;
+}
