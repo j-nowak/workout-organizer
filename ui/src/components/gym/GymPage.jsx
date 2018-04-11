@@ -11,7 +11,7 @@ class GymPage extends Component {
     this.state = {
       gymId: this.props.match.params.gymId,
       gym: {},
-      thumbnails: []
+      imagesData: []
     };
   }
 
@@ -22,10 +22,10 @@ class GymPage extends Component {
         this.setState({ gym });
       });
 
-    axios.get("http://localhost:9000/react/gyms/" + this.state.gymId + "/thumbnails")
+    axios.get("http://localhost:9000/react/gyms/" + this.state.gymId + "/images")
       .then(res => {
-        const thumbnails = res.data;
-        this.setState({ thumbnails });
+        const imagesData = res.data;
+        this.setState({ imagesData });
       });
   }
 
@@ -34,12 +34,13 @@ class GymPage extends Component {
     return (
       <div>
         <h2>{gym.name}</h2>
-        <StarRatingComponent 
+        <StarRatingComponent
+            name='' 
             starCount={10}
             value={gym.rating}
             editing={false} />
         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
-        <Gallery imageUrls={this.state.thumbnails} />
+        <Gallery images={this.state.imagesData} />
       </div>
     );
   }

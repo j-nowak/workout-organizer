@@ -1,6 +1,8 @@
 import React from "react";
+import "./Gallery.css";
 
 import LoadingSpinner from "./LoadingSpinner.jsx";
+import Popup from "./Popup.jsx";
 
 function imagesLoaded(parentNode) {
   const imgElements = [...parentNode.querySelectorAll("img")];
@@ -17,7 +19,8 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true
+      loading: true,
+      focusImage: null
     };
   }
 
@@ -27,12 +30,26 @@ class Gallery extends React.Component {
     });
   };
 
-  renderImage(imageUrl) {
+  openPopup = (imageData) => {
+    this.setState({
+      focusImage: imageData
+    });
+  }
+
+  closePopup = () => {
+    this.setState({
+      focusImage: null
+    });
+  }
+
+  renderImage(imageData) {
     return (
-      <div>
+      <div key={imageData.id}>
         <img
-          src={imageUrl}
-          alt=''
+          src={imageData.thumbnailUrl}
+          className="gallery-item"
+          alt={imageData.name}
+          onClick={() => this.openPopup(imageData)}
           onLoad={this.handleImageChange}
           onError={this.handleImageChange}
         />
@@ -42,15 +59,21 @@ class Gallery extends React.Component {
 
   render() {
     return (
-      <div
-        className="gallery"
-        ref={element => {
-          this.galleryElement = element;
-        }}
-      >
-        {this.state.loading ? <LoadingSpinner /> : null}
-        <div className="images">
-          {this.props.imageUrls.map(imageUrl => this.renderImage(imageUrl))}
+      <div>
+        <Popup
+            onClose={this.closePopup}
+            focusImage={this.state.focusImage} />
+
+        <div
+          className="gallery"
+          ref={element => {
+            this.galleryElement = element;
+          }}
+        >
+          {this.state.loading ? <LoadingSpinner /> : null}
+          <div className="images">
+            {this.props.images.map(imageData => this.renderImage(imageData))}
+          </div>
         </div>
       </div>
     );

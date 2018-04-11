@@ -52,9 +52,13 @@ GET     /react/home                 controllers.Application.home_react()
 
 GET		/react/gyms					controllers.GymsController.listAllGyms_react()
 GET		/react/gyms/:id 			controllers.GymsController.showGym_react(id: Int)
-GET		/react/gyms/:id/thumbnails 	controllers.GymsController.gymThumbnails_react(id: Int)
+GET		/react/gyms/:gymId/images 	controllers.GymsController.gymThumbnails_react(gymId: Int)
 
 POST	/react/changePassword		controllers.AccountController.changePassword_react()
 
 POST	/react/workouts				controllers.WorkoutsController.create_react()
 POST 	/react/workouts/:id/like	controllers.WorkoutsController.like_react(id: Int)
+
+GET		/react/images/:id/comments	controllers.GymsController.getComments(id: Int)
+POST	/react/images/:id/comments	controllers.GymsController.addComment(id: Int)
+
