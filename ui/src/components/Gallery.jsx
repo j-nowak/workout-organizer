@@ -1,8 +1,9 @@
 import React from "react";
-import "./Gallery.css";
 
+import "./Gallery.css";
 import LoadingSpinner from "./LoadingSpinner.jsx";
 import Popup from "./Popup.jsx";
+import ImageDetails from "./ImageDetails.jsx";
 
 function imagesLoaded(parentNode) {
   const imgElements = [...parentNode.querySelectorAll("img")];
@@ -20,7 +21,8 @@ class Gallery extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      focusImage: null
+      focusImage: null,
+      show: false
     };
   }
 
@@ -32,13 +34,15 @@ class Gallery extends React.Component {
 
   openPopup = (imageData) => {
     this.setState({
-      focusImage: imageData
+      focusImage: imageData,
+      show: true
     });
   }
 
   closePopup = () => {
     this.setState({
-      focusImage: null
+      focusImage: null,
+      show: false
     });
   }
 
@@ -62,7 +66,10 @@ class Gallery extends React.Component {
       <div>
         <Popup
             onClose={this.closePopup}
-            focusImage={this.state.focusImage} />
+            show={this.state.show}>
+          <ImageDetails
+              focusImage={this.state.focusImage} />
+        </Popup>
 
         <div
           className="gallery"
