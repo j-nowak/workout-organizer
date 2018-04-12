@@ -48,7 +48,7 @@ class Gallery extends React.Component {
 
   renderImage(imageData) {
     return (
-      <div key={imageData.id}>
+      <div key={imageData.id} className="col-sm-4">
         <img
           src={imageData.thumbnailUrl}
           className="gallery-item"
@@ -61,7 +61,22 @@ class Gallery extends React.Component {
     );
   }
 
+  renderImagesRow(imagesRow) {
+    return (
+      <div className="row" key={imagesRow.id}>
+        {imagesRow.data.map(imageData => this.renderImage(imageData))}
+      </div>
+    );
+  }
+
   render() {
+    var galleryImages = [];
+    const chunkSize = 3
+    var rowId = 0;
+    for (var i = 0, j = this.props.images.length; i < j; i += chunkSize) {
+        galleryImages.push({id: rowId++, data: this.props.images.slice(i, i + chunkSize)});
+    }
+
     return (
       <div>
         <Popup
@@ -79,7 +94,7 @@ class Gallery extends React.Component {
         >
           {this.state.loading ? <LoadingSpinner /> : null}
           <div className="images">
-            {this.props.images.map(imageData => this.renderImage(imageData))}
+            {galleryImages.map(imagesRow => this.renderImagesRow(imagesRow))}
           </div>
         </div>
       </div>
