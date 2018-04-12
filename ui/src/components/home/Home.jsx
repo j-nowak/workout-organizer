@@ -7,19 +7,22 @@ import LoadingSpinner from "../LoadingSpinner.jsx";
 class Home extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       data: [],
       requestSent: false
     };
+
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleOnScroll.bind(this));
+    window.addEventListener('scroll', this.handleScroll);
     this.querySearchResult();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleOnScroll.bind(this));
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   querySearchResult() {
@@ -43,7 +46,7 @@ class Home extends Component {
     }.bind(this));
   }
 
-  handleOnScroll() {
+  handleScroll() {
     var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
     var scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
     var clientHeight = document.documentElement.clientHeight || window.innerHeight;
@@ -59,7 +62,7 @@ class Home extends Component {
       <div>
         <div className="news-feed">
           {this.state.data.map(d =>
-            <News news={d} />)}
+            <News key={d.id} news={d.news} />)}
         </div>
         {(() => {
           if (this.state.requestSent) {
