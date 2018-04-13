@@ -100,8 +100,8 @@ class Exercises extends Component {
         <table className="table">
           <thead>
             <tr>
-              <th className={this.state.sortBy == 'id' ? 'active' : null} onClick={() => this.setSortBy('id')}>Id</th>
-              <th className={this.state.sortBy == 'name' ? 'active' : null} onClick={() => this.setSortBy('name')}>Name</th>
+              <th className={this.state.sortBy === 'id' ? 'active' : null} onClick={() => this.setSortBy('id')}>Id</th>
+              <th className={this.state.sortBy === 'name' ? 'active' : null} onClick={() => this.setSortBy('name')}>Name</th>
               <th>Target muscles</th>
             </tr>
           </thead>
