@@ -50,6 +50,8 @@ GET  	/stylesheets/*file          controllers.Assets.at(path="/public/stylesheet
 # React
 GET     /react/home                 controllers.Application.home_react()
 
+GET		/react/exercises			controllers.ExercisesController.listAllExercises_react()
+
 GET		/react/gyms					controllers.GymsController.listAllGyms_react()
 GET		/react/gyms/:id 			controllers.GymsController.showGym_react(id: Int)
 GET		/react/gyms/:gymId/images 	controllers.GymsController.gymThumbnails_react(gymId: Int)
