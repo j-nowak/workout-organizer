@@ -59,18 +59,13 @@ class Home extends Component {
       <div>
         <div className="news-feed">
           {this.state.data.map(d =>
-            <News news={d} />)}
+            <News key={d.workoutId + `${Math.random()}`} news={d} />
+          )}
         </div>
-        {(() => {
-          if (this.state.requestSent) {
-            return(
-              <LoadingSpinner />
-            );
-          }
-        })()}
+        {this.state.requestSent ? <LoadingSpinner /> : null}
       </div>
     );
   }
 }
- 
+
 export default Home;
