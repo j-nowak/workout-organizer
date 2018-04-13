@@ -14,6 +14,7 @@ import GymPage from "./components/gym/GymPage.jsx";
 import ChangePassword from "./components/account/ChangePassword.jsx";
 import Measurements from "./components/account/Measurements.jsx";
 import Profile from "./components/account/Profile.jsx";
+import UserPage from "./components/users/UserPage.jsx";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
@@ -73,12 +74,12 @@ class App extends Component {
             <Route exact path="/account/profile" component={Profile}/>
             <Route exact path="/account/password" component={ChangePassword}/>
 
-            <Route path="/users/:userId" component={Profile}/>
+            <Route path="/users/:userId" component={UserPage}/>
           </div>
         </div>
       </HashRouter>
     );
   }
 }
- 
+
 export default App;

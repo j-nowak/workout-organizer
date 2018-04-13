@@ -62,3 +62,4 @@ POST 	/react/workouts/:id/like	controllers.WorkoutsController.like_react(id: Int
 GET		/react/images/:id/comments	controllers.GymsController.getComments(id: Int)
 POST	/react/images/:id/comments	controllers.GymsController.addComment(id: Int)
 
+GET		/react/users/:id			controllers.UsersController.showUser_react(id: Int)
