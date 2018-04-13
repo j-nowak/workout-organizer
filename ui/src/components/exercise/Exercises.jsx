@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const targetMusclesContain = muscleName => {
   return e => e.targetMuscles.filter(m => m.muscleName === muscleName).length > 0
-}
+};
 
 const filterFunctions = {
   all: e => true,
@@ -13,12 +13,21 @@ const filterFunctions = {
   biceps: targetMusclesContain('biceps'),
   triceps: targetMusclesContain('triceps'),
   klata: targetMusclesContain('klata'),
-}
+};
+
+const filters = [
+  { id: 'all', text: 'All' },
+  { id: 'evenId', text: 'EvenId' },
+  { id: 'oddId', text: 'OddId' },
+  { id: 'biceps', text: 'Biceps' },
+  { id: 'triceps', text: 'Triceps' },
+  { id: 'klata', text: 'Klata' },
+];
 
 const sortFunctions = {
   id: (a,b) => a.id - b.id,
   name: (a,b) => a ? a.name.localeCompare(b.name) : -1
-}
+};
 
 class Exercises extends Component {
 
@@ -27,7 +36,7 @@ class Exercises extends Component {
 
     this.state = {
       exercises: [],
-      filterFn: filterFunctions['all'],
+      filter: 'all',
       sortBy: 'id',
       ascending: true
     }
@@ -42,10 +51,9 @@ class Exercises extends Component {
   }
 
   setFilterBy(name) {
-    const fn = filterFunctions[name];
-    if (fn) {
+    if (name in filterFunctions) {
       this.setState({
-        filterFn: fn
+        filter: name
       });
     }
   }
@@ -75,24 +83,25 @@ class Exercises extends Component {
 
   render() {
     const exercises = this.state.exercises
-      .filter(this.state.filterFn)
+      .filter(filterFunctions[this.state.filter])
       .sort(this.getSortFn());
     return (
       <div className="page">
         <h1>EXERCISES</h1>
         <div>
-          <button className="btn btn-default" onClick={() => this.setFilterBy('all')}>All</button>
-          <button className="btn btn-default" onClick={() => this.setFilterBy('oddId')}>Odd ids</button>
-          <button className="btn btn-default" onClick={() => this.setFilterBy('evenId')}>Even ids</button>
-          <button className="btn btn-default" onClick={() => this.setFilterBy('biceps')}>Biceps</button>
-          <button className="btn btn-default" onClick={() => this.setFilterBy('triceps')}>Triceps</button>
-          <button className="btn btn-default" onClick={() => this.setFilterBy('klata')}>Klata</button>
+          {filters.map(f =>
+            <button className="btn btn-default"
+                disabled={f.id === this.state.filter}
+                onClick={() => this.setFilterBy(f.id)}>
+              {f.text}
+            </button>
+          )}
         </div>
         <table className="table">
           <thead>
             <tr>
-              <th onClick={() => this.setSortBy('id')}>Id</th>
-              <th onClick={() => this.setSortBy('name')}>Name</th>
+              <th className={this.state.sortBy == 'id' ? 'active' : null} onClick={() => this.setSortBy('id')}>Id</th>
+              <th className={this.state.sortBy == 'name' ? 'active' : null} onClick={() => this.setSortBy('name')}>Name</th>
               <th>Target muscles</th>
             </tr>
           </thead>
