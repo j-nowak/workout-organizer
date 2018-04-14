@@ -91,6 +91,7 @@ class Exercises extends Component {
         <div>
           {filters.map(f =>
             <button className="btn btn-default"
+                key={f.id}
                 disabled={f.id === this.state.filter}
                 onClick={() => this.setFilterBy(f.id)}>
               {f.text}
