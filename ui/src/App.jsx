@@ -15,11 +15,49 @@ import ChangePassword from "./components/account/ChangePassword.jsx";
 import Measurements from "./components/account/Measurements.jsx";
 import Profile from "./components/account/Profile.jsx";
 import UserPage from "./components/users/UserPage.jsx";
+import LoginPage from './components/account/LoginPage.jsx';
+import LoadingSpinner from './components/LoadingSpinner.jsx';
+import { setCookie, deleteCookie, getCurrentUser } from './lib/auth';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
 class App extends Component {
+  constructor(params) {
+    super(params);
+    this.state = {
+      user: null,
+      isLoading: true,
+    };
+  }
+
+  login(user) {
+    this.setState({ user });
+    setCookie(user.id);
+  }
+
+  logout() {
+    this.setState({
+      user: null
+    });
+    deleteCookie();
+  }
+
+  componentWillMount() {
+    getCurrentUser()
+    .then(user => {
+      this.setState({ user, isLoading: false });
+    })
+    .catch(e => {
+      this.setState({ isLoading: false });
+    });
+  }
+
   render() {
+    if (this.state.isLoading) {
+      return <LoadingSpinner />
+    }
+
+    const user = this.state.user;
     return (
         <HashRouter>
         <div className="App">
@@ -54,28 +92,39 @@ class App extends Component {
                 </ul>
               </li>
 
-
-              <li className="nav-item"><NavLink to="/logout">Logout</NavLink></li>
+              { user ?
+                <li className="nav-item">
+                  <a className="nav-link" role="button" aria-haspopup="true"
+                      onClick={() => this.logout()}>
+                    Logout
+                  </a>
+                </li>
+                : null
+              }
             </ul>
           </nav>
 
-          <div className="content">
-            <Route exact path="/" component={Home}/>
+          {user ?
+            <div className="content container">
+              <Route exact path="/" component={Home}/>
 
-            <Route exact path="/workouts" component={Workouts}/>
-            <Route exact path="/workouts/new" component={NewWorkout}/>
+              <Route exact path="/workouts" component={Workouts}/>
+              <Route exact path="/workouts/new" component={NewWorkout}/>
 
-            <Route path="/exercises" component={Exercises}/>
+              <Route path="/exercises" component={Exercises}/>
 
-            <Route exact path="/gyms" component={Gyms}/>
-            <Route path="/gyms/:gymId" component={GymPage}/>
+              <Route exact path="/gyms" component={Gyms}/>
+              <Route path="/gyms/:gymId" component={GymPage}/>
 
-            <Route exact path="/account/measurements" component={Measurements}/>
-            <Route exact path="/account/profile" component={Profile}/>
-            <Route exact path="/account/password" component={ChangePassword}/>
+              <Route exact path="/account/measurements" component={Measurements}/>
+              <Route exact path="/account/profile" component={Profile}/>
+              <Route exact path="/account/password" component={ChangePassword}/>
 
-            <Route path="/users/:userId" component={UserPage}/>
-          </div>
+              <Route path="/users/:userId" component={UserPage}/>
+            </div>
+            :
+            <LoginPage onLoggedIn={user => this.login(user)} />
+          }
         </div>
       </HashRouter>
     );
