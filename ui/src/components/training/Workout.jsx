@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-// import axios from 'axios';
-import './WorkoutEntry.css';
+import './Workout.css';
 
-class WorkoutEntry extends Component {
+class Workout extends Component {
   constructor(props) {
     super(props);
 
@@ -45,4 +44,4 @@ class WorkoutEntry extends Component {
   }
 }
 
-export default WorkoutEntry;
+export default Workout;
