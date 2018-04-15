@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
-import models.News;
-import models.Secured;
-import models.Stranger;
-import models.User;
+import models.*;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -37,19 +34,25 @@ public class Application extends Controller {
     	}
     }
 
-	public static Result home_react() throws InterruptedException {
-		// TODO: userId
-		List<News> news = NewsDao.get().getNews(1);
+	private static int newsId = 0;
+
+	public static Result home_react(int userId) throws InterruptedException {
+		List<News> news = NewsDao.get().getNews(userId);
 
 		List<News> fakeNews = new ArrayList<>();
 		for (int i = 0; i < 10; ++i) {
 			fakeNews.addAll(news);
 		}
 
+		List<NewsWrapper> result = new ArrayList<>();
+		for (int i = 0; i < fakeNews.size(); i++) {
+			result.add(new NewsWrapper(newsId++, fakeNews.get(i)));
+		}
+
 		Thread.sleep(2000);
 
 		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-		return ok(new Gson().toJson(fakeNews));
+		return ok(new Gson().toJson(result));
 	}
 
     public static Result editAccountSettings() {

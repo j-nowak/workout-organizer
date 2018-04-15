@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
- 
+
 class ChangePassword extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +26,7 @@ class ChangePassword extends Component {
     bodyFormData.set('oldPassword', this.state.oldPassword);
     bodyFormData.set('newPassword', this.state.newPassword);
     bodyFormData.set('repeatedPassword', this.state.repeatedPassword);
+    bodyFormData.set('userId', this.props.userId);
 
     axios({
       method: 'post',

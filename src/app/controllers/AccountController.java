@@ -46,30 +46,27 @@ public class AccountController extends Controller {
 		String newPassword = requestData.get("newPassword");
 		String repeatedPassword = requestData.get("repeatedPassword");
 
-        // TODO: Get userId.
-
         response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-        return ok();
-//		int userId;
-//		try {
-//			userId = Integer.parseInt(session(Application.USER_ID));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return badRequest();
-//		}
-//
-//		if (newPassword.equals(repeatedPassword)) {
-//			if (UsersDao.get().checkPasswordForUser(userId, oldPassword)) {
-//				UsersDao.get().changePassword(userId, newPassword);
-//				return ok();
-//			}
-//			else {
-//				return badRequest("Old password is incorrect!");
-//			}
-//		}
-//		else {
-//			return badRequest("New and repeated passwords are different!");
-//		}
+		int userId;
+		try {
+			userId = Integer.parseInt(requestData.get("userId"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return badRequest();
+		}
+
+		if (newPassword.equals(repeatedPassword)) {
+			if (UsersDao.get().checkPasswordForUser(userId, oldPassword)) {
+				UsersDao.get().changePassword(userId, newPassword);
+				return ok();
+			}
+			else {
+				return badRequest("Old password is incorrect!");
+			}
+		}
+		else {
+			return badRequest("New and repeated passwords are different!");
+		}
 	}
 	
 	public static Result changeUserInfo() {
