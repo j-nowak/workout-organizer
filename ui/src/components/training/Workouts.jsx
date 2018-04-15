@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import WorkoutEntry from './WorkoutEntry.jsx';
+import Workout from './Workout.jsx';
 import axios from 'axios';
 
 class Workouts extends Component {
@@ -29,7 +29,7 @@ class Workouts extends Component {
         <h1>Workouts</h1>
         <div className="news-feed">
           {workouts.map(workout =>
-            <WorkoutEntry key={workout.id} workout={workout} />
+            <Workout key={workout.id} workout={workout} />
           )}
         </div>
       </div>
