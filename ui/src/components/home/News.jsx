@@ -16,7 +16,8 @@ class News extends Component {
     axios({
       method: 'post',
       url: 'http://localhost:9000/react/workouts/' + this.state.news.workoutId + '/like',
-      config: { headers: {'Content-Type': 'multipart/form-data' }}
+      config: { headers: {'Content-Type': 'multipart/form-data' }},
+      withCredentials: true
     })
     .then(function (response) {
         var updatedNews = this.state.news;

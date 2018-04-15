@@ -42,7 +42,6 @@ class GymRating extends Component {
       config: { headers: {'Content-Type': 'multipart/form-data' }}
     })
     .then(function (response) {
-      console.log('aaa');
       this.props.onClose();
     }.bind(this))
     .catch(function (response) {

@@ -68,18 +68,21 @@ public class WorkoutsController extends Controller {
 	}
 
     public static Result like_react(int workoutId) {
-        response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-        return ok("" + 8);
+		String origin = request().getHeader("origin");
+		origin = origin == null ? "*" : origin;
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
 
+		String userIdStr = request().cookie(Application.USER_ID).value();
+		int userId = Integer.parseInt(userIdStr);
 
-//        try {
-//            int userId = Integer.parseInt(session().get(Application.USER_ID));
-//            int likesCount = WorkoutDao.get().like(workoutId, userId);
-//            return ok("" + likesCount);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return internalServerError();
-//        }
+        try {
+            int likesCount = WorkoutDao.get().like(workoutId, userId);
+            return ok("" + likesCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return internalServerError();
+        }
     }
 
 	public static Result create() {
