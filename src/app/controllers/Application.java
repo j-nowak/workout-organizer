@@ -36,9 +36,8 @@ public class Application extends Controller {
 
 	private static int newsId = 0;
 
-	public static Result home_react() throws InterruptedException {
-		// TODO: userId
-		List<News> news = NewsDao.get().getNews(1);
+	public static Result home_react(int userId) throws InterruptedException {
+		List<News> news = NewsDao.get().getNews(userId);
 
 		List<News> fakeNews = new ArrayList<>();
 		for (int i = 0; i < 10; ++i) {

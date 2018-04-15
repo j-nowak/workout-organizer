@@ -87,7 +87,7 @@ class App extends Component {
                 </a>
                 <ul className="dropdown-menu">
                   <li className="dropdown-item"><NavLink to="/account/measurements" >Enter measurements</NavLink></li>
-                  <li className="dropdown-item"><NavLink to="/account/profile" >Edit profile</NavLink></li>
+                  <li className="dropdown-item"><NavLink to={"/users/" + user.id} >My profile</NavLink></li>
                   <li className="dropdown-item"><NavLink to="/account/password" >Change password</NavLink></li>
                 </ul>
               </li>
@@ -106,7 +106,7 @@ class App extends Component {
 
           {user ?
             <div className="content container">
-              <Route exact path="/" component={Home}/>
+              <Route exact path="/" component={() => <Home userId={user.id}/>}/>
 
               <Route exact path="/workouts" component={Workouts}/>
               <Route exact path="/workouts/new" component={NewWorkout}/>
@@ -117,8 +117,7 @@ class App extends Component {
               <Route path="/gyms/:gymId" component={GymPage}/>
 
               <Route exact path="/account/measurements" component={Measurements}/>
-              <Route exact path="/account/profile" component={Profile}/>
-              <Route exact path="/account/password" component={ChangePassword}/>
+              <Route exact path="/account/password" component={() => <ChangePassword userId={user.id} />}/>
 
               <Route path="/users/:userId" component={UserPage}/>
             </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import './ImageDetails.css';
+import { getCurrentUser } from '../lib/auth';
 
 class ImageDetails extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class ImageDetails extends Component {
     return ( 
       <div className="comments pre-scrollable">
         {this.state.comments.map(c =>
-              <div key={c.id}> {"Author: " + c.author + " - " + c.text} </div>)}
+              <div key={c.id}> {c.author + ": " + c.text} </div>)}
       </div>
     );
   }
@@ -49,23 +50,26 @@ class ImageDetails extends Component {
   submitForm(event) {
     event.preventDefault();
 
-    var bodyFormData = new FormData();
-    bodyFormData.set('author', 'user-author');
-    bodyFormData.set('newComment', this.state.newComment);
+    getCurrentUser()
+    .then(user => {
+      var bodyFormData = new FormData();
+      bodyFormData.set('author', user.login);
+      bodyFormData.set('newComment', this.state.newComment);
 
-    axios({
-      method: 'post',
-      url: 'http://localhost:9000/react/images/' + this.props.focusImage.id + '/comments',
-      data: bodyFormData,
-      config: { headers: {'Content-Type': 'multipart/form-data' }}
-    })
-    .then(function (response) {
-        var comments = this.state.comments.concat(response.data);
-        this.setState({ comments, newComment: '' });
-    }.bind(this))
-    .catch(function (response) {
-        //handle error
-        console.log(response);
+      axios({
+        method: 'post',
+        url: 'http://localhost:9000/react/images/' + this.props.focusImage.id + '/comments',
+        data: bodyFormData,
+        config: { headers: {'Content-Type': 'multipart/form-data' }}
+      })
+      .then(function (response) {
+          var comments = this.state.comments.concat(response.data);
+          this.setState({ comments, newComment: '' });
+      }.bind(this))
+      .catch(function (response) {
+          //handle error
+          console.log(response);
+      });
     });
   }
 

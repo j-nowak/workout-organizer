@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import { getCurrentUser } from '../../lib/auth';
 
 import News from "./News.jsx";
 import LoadingSpinner from "../LoadingSpinner.jsx";
@@ -10,7 +11,7 @@ class Home extends Component {
 
     this.state = {
       data: [],
-      requestSent: false
+      requestSent: false,
     };
 
     this.handleScroll = this.handleScroll.bind(this);
@@ -35,7 +36,7 @@ class Home extends Component {
   doQuery() {
     axios({
       method: 'get',
-      url: 'http://localhost:9000/react/home',
+      url: 'http://localhost:9000/react/home/' + this.props.userId,
     })
     .then(function (response) {
         var newData = this.state.data.concat(response.data);

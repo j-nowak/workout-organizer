@@ -48,7 +48,7 @@ GET  	/images/*file             	controllers.Assets.at(path="/public/images", fi
 GET  	/stylesheets/*file          controllers.Assets.at(path="/public/stylesheets", file)
 
 # React
-GET     /react/home                 controllers.Application.home_react()
+GET     /react/home/:userId         controllers.Application.home_react(userId: Int)
 
 GET		/react/exercises			controllers.ExercisesController.listAllExercises_react()
 
