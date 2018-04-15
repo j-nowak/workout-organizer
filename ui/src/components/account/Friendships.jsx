@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import './Friendship.css';
 
 class Friendships extends Component {
   constructor(props) {
@@ -111,8 +112,8 @@ class FriendshipRequest extends Component {
     return (
       <div>
         {this.state.acc ? <div>Resolved!</div> :
-          <div>
-            {this.props.name + ' wants to be your friend.'}
+          <div className="friendship-info">
+            <span><strong>{this.props.name}</strong> wants to be your friend.</span>
             <button className="btn" onClick={() => this.accept()}>Accept</button>
             <button className="btn" onClick={() => this.decline()}>Decline</button>
           </div>
@@ -149,11 +150,13 @@ class Stranger extends Component {
   }
 
   render() {
+    const style = { display: 'flex', alignItems: 'center', justifyContent: 'space-between'};
+
     return (
       <div>
         {this.state.sent ? <div>Sent!</div> :
-          <div>
-            {this.props.name + ' can be your friend!'}
+          <div className="friendship-info" style={style}>
+            <span><strong>{this.props.name}</strong> can be your friend!</span>
             <button className="btn btn-primary" onClick={() => this.invite()}>Invite</button>
           </div>
         }
