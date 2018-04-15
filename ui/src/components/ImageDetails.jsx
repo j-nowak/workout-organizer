@@ -42,7 +42,7 @@ class ImageDetails extends Component {
     return ( 
       <div className="comments pre-scrollable">
         {this.state.comments.map(c =>
-              <div key={c.id}> {c.author + ": " + c.text} </div>)}
+              <div className="single-comment" key={c.id}> <strong>{c.author + ": "}</strong>{c.text}</div>)}
       </div>
     );
   }
@@ -79,7 +79,7 @@ class ImageDetails extends Component {
         <form onSubmit={(e) => this.submitForm(e)}>
           <div className="form-group">
             <label htmlFor="new-comment">Your comment:</label>
-            <textarea id="new-comment" form="new-comment-form"
+            <textarea className="form-control" id="new-comment" form="new-comment-form"
                 value={this.state.newComment}
                 onChange={(ev) => this.setState({ newComment: ev.target.value })} />
           </div>

@@ -36,19 +36,26 @@ class Friendships extends Component {
   render() {
     const requests = this.state.friendshipRequests;
     const suggestions = this.state.strangers;
+
+    const requestsToShow = requests.length !== 0;
+    const suggestionsToShow = suggestions.length !== 0;
     return (
       <div>
         <div>
           <h2>Friendship requests</h2>
-          {requests.map(fr =>
-            <FriendshipRequest key={fr.id} requestId={fr.id} name={fr.firstName} />
-          )}
+          {requestsToShow ? 
+            <div>{requests.map(fr =>
+              <FriendshipRequest key={fr.id} requestId={fr.id} name={fr.firstName} />
+            )}</div>
+            : <div class="alert alert-success">No friendship requests.</div>}
         </div>
         <div>
           <h2>Suggested friends</h2>
-          {suggestions.map(fr =>
-            <Stranger key={fr.id} requestId={fr.id} name={fr.firstName} />
-          )}
+          {suggestionsToShow ? 
+            <div>{suggestions.map(fr =>
+              <Stranger key={fr.id} requestId={fr.id} name={fr.firstName} />
+            )}</div>
+            : <div class="alert alert-success">No friendship suggestions.</div>}
         </div>
       </div>
     );
