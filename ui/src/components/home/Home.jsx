@@ -64,16 +64,10 @@ class Home extends Component {
           {this.state.data.map(d =>
             <News key={d.id} news={d.news} />)}
         </div>
-        {(() => {
-          if (this.state.requestSent) {
-            return(
-              <LoadingSpinner />
-            );
-          }
-        })()}
+        {this.state.requestSent ? <LoadingSpinner /> : null}
       </div>
     );
   }
 }
- 
+
 export default Home;

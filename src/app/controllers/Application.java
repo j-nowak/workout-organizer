@@ -15,9 +15,9 @@ import database.UsersDao;
 
 //@Security.Authenticated(Secured.class)
 public class Application extends Controller {
-	
+
 	public static final String USER_ID = "user_id";
-	
+
 	public static final String HOME = "/home";
 	public static final String LOGIN = "/login";
 
@@ -55,15 +55,23 @@ public class Application extends Controller {
 		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 		return ok(new Gson().toJson(result));
 	}
-    
+
     public static Result editAccountSettings() {
-    	try {
-	    	User user = UsersDao.get().getById(Integer.parseInt(session(USER_ID))); //TODO change session to userId
-	    	return ok(account.render(user));
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		return badRequest();
-    	}
+        try {
+            User user = UsersDao.get().getById(Integer.parseInt(session(USER_ID))); //TODO change session to userId
+            return ok(account.render(user));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest();
+        }
+    }
+
+    public static Result options(String path) {
+        response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:3000");
+        response().setHeader(ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, DELETE, OPTIONS");
+        response().setHeader(ACCESS_CONTROL_ALLOW_HEADERS, "Accept, Origin, Content-type, X-Json, X-Prototype-Version, X-Requested-With");
+        response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+        return ok("");
     }
 
 }
