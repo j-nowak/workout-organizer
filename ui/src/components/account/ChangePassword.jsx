@@ -35,12 +35,10 @@ class ChangePassword extends Component {
       config: { headers: {'Content-Type': 'multipart/form-data' }}
     })
     .then(function (response) {
-        //handle success
-        console.log(response);
+      alert('Password changed');
     })
-    .catch(function (response) {
-        //handle error
-        console.log(response);
+    .catch(function (err) {
+      alert(err.response.data);
     });
   }
 

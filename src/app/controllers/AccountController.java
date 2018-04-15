@@ -2,6 +2,7 @@ package controllers;
 
 import java.sql.Date;
 
+import com.google.gson.Gson;
 import models.Secured;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -61,11 +62,11 @@ public class AccountController extends Controller {
 				return ok();
 			}
 			else {
-				return badRequest("Old password is incorrect!");
+				return badRequest(new Gson().toJson("Old password is incorrect!"));
 			}
 		}
 		else {
-			return badRequest("New and repeated passwords are different!");
+			return badRequest(new Gson().toJson("New and repeated passwords are different!"));
 		}
 	}
 	
