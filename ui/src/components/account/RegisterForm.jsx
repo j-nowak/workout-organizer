@@ -87,8 +87,8 @@ class RegisterForm extends Component {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Confirm password:</label>
-          <input id="password" className="form-control"
+          <label htmlFor="passwordConfirm">Confirm password:</label>
+          <input id="passwordConfirm" className="form-control"
               type="password"
               value={this.state.passwordConfirm}
               onChange={e => this.updateField('passwordConfirm', e)} />

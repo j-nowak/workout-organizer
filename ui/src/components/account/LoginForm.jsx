@@ -42,16 +42,16 @@ class LoginForm extends Component {
     return (
       <form>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input id="username" className="form-control"
+          <label htmlFor="usernameLogin">Username:</label>
+          <input id="usernameLogin" className="form-control"
               type="text"
               value={this.state.username}
               onChange={e => this.updateUsername(e)} />
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input id="password" className="form-control"
+          <label htmlFor="passwordLogin">Password:</label>
+          <input id="passwordLogin" className="form-control"
               type="password"
               value={this.state.password}
               onChange={e => this.updatePassword(e)} />
