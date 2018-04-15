@@ -1,18 +1,18 @@
 package models;
 
 public class WorkoutEntry {
-	
+
 	private int workoutId;
 	private int exerciseId;
 	private int setsCount;
 	private Integer repsPerSet;
 	private Double weight;
 	private String exerciseName;
-	
+
 	public WorkoutEntry() {
-		
+
 	}
-	
+
 	public int getWorkoutId() {
 		return workoutId;
 	}

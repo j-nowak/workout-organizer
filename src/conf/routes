@@ -59,6 +59,7 @@ POST	/react/gyms/:gymId			controllers.GymsController.rate_react(gymId: Int)
 
 POST	/react/changePassword		controllers.AccountController.changePassword_react()
 
+GET  /react/workouts       controllers.WorkoutsController.index_react()
 POST	/react/workouts				controllers.WorkoutsController.create_react()
 POST 	/react/workouts/:id/like	controllers.WorkoutsController.like_react(id: Int)
 

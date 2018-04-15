@@ -18,13 +18,13 @@ import play.db.DB;
 public class WorkoutDao {
 
 	private static final WorkoutDao INSTANCE = new WorkoutDao();
-	
+
 	public static WorkoutDao get() {
 		return INSTANCE;
 	}
-	
+
 	private WorkoutDao() {}
-	
+
 	public List<Workout> getUserWorkouts(int userId) {
 		List<Workout> workouts = new ArrayList<Workout>();
 		Connection connection = null;
@@ -54,12 +54,12 @@ public class WorkoutDao {
 					w.setGymName(resultSet.getString("gym_name"));
 					w.setNote(note);
 					workoutsTree.put(id, w);
-				} else
+				} else {
 					w = workoutsTree.get(id);
-				int exerciseId = resultSet.getInt("exercise_id");
+				}
 				if (!resultSet.wasNull()) {
 					WorkoutEntry we = new WorkoutEntry();
-					we.setExerciseId(exerciseId);
+					we.setExerciseId(resultSet.getInt("exercise_id"));
 					we.setRepsPerSet(resultSet.getInt("reps_per_set"));
 					we.setSetsCount(resultSet.getInt("set_count"));
 					we.setWeight(resultSet.getDouble("weight"));
@@ -85,7 +85,7 @@ public class WorkoutDao {
 		}
 		return workouts;
 	}
-	
+
 	public boolean create(Workout workout) {
 		Connection connection = null;
 		try {
@@ -93,12 +93,12 @@ public class WorkoutDao {
 			connection.setAutoCommit(false);
 			if (workout.getStartedAt() == null || workout.getFinishedAt() == null)
 				return false;
-			
+
 			PreparedStatement p = connection.prepareStatement("INSERT INTO "
 					+ "workouts(user_id, gym_id, started_at, finished_at, note) "
 					+ "VALUES (?, ?, ?, ?, ?) "
 					+ "RETURNING workout_id");
-			
+
 			p.setInt(1, workout.getUserId());
 			if (workout.getGymId() == null)
 				p.setNull(2, Types.INTEGER);
@@ -110,16 +110,16 @@ public class WorkoutDao {
 				p.setNull(5, Types.VARCHAR);
 			else
 				p.setString(5, workout.getNote());
-			
+
 			p.execute();
 			ResultSet resultSet = p.getResultSet();
 			resultSet.next();
 			int workoutId = resultSet.getInt("workout_id");
 			workout.setId(workoutId);
-			
+
 			resultSet.close();
 			p.close();
-			
+
 			for (WorkoutEntry we : workout.getWorkoutEntries()) {
 				we.setWorkoutId(workoutId);
 				p = connection.prepareStatement("INSERT INTO "
@@ -173,7 +173,7 @@ public class WorkoutDao {
 				p = connection.prepareStatement("INSERT INTO "
 						+ "likes(user_id, workout_id) "
 						+ "VALUES (?, ?)");
-	
+
 				p.setInt(1, userId);
 				p.setInt(2, workoutId);
 				p.execute();
@@ -181,7 +181,7 @@ public class WorkoutDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 			p = connection.prepareStatement("SELECT count(*) "
 					+ "FROM likes "
 					+ "WHERE workout_id = ?");
@@ -191,7 +191,7 @@ public class WorkoutDao {
 			resultSet.next();
 			int likesCount = resultSet.getInt(1);
 			p.close();
-			
+
 			return likesCount;
 		} catch (SQLException e) {
 			e.printStackTrace();

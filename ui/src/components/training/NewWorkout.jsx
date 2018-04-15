@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import './NewWorkout.css'
+import '../home/News.css';
 
 class NewWorkout extends Component {
   constructor(props) {
