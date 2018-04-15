@@ -54,9 +54,13 @@ public class WorkoutDao {
 					w.setGymName(resultSet.getString("gym_name"));
 					w.setNote(note);
 					workoutsTree.put(id, w);
+
+					workouts.add(w);
 				} else {
 					w = workoutsTree.get(id);
 				}
+
+				resultSet.getInt("exercise_id");
 				if (!resultSet.wasNull()) {
 					WorkoutEntry we = new WorkoutEntry();
 					we.setExerciseId(resultSet.getInt("exercise_id"));
@@ -64,11 +68,9 @@ public class WorkoutDao {
 					we.setSetsCount(resultSet.getInt("set_count"));
 					we.setWeight(resultSet.getDouble("weight"));
 					we.setExerciseName(resultSet.getString("exercise_name"));
+
 					w.addWorkoutEntry(we);
 				}
-			}
-			for (Entry<Integer, Workout> e : workoutsTree.entrySet()) {
-				workouts.add(e.getValue());
 			}
 			resultSet.close();
 			p.close();

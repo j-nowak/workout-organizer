@@ -21,7 +21,7 @@ class Workout extends Component {
 
   render() {
     const workout = this.props.workout;
-    const workoutEntries = workout.workoutEntries.concat(workout.workoutEntries);
+    const workoutEntries = workout.workoutEntries;
     const gymUrl = "/gyms/" + workout.gymId;
 
     return (

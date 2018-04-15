@@ -9,6 +9,8 @@ import models.Gym;
 import models.Secured;
 import models.Workout;
 import models.WorkoutEntry;
+import play.data.DynamicForm;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -125,41 +127,48 @@ public class WorkoutsController extends Controller {
 	}
 
 	public static Result create_react() {
-		Map<String, String[]> params = request().body().asFormUrlEncoded();
+		String origin = request().getHeader("origin");
+		origin = origin == null ? "*" : origin;
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
 
+		Map<String, String> params = Form.form().bindFromRequest().data();
 		try {
-			String userId = session().get(Application.USER_ID);
-			String gymId = params.get("gymId")[0];
-			String startedAt =  params.get("startedAt")[0];
-			String finishedAt = params.get("finishedAt")[0];
-			String note = params.get("note")[0];
-			String[] exerciseId = params.get("entries[][exerciseId]");
-			String[] setsCount = params.get("entries[][setsCount]");
-			String[] repsPerSet = params.get("entries[][repsPerSet]");
-			String[] weight = params.get("entries[][weight]");
+			String userId = request().cookie(Application.USER_ID).value();
+			String gymId = params.get("gymId");
+			String startedAt =  params.get("startedAt");
+			String finishedAt = params.get("finishedAt");
+			String note = params.get("note");
 
 			startedAt = startedAt.replace("T", " ") + ":00";
 			finishedAt = finishedAt.replace("T", " ") + ":00";
 			Workout workout = new Workout(Integer.parseInt(userId), Integer.parseInt(gymId), Timestamp.valueOf(startedAt), Timestamp.valueOf(finishedAt));
 			workout.setNote(note);
 
-			for (int i = 0; i < exerciseId.length; ++i) {
+			for (int i = 0; params.get("entries[" + i + "].exerciseId") != null; ++i) {
 				WorkoutEntry entry = new WorkoutEntry();
+				String prefix = "entries[" + i + "].";
+				String exerciseId = params.get(prefix + "exerciseId");
+				String setsCount = params.get(prefix + "setsCount");
+				String repsPerSet = params.get(prefix + "repsPerSet");
+				String weight = params.get(prefix + "weight");
 
-				entry.setExerciseId(Integer.parseInt(exerciseId[i]));
-				entry.setSetsCount(Integer.parseInt(setsCount[i]));
-				if (!repsPerSet[i].isEmpty())
-					entry.setRepsPerSet(Integer.parseInt(repsPerSet[i]));
-				if (!weight[i].isEmpty())
-					entry.setWeight(Double.parseDouble(weight[i]));
+				entry.setExerciseId(Integer.parseInt(exerciseId));
+				if (setsCount != null)
+					entry.setSetsCount(Integer.parseInt(setsCount));
+				if (repsPerSet != null)
+					entry.setRepsPerSet(Integer.parseInt(repsPerSet));
+				if (weight != null)
+					entry.setWeight(Double.parseDouble(weight));
+
 				workout.addWorkoutEntry(entry);
 			}
 
 			WorkoutDao.get().create(workout);
-			return ok();
+			return ok(new Gson().toJson(workout));
 		} catch (Exception e) {
 			e.printStackTrace();
-			return badRequest();
+			return internalServerError("Unable to store workout");
 		}
 	}
 }
