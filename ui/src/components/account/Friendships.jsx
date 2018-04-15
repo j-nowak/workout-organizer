@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import './Friendship.css';
 
 class Friendships extends Component {
   constructor(props) {
@@ -36,19 +37,26 @@ class Friendships extends Component {
   render() {
     const requests = this.state.friendshipRequests;
     const suggestions = this.state.strangers;
+
+    const requestsToShow = requests.length !== 0;
+    const suggestionsToShow = suggestions.length !== 0;
     return (
       <div>
         <div>
           <h2>Friendship requests</h2>
-          {requests.map(fr =>
-            <FriendshipRequest key={fr.id} requestId={fr.id} name={fr.firstName} />
-          )}
+          {requestsToShow ? 
+            <div>{requests.map(fr =>
+              <FriendshipRequest key={fr.id} requestId={fr.id} name={fr.firstName} />
+            )}</div>
+            : <div class="alert alert-success">No friendship requests.</div>}
         </div>
         <div>
           <h2>Suggested friends</h2>
-          {suggestions.map(fr =>
-            <Stranger key={fr.id} requestId={fr.id} name={fr.firstName} />
-          )}
+          {suggestionsToShow ? 
+            <div>{suggestions.map(fr =>
+              <Stranger key={fr.id} requestId={fr.id} name={fr.firstName} />
+            )}</div>
+            : <div class="alert alert-success">No friendship suggestions.</div>}
         </div>
       </div>
     );
@@ -104,8 +112,8 @@ class FriendshipRequest extends Component {
     return (
       <div>
         {this.state.acc ? <div>Resolved!</div> :
-          <div>
-            {this.props.name + ' wants to be your friend.'}
+          <div className="friendship-info">
+            <span><strong>{this.props.name}</strong> wants to be your friend.</span>
             <button className="btn" onClick={() => this.accept()}>Accept</button>
             <button className="btn" onClick={() => this.decline()}>Decline</button>
           </div>
@@ -142,11 +150,13 @@ class Stranger extends Component {
   }
 
   render() {
+    const style = { display: 'flex', alignItems: 'center', justifyContent: 'space-between'};
+
     return (
       <div>
         {this.state.sent ? <div>Sent!</div> :
-          <div>
-            {this.props.name + ' can be your friend!'}
+          <div className="friendship-info" style={style}>
+            <span><strong>{this.props.name}</strong> can be your friend!</span>
             <button className="btn btn-primary" onClick={() => this.invite()}>Invite</button>
           </div>
         }

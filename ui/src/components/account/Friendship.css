@@ -1,0 +1,7 @@
+.friendship-info {
+  width: 40%;
+}
+
+.friendship-info>button {
+  float: right;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import StarRatingComponent from 'react-star-rating-component';
+import "./GymPage.css"
 
 import Gallery from "../Gallery.jsx";
 import Popup from "../Popup.jsx";
@@ -46,6 +47,8 @@ class GymPage extends Component {
 
   render() {
     const gym = this.state.gym;
+    const style = { display: 'flex', alignItems: 'center'}
+
     return (
       <div className="container">
         <Popup
@@ -57,8 +60,9 @@ class GymPage extends Component {
         </Popup>
 
         <h2>{gym.name}</h2>
-        <div>
+        <div className="rating-component" style={style}>
           <StarRatingComponent
+            className="gym-star-rating-info"
             name='' 
             starCount={10}
             value={gym.rating}

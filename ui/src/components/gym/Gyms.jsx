@@ -69,7 +69,7 @@ export class Gyms extends Component {
               <li key={g.id}> <GymListing gym={g} /></li>)}
           </ul>
 
-          <ul className="pagination">
+          <ul className="gym-pagination pagination">
             {pageNumbers.map(p =>
               <li key={p} className={'page-item ' + ((p === this.state.currentPage) ? 'active' : '')}><Link id={p} onClick={this.updatePage.bind(this)} className="page-link" to={'/gyms?page=' + p}>{p}</Link></li>)}
           </ul>
