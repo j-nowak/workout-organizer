@@ -34,17 +34,27 @@ class Friendships extends Component {
   }
 
   render() {
+    const requests = this.state.friendshipRequests;
+    const suggestions = this.state.strangers;
     return (
       <div>
-        <h2>Friendship requests</h2>
-          {this.state.friendshipRequests.map(fr => <FriendshipRequest key={fr.id} requestId={fr.id} name={fr.firstName} />)}
-        <h2>Suggested friends</h2>
-          {this.state.strangers.map(fr => <Stranger key={fr.id} requestId={fr.id} name={fr.firstName} />)}
+        <div>
+          <h2>Friendship requests</h2>
+          {requests.map(fr =>
+            <FriendshipRequest key={fr.id} requestId={fr.id} name={fr.firstName} />
+          )}
+        </div>
+        <div>
+          <h2>Suggested friends</h2>
+          {suggestions.map(fr =>
+            <Stranger key={fr.id} requestId={fr.id} name={fr.firstName} />
+          )}
+        </div>
       </div>
     );
   }
 }
- 
+
 export default Friendships;
 
 class FriendshipRequest extends Component {
@@ -93,7 +103,7 @@ class FriendshipRequest extends Component {
   render() {
     return (
       <div>
-        {this.state.acc ? <div>Resolved!</div> : 
+        {this.state.acc ? <div>Resolved!</div> :
           <div>
             {this.props.name + ' wants to be your friend.'}
             <button className="btn" onClick={() => this.accept()}>Accept</button>
@@ -137,7 +147,7 @@ class Stranger extends Component {
         {this.state.sent ? <div>Sent!</div> :
           <div>
             {this.props.name + ' can be your friend!'}
-            <button className="btn" onClick={() => this.invite()}>Invite</button>
+            <button className="btn btn-primary" onClick={() => this.invite()}>Invite</button>
           </div>
         }
       </div>
