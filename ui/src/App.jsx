@@ -80,17 +80,20 @@ class App extends Component {
 
               <li className="nav-item"><NavLink to="/gyms?page=1">Gyms</NavLink></li>
 
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  Account
-                  <span className="caret"></span>
-                </a>
-                <ul className="dropdown-menu">
-                  <li className="dropdown-item"><NavLink to="/account/measurements" >Enter measurements</NavLink></li>
-                  <li className="dropdown-item"><NavLink to={"/users/" + user.id} >My profile</NavLink></li>
-                  <li className="dropdown-item"><NavLink to="/account/password" >Change password</NavLink></li>
-                </ul>
-              </li>
+              { user ?
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Account
+                    <span className="caret"></span>
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li className="dropdown-item"><NavLink to="/account/measurements" >Enter measurements</NavLink></li>
+                    <li className="dropdown-item"><NavLink to={"/users/" + user.id} >My profile</NavLink></li>
+                    <li className="dropdown-item"><NavLink to="/account/password" >Change password</NavLink></li>
+                  </ul>
+                </li>
+                : null
+              }
 
               { user ?
                 <li className="nav-item">

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const COOKIE_NAME = 'wo_session_token';
+const COOKIE_NAME = 'user_id';
 
 export function setCookie(value, expiresIn=(1000 * 60 * 60 * 24 * 365)) {
   const expires = new Date(Date.now() + expiresIn);

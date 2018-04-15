@@ -41,11 +41,13 @@ public class WorkoutsController extends Controller {
 	}
 
 	public static Result index_react() {
-		String origin = request().getHeader("Origin");
+		String origin = request().getHeader("origin");
+		origin = origin == null ? "*" : origin;
 		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
 		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
 		try {
-			int userId = Integer.parseInt(session().get(Application.USER_ID));
+			String userIdStr = request().cookie(Application.USER_ID).value();
+			int userId = Integer.parseInt(userIdStr);
 			List<Workout> workouts = WorkoutDao.get().getUserWorkouts(userId);
 			return ok(new Gson().toJson(workouts));
 		} catch (Exception e) {

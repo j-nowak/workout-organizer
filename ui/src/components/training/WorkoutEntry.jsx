@@ -13,11 +13,11 @@ class WorkoutEntry extends Component {
   }
 
   pluralizeSets(count) {
-    return count == 1 ? '1 set' : `${count} sets`;
+    return count === 1 ? '1 set' : `${count} sets`;
   }
 
   pluralizeReps(count) {
-    return count == 1 ? '1 rep' : `${count} reps`;
+    return count === 1 ? '1 rep' : `${count} reps`;
   }
 
   render() {
