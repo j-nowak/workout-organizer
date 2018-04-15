@@ -50,9 +50,12 @@ GET  	/stylesheets/*file          controllers.Assets.at(path="/public/stylesheet
 # React
 GET     /react/home                 controllers.Application.home_react()
 
+GET		/react/exercises			controllers.ExercisesController.listAllExercises_react()
+
 GET		/react/gyms					controllers.GymsController.listAllGyms_react()
 GET		/react/gyms/:id 			controllers.GymsController.showGym_react(id: Int)
 GET		/react/gyms/:gymId/images 	controllers.GymsController.gymThumbnails_react(gymId: Int)
+POST	/react/gyms/:gymId			controllers.GymsController.rate_react(gymId: Int)
 
 POST	/react/changePassword		controllers.AccountController.changePassword_react()
 
@@ -62,3 +65,7 @@ POST 	/react/workouts/:id/like	controllers.WorkoutsController.like_react(id: Int
 GET		/react/images/:id/comments	controllers.GymsController.getComments(id: Int)
 POST	/react/images/:id/comments	controllers.GymsController.addComment(id: Int)
 
+GET		/react/users/:id			controllers.UsersController.showUser_react(id: Int)
+
+POST	/react/login				controllers.SignController.loginUser_react()
+OPTIONS	/*path						controllers.Application.options(path: String)

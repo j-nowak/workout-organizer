@@ -14,3 +14,7 @@ html, body, #root {
   text-align: center;
   font-size: 50px;
 }
+
+.page {
+  margin: 1em;
+}

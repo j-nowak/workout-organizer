@@ -16,14 +16,14 @@ import models.MuscleGroup;
 import play.db.DB;
 
 public class ExerciseDao {
-	
+
 	public static ExerciseDao get() {
 		return INSTANCE;
 	}
-	
+
 	public List<Exercise> getAll() {
 		List<Exercise> exercises = new ArrayList<Exercise>();
-		
+
 		Connection connection = null;
 		try {
 			connection = DB.getConnection();
@@ -41,7 +41,7 @@ public class ExerciseDao {
 					+ "LEFT JOIN exercise_muscle_groups USING (exercise_id) "
 					+ "GROUP BY exercises.exercise_id, rating, ratings_count "
 					+ "ORDER BY exercises.exercise_name");
-			
+
 			while (exerciseSet.next()) {
 				Exercise e = new Exercise();
 				e.setId(exerciseSet.getInt("exercise_id"));
@@ -58,7 +58,9 @@ public class ExerciseDao {
 					MuscleGroup muscleGroup = new MuscleGroup();
 					muscleGroup.setMuscleName(targetMuscleSet.getString(2));
 
-					targetMuscles.add(muscleGroup);
+					if (muscleGroup.getMuscleName() != null) {
+						targetMuscles.add(muscleGroup);
+					}
 				}
 
 				targetMuscleSet.close();
@@ -66,7 +68,7 @@ public class ExerciseDao {
 
 				exercises.add(e);
 			}
-			
+
 			exerciseSet.close();
 			statement.close();
 		} catch (SQLException e) {
@@ -83,7 +85,7 @@ public class ExerciseDao {
 
 		return exercises;
 	}
-	
+
 	public List<Exercise> filter(String muscleName) {
 		MuscleGroup muscle = new MuscleGroup(muscleName);
 		List<Exercise> result = new ArrayList<Exercise>();
@@ -91,10 +93,10 @@ public class ExerciseDao {
 			if (ex.getTargetMuscles().contains(muscle)) {
 				result.add(ex);
 			}
-		}		
+		}
 		return result;
 	}
-	
+
 	public void rateExercise(int userId, int exerciseId, int rating) {
 		Connection connection = null;
 		try {
@@ -103,7 +105,7 @@ public class ExerciseDao {
 			p.setInt(1, userId);
 			p.setInt(2, exerciseId);
 			p.setInt(3, rating);
-			
+
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
@@ -120,7 +122,7 @@ public class ExerciseDao {
 	}
 
 	private static final ExerciseDao INSTANCE = new ExerciseDao();
-	
+
 	private ExerciseDao() {}
 
 	public ExerciseResult getBestForUser(String id, int exerciseId) {
@@ -141,7 +143,7 @@ public class ExerciseDao {
 				result.setRepsPerSet(resultSet.getInt("reps_per_set"));
 				result.setSetCount(resultSet.getInt("set_count"));
 				result.setWeight(resultSet.getInt("weight"));
-				
+
 			}
 			resultSet.close();
 			p.close();
@@ -159,5 +161,5 @@ public class ExerciseDao {
 			}
 		}
 	}
-	
+
 }

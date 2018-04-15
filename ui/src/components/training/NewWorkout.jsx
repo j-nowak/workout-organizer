@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import './NewWorkout.css'
 
 class NewWorkout extends Component {
   constructor(props) {
@@ -57,19 +58,19 @@ class NewWorkout extends Component {
 
   render() {
     return (
-      <div>
+      <div className="workoutForm">
         <h2>New workout</h2>
         <form id="new-workout" onSubmit={(e) => this.submitForm(e)}>
           <div className="form-group">
             <label htmlFor="gymId">Gym:</label>
-            <select id="gymId">
+            <select id="gymId" className="form-control">
               {this.state.availableGyms.map(g =>
                 <option value={g.id} key={g.id}>{g.name}</option>)}
             </select>
           </div>
 
           <div className="form-group">
-            <label htmlFor="startedAt">Date:</label> 
+            <label htmlFor="startedAt">Date:</label>
             <input className="form-control" type="date" id="startedAt"
                 value={this.state.trainingDate}
                 onChange={this.handleTrainingDateChange} />
@@ -77,7 +78,7 @@ class NewWorkout extends Component {
 
           <div className="form-group">
             <label htmlFor="note">Note:</label>
-            <textarea id="note" form="new-workout"
+            <textarea id="note" className="form-control" form="new-workout"
                 value={this.state.note}
                 onChange={this.handleNoteChange} />
           </div>
@@ -88,5 +89,5 @@ class NewWorkout extends Component {
     );
   }
 }
- 
+
 export default NewWorkout;

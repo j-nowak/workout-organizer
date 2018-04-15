@@ -10,6 +10,7 @@ import models.Gym;
 import models.ImageDescription;
 import models.Secured;
 import play.api.libs.json.Json;
+import play.api.libs.ws.ssl.SystemConfiguration;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -53,6 +54,28 @@ public class GymsController extends Controller {
     		return badRequest();
     	}
     }
+
+	public static Result rate_react(int gymId) throws InterruptedException {
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+
+		int userId = Integer.parseInt(session("user_id") == null ? "1" : session("user_id"));
+		DynamicForm requestData = Form.form().bindFromRequest();
+		String ratingRaw = requestData.get("rating");
+
+		try {
+			int rating = Integer.parseInt(ratingRaw);
+			if (rating < 0 || rating > 10)
+				return badRequest();
+
+			GymsDao.get().rateGym(userId, gymId, rating);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Thread.sleep(1000);
+
+		return ok();
+	}
 
     public static Result showGym(int id) {
     	Gym g = GymsDao.get().getById(id);
