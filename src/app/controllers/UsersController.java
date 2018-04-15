@@ -19,9 +19,43 @@ public class UsersController extends Controller {
 		}
 	}
 
+	public static Result invite_react(int requestedUserId) {
+		String origin = request().getHeader("origin");
+		origin = origin == null ? "*" : origin;
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+
+		try {
+			String userIdStr = request().cookie(Application.USER_ID).value();
+			int userId = Integer.parseInt(userIdStr);
+			UsersDao.get().inviteUser(userId, requestedUserId);
+
+			return ok();
+		} catch (Exception e) {
+			return badRequest();
+		}
+	}
+
 	public static Result decline(int requesingUserId) {
 		try {
 			int userId = Integer.parseInt(session("user_id"));
+			UsersDao.get().removeRequest(userId, requesingUserId);
+			return ok();
+		} catch (Exception e) {
+			return badRequest();
+		}
+	}
+
+	public static Result decline_react(int requesingUserId) {
+		String origin = request().getHeader("origin");
+		origin = origin == null ? "*" : origin;
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+
+		try {
+			String userIdStr = request().cookie(Application.USER_ID).value();
+			int userId = Integer.parseInt(userIdStr);
+
 			UsersDao.get().removeRequest(userId, requesingUserId);
 			return ok();
 		} catch (Exception e) {

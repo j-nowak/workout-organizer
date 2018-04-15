@@ -12,8 +12,7 @@ import Exercises from "./components/exercise/Exercises.jsx";
 import Gyms from "./components/gym/Gyms.jsx";
 import GymPage from "./components/gym/GymPage.jsx";
 import ChangePassword from "./components/account/ChangePassword.jsx";
-import Measurements from "./components/account/Measurements.jsx";
-import Profile from "./components/account/Profile.jsx";
+import Friendships from "./components/account/Friendships.jsx";
 import UserPage from "./components/users/UserPage.jsx";
 import LoginPage from './components/account/LoginPage.jsx';
 import LoadingSpinner from './components/LoadingSpinner.jsx';
@@ -87,7 +86,7 @@ class App extends Component {
                     <span className="caret"></span>
                   </a>
                   <ul className="dropdown-menu">
-                    <li className="dropdown-item"><NavLink to="/account/measurements" >Enter measurements</NavLink></li>
+                    <li className="dropdown-item"><NavLink to="/account/friednships" >Friendships</NavLink></li>
                     <li className="dropdown-item"><NavLink to={"/users/" + user.id} >My profile</NavLink></li>
                     <li className="dropdown-item"><NavLink to="/account/password" >Change password</NavLink></li>
                   </ul>
@@ -119,7 +118,7 @@ class App extends Component {
               <Route exact path="/gyms" component={Gyms}/>
               <Route path="/gyms/:gymId" component={GymPage}/>
 
-              <Route exact path="/account/measurements" component={Measurements}/>
+              <Route exact path="/account/friednships" component={Friendships}/>
               <Route exact path="/account/password" component={() => <ChangePassword userId={user.id} />}/>
 
               <Route path="/users/:userId" component={UserPage}/>

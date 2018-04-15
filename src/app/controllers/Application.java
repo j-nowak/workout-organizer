@@ -34,6 +34,33 @@ public class Application extends Controller {
     	}
     }
 
+	public static Result strangers_react() {
+		String origin = request().getHeader("origin");
+		origin = origin == null ? "*" : origin;
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+
+		String userIdStr = request().cookie(Application.USER_ID).value();
+		int userId = Integer.parseInt(userIdStr);
+
+		List<Stranger> strangers = UsersDao.get().getStrangersForUser(userId);
+
+		return ok(new Gson().toJson(strangers));
+	}
+
+	public static Result friendsRequests_react() {
+		String origin = request().getHeader("origin");
+		origin = origin == null ? "*" : origin;
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+
+		String userIdStr = request().cookie(Application.USER_ID).value();
+		int userId = Integer.parseInt(userIdStr);
+
+		List<User> friendshipRequests = UsersDao.get().getFriendshipRequests(userId);
+		return ok(new Gson().toJson(friendshipRequests));
+	}
+
 	private static int newsId = 0;
 
 	public static Result home_react(int userId) throws InterruptedException {

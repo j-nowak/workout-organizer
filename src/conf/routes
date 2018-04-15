@@ -49,6 +49,8 @@ GET  	/stylesheets/*file          controllers.Assets.at(path="/public/stylesheet
 
 # React
 GET     /react/home/:userId         controllers.Application.home_react(userId: Int)
+GET     /react/strangers       controllers.Application.strangers_react()
+GET     /react/friendships     controllers.Application.friendsRequests_react()
 
 GET		/react/exercises			controllers.ExercisesController.listAllExercises_react()
 
@@ -67,7 +69,11 @@ GET		/react/images/:id/comments	controllers.GymsController.getComments(id: Int)
 POST	/react/images/:id/comments	controllers.GymsController.addComment(id: Int)
 
 GET		/react/users/:id			controllers.UsersController.showUser_react(id: Int)
+POST	/react/users/:id/invite			controllers.UsersController.invite_react(id: Int)
+POST	/react/users/:id/accept			controllers.UsersController.invite_react(id: Int)
+POST	/react/users/:id/decline			controllers.UsersController.decline_react(id: Int)
 
 POST	/react/login				controllers.SignController.loginUser_react()
 POST	/react/register				controllers.SignController.registerUser_react()
 OPTIONS	/*path						controllers.Application.options(path: String)
+
