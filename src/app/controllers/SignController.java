@@ -12,10 +12,13 @@ public class SignController extends Controller {
 
 	private static final String FORM_FIRST_NAME = "firstname";
 	private static final String FORM_LAST_NAME = "lastname";
+	private static final String FORM_FIRST_NAME_REACT = "firstName";
+	private static final String FORM_LAST_NAME_REACT = "lastName";
 	private static final String FORM_LOGIN = "username";
 	private static final String FORM_EMAIL = "email";
 	private static final String FORM_PASSWORD = "password";
 	private static final String FORM_REPEATED_PASSWORD = "repeat-password";
+	private static final String FORM_REPEATED_PASSWORD_REACT = "passwordConfirm";
 
 
 	public static Result registerUser() {
@@ -35,6 +38,29 @@ public class SignController extends Controller {
 		}
 		else {
 			return redirect(Application.LOGIN);
+		}
+	}
+
+	public static Result registerUser_react() {
+		DynamicForm requestData = Form.form().bindFromRequest();
+		String firstName = requestData.get(FORM_FIRST_NAME_REACT);
+		String lastName = requestData.get(FORM_LAST_NAME_REACT);
+		String login = requestData.get(FORM_LOGIN);
+		String email = requestData.get(FORM_EMAIL);
+		String password = requestData.get(FORM_PASSWORD);
+		String repeatedPassword = requestData.get(FORM_REPEATED_PASSWORD_REACT);
+
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+
+		User user = new User(login, email, password, firstName, lastName);
+		if (!password.equals(repeatedPassword)) {
+			return badRequest("Incorrect password confirmation");
+		} else if (!saveUser(user)) {
+			return badRequest("Unable to save user");
+		}
+		else {
+			response().setCookie(Application.USER_ID, "" + user.getId());
+			return ok(new Gson().toJson(user));
 		}
 	}
 
@@ -64,8 +90,7 @@ public class SignController extends Controller {
 
 		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 		if (user != null) {
-			session().clear();
-			session(Application.USER_ID, "" + user.getId());
+			response().setCookie(Application.USER_ID, "" + user.getId());
 			return ok(new Gson().toJson(user));
 		}
 		else {

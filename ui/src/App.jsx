@@ -60,7 +60,7 @@ class App extends Component {
     const user = this.state.user;
     return (
         <HashRouter>
-        <div className="App">
+        <div className="App container">
           <nav className="navbar navbar-inverse">
             <ul className="nav navbar-nav">
               <li className="nav-item active"><NavLink to="/">Home</NavLink></li>

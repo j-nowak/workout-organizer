@@ -59,7 +59,7 @@ POST	/react/gyms/:gymId			controllers.GymsController.rate_react(gymId: Int)
 
 POST	/react/changePassword		controllers.AccountController.changePassword_react()
 
-GET  /react/workouts       controllers.WorkoutsController.index_react()
+GET		/react/workouts				controllers.WorkoutsController.index_react()
 POST	/react/workouts				controllers.WorkoutsController.create_react()
 POST 	/react/workouts/:id/like	controllers.WorkoutsController.like_react(id: Int)
 
@@ -69,4 +69,5 @@ POST	/react/images/:id/comments	controllers.GymsController.addComment(id: Int)
 GET		/react/users/:id			controllers.UsersController.showUser_react(id: Int)
 
 POST	/react/login				controllers.SignController.loginUser_react()
+POST	/react/register				controllers.SignController.registerUser_react()
 OPTIONS	/*path						controllers.Application.options(path: String)

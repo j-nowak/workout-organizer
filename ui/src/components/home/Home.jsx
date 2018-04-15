@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import { getCurrentUser } from '../../lib/auth';
 
 import News from "./News.jsx";
 import LoadingSpinner from "../LoadingSpinner.jsx";
