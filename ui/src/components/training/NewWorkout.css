@@ -1,0 +1,8 @@
+.workoutForm {
+  width: 500px;
+  padding: 1.5em;
+}
+
+ul.workout-entries li.workoutForm {
+  width: 500px;
+}

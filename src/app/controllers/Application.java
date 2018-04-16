@@ -1,11 +1,10 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import models.News;
-import models.Secured;
-import models.Stranger;
-import models.User;
+import com.google.gson.Gson;
+import models.*;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -14,11 +13,11 @@ import views.html.index;
 import database.NewsDao;
 import database.UsersDao;
 
-@Security.Authenticated(Secured.class)
+//@Security.Authenticated(Secured.class)
 public class Application extends Controller {
-	
+
 	public static final String USER_ID = "user_id";
-	
+
 	public static final String HOME = "/home";
 	public static final String LOGIN = "/login";
 
@@ -34,15 +33,71 @@ public class Application extends Controller {
     		return ok(index.render(news, strangers, friendshipRequests));
     	}
     }
-    
+
+	public static Result strangers_react() {
+		String origin = request().getHeader("origin");
+		origin = origin == null ? "*" : origin;
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+
+		String userIdStr = request().cookie(Application.USER_ID).value();
+		int userId = Integer.parseInt(userIdStr);
+
+		List<Stranger> strangers = UsersDao.get().getStrangersForUser(userId);
+
+		return ok(new Gson().toJson(strangers));
+	}
+
+	public static Result friendsRequests_react() {
+		String origin = request().getHeader("origin");
+		origin = origin == null ? "*" : origin;
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+
+		String userIdStr = request().cookie(Application.USER_ID).value();
+		int userId = Integer.parseInt(userIdStr);
+
+		List<User> friendshipRequests = UsersDao.get().getFriendshipRequests(userId);
+		return ok(new Gson().toJson(friendshipRequests));
+	}
+
+	private static int newsId = 0;
+
+	public static Result home_react(int userId) throws InterruptedException {
+		List<News> news = NewsDao.get().getNews(userId);
+
+		List<News> fakeNews = new ArrayList<>();
+		for (int i = 0; i < 10; ++i) {
+			fakeNews.addAll(news);
+		}
+
+		List<NewsWrapper> result = new ArrayList<>();
+		for (int i = 0; i < fakeNews.size(); i++) {
+			result.add(new NewsWrapper(newsId++, fakeNews.get(i)));
+		}
+
+		Thread.sleep(2000);
+
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		return ok(new Gson().toJson(result));
+	}
+
     public static Result editAccountSettings() {
-    	try {
-	    	User user = UsersDao.get().getById(Integer.parseInt(session(USER_ID))); //TODO change session to userId
-	    	return ok(account.render(user));
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		return badRequest();
-    	}
+        try {
+            User user = UsersDao.get().getById(Integer.parseInt(session(USER_ID))); //TODO change session to userId
+            return ok(account.render(user));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest();
+        }
+    }
+
+    public static Result options(String path) {
+        response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:3000");
+        response().setHeader(ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, DELETE, OPTIONS");
+        response().setHeader(ACCESS_CONTROL_ALLOW_HEADERS, "Accept, Origin, Content-type, X-Json, X-Prototype-Version, X-Requested-With");
+        response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+        return ok("");
     }
 
 }

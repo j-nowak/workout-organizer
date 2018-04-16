@@ -1,0 +1,36 @@
+.news-feed {
+  width: 100%;
+}
+
+.news-feed .news {
+  width: 480px;
+  margin: 20px auto;
+  background-color: white;
+  padding: 10px;
+  font-family: Helvetica;
+  font-size: 15px;
+  color: #4C4C4C;
+}
+
+.news-feed .news a.news-link {
+  color: #6BABEA;
+  text-decoration: none;
+}
+
+.news-feed .news a.news-link:hover {
+  cursor: pointer;
+}
+
+.news-feed .news .news-note {
+  margin: 10px 0px;
+}
+
+.news-feed .news .news-date {
+  color: #999;
+  font-size: 12px
+}
+
+.news-feed .news .news-likes {
+  color: #6E8699;
+  font-size: 14px;
+}

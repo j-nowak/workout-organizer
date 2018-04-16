@@ -1,0 +1,14 @@
+div .gyms-listing-container {
+  width: 100%;
+  margin: 0px;
+}
+
+div .gyms-listing {
+  height: 600px;
+  text-align: center;
+}
+
+.gyms-listing>.gym-pagination {
+  position: relative;
+  left: 19px;
+}

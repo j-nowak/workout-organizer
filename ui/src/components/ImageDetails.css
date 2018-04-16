@@ -1,0 +1,18 @@
+div .comments {
+  max-height: 600px;
+  padding-bottom: 50px;
+}
+
+div .comments-container {
+  position: relative;
+  left: -50px;
+  top: 50px;
+}
+
+.single-comment {
+  background-color: beige;
+  border: 1px solid blue;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 3px;
+}

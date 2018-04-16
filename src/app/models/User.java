@@ -3,14 +3,14 @@ package models;
 import java.util.Date;
 
 public class User {
-	
+
 	public User() {}
-	
+
 	public User(String login, String email, String password, String firstName, String lastName) {
 		this.login = login;
 		this.email = email;
 		this.password = password;
-		this.firstName = firstName;		
+		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 
@@ -18,14 +18,16 @@ public class User {
 	private String login;
 	private String email;
 	private String password;
-	
+
 	private String firstName;
 	private String lastName;
 	private Date dateOfBirth;
-	
+
 	private int height;
 	private double weight;
-	
+
+	private boolean isFriend;
+
 	public int getId() {
 		return id;
 	}
@@ -82,5 +84,11 @@ public class User {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
+	public boolean getIsFriend() {
+		return this.isFriend;
+	}
+	public void setIsFriend(boolean isFriend) {
+		this.isFriend = isFriend;
+	}
+
 }

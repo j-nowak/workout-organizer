@@ -12,30 +12,37 @@ import play.mvc.Result;
 import play.mvc.Security;
 import views.html.exercises;
 import database.ExerciseDao;
+import com.google.gson.Gson;
 
-@Security.Authenticated(Secured.class)
+// @Security.Authenticated(Secured.class)
 public class ExercisesController extends Controller {
-	
+
     private static final String RATING = "rating";
     private static final String MUSCLES = "muscles";
     private static final String EXERCISE_ID = "exerciseId";
 
-	public static Result listAllExercises() {	
-    	List<Exercise> exercisesList = ExerciseDao.get().getAll(); 
+	public static Result listAllExercises() {
+    	List<Exercise> exercisesList = ExerciseDao.get().getAll();
 		return ok(exercises.render(exercisesList));
 	}
-	
+
+	public static Result listAllExercises_react() {
+		List<Exercise> exercisesList = ExerciseDao.get().getAll();
+		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		return ok(new Gson().toJson(exercisesList));
+	}
+
 	public static Result listFileteredExercises() {
 		String muscle = request().queryString().get(MUSCLES)[0];
-    	List<Exercise> exercisesList = ExerciseDao.get().filter(muscle); 
+    	List<Exercise> exercisesList = ExerciseDao.get().filter(muscle);
 		return ok(exercises.render(exercisesList));
 	}
-    
+
     public static Result rate(int exerciseId) {
     	String userId = session(Application.USER_ID);
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String ratingRaw = requestData.get(RATING);
-		
+
     	try {
     		int rating = Integer.parseInt(ratingRaw);
     		if (rating < 0 || rating > 10)
@@ -55,7 +62,7 @@ public class ExercisesController extends Controller {
     		String userId = session(Application.USER_ID);
     		int exerciseId = Integer.parseInt(requestData.get(EXERCISE_ID));
     		ExerciseResult result = ExerciseDao.get().getBestForUser(userId, exerciseId);
-    		
+
     		String returnData;
     		if (result == null) {
     			returnData = "You haven't done this exercise yet.";
@@ -63,11 +70,11 @@ public class ExercisesController extends Controller {
     		else {
     			returnData = "Weight: " + result.getWeight() + ", reps: " + result.getRepsPerSet() + ", sets: " + result.getSetCount();
     		}
-    		
+
     		return ok(returnData);
     	} catch (NumberFormatException e) {
     		return badRequest();
     	}
-    	
+
     }
 }
