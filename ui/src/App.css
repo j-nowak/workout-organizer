@@ -1,4 +1,4 @@
-html, body, #root {
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -11,6 +11,7 @@ html, body, #root {
 
 #root {
   min-height: 100%;
+  background-color: #e9ebee;
 }
 
 .data-loading {
