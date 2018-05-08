@@ -33,7 +33,7 @@ public class GymsController extends Controller {
 
 	public static Result listAllGyms_react() {
 		List<Gym> gymsList = GymsDao.get().getAll();
-		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+//		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 		return ok(new Gson().toJson(gymsList));
 	}
     
