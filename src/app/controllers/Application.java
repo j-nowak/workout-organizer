@@ -2,10 +2,7 @@ package controllers;
 
 import com.google.gson.Gson;
 import database.NewsDao;
-import database.UsersDao;
 import models.News;
-import models.Stranger;
-import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -23,22 +20,6 @@ public class Application extends Controller {
 
 		List<News> news = NewsDao.get().getNews(userId);
 		return ok(new Gson().toJson(news));
-	}
-
-	public static Result strangers() {
-		String userIdStr = request().cookie(Application.USER_ID).value();
-		int userId = Integer.parseInt(userIdStr);
-
-		List<Stranger> strangers = UsersDao.get().getStrangersForUser(userId);
-		return ok(new Gson().toJson(strangers));
-	}
-
-	public static Result friendsRequests() {
-		String userIdStr = request().cookie(Application.USER_ID).value();
-		int userId = Integer.parseInt(userIdStr);
-
-		List<User> friendshipRequests = UsersDao.get().getFriendshipRequests(userId);
-		return ok(new Gson().toJson(friendshipRequests));
 	}
 
     public static Result options(String path) {

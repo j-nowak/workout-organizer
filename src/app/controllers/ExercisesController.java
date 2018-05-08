@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ExercisesController extends Controller {
 
-	public static Result listAllExercises_react() {
+	public static Result listAllExercises() {
 		List<Exercise> exercisesList = ExerciseDao.get().getAll();
 		return ok(new Gson().toJson(exercisesList));
 	}

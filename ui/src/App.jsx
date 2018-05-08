@@ -119,7 +119,7 @@ class App extends Component {
               <Route path="/gyms/:gymId" component={GymPage}/>
 
               <Route exact path="/account/friednships" component={Friendships}/>
-              <Route exact path="/account/password" component={() => <ChangePassword userId={user.id} />}/>
+              <Route exact path="/account/password" component={ChangePassword}/>
 
               <Route path="/users/:userId" component={UserPage}/>
             </div>

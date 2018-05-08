@@ -16,39 +16,17 @@ import java.util.stream.IntStream;
 
 public class GymsController extends Controller {
 
-	public static Result listAllGyms_react() {
+	public static Result listAllGyms() {
 		List<Gym> gymsList = GymsDao.get().getAll();
 		return ok(new Gson().toJson(gymsList));
 	}
 
-	public static Result rate_react(int gymId) throws InterruptedException {
-		int userId = Integer.parseInt(session("user_id") == null ? "1" : session("user_id"));
-		DynamicForm requestData = Form.form().bindFromRequest();
-		String ratingRaw = requestData.get("rating");
-
-		try {
-			int rating = Integer.parseInt(ratingRaw);
-			if (rating < 0 || rating > 10) {
-				return badRequest("Rating out of range");
-			} else {
-				GymsDao.get().rateGym(userId, gymId, rating);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return ok();
-	}
-
-	public static Result showGym_react(int id) {
-		Gym g = GymsDao.get().getById(id);
-
-		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-		if (g != null) {
-			return ok(new Gson().toJson(g));
-		}
-		else {
-			return badRequest();
+	public static Result showGym(int id) {
+		Gym gym = GymsDao.get().getById(id);
+		if (gym != null) {
+			return ok(new Gson().toJson(gym));
+		} else {
+			return notFound("Gym not found");
 		}
 	}
 

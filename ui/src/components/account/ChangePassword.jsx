@@ -26,12 +26,12 @@ class ChangePassword extends Component {
     bodyFormData.set('oldPassword', this.state.oldPassword);
     bodyFormData.set('newPassword', this.state.newPassword);
     bodyFormData.set('repeatedPassword', this.state.repeatedPassword);
-    bodyFormData.set('userId', this.props.userId);
 
     axios({
       method: 'post',
       url: 'http://localhost:9000/react/changePassword',
       data: bodyFormData,
+      withCredentials: true,
       config: { headers: {'Content-Type': 'multipart/form-data' }}
     })
     .then(function (response) {

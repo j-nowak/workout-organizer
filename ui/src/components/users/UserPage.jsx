@@ -12,7 +12,7 @@ class UserPage extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:9000/react/users/${this.state.userId}`)
+    axios.get(`http://localhost:9000/react/users/${this.state.userId}`, {withCredentials: true})
     .then(res => {
       const user = res.data;
       this.setState({ user });
