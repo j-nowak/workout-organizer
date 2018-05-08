@@ -1,96 +1,45 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.Gson;
-import models.*;
-import play.mvc.Controller;
-import play.mvc.Result;
-import play.mvc.Security;
-import views.html.account;
-import views.html.index;
 import database.NewsDao;
 import database.UsersDao;
+import models.News;
+import models.Stranger;
+import models.User;
+import play.mvc.Controller;
+import play.mvc.Result;
 
-//@Security.Authenticated(Secured.class)
+import java.util.List;
+
 public class Application extends Controller {
 
 	public static final String USER_ID = "user_id";
 
-	public static final String HOME = "/home";
 	public static final String LOGIN = "/login";
 
-    public static Result home() {
-    	String userId = session(USER_ID);
-    	if (userId == null) {
-    		return redirect(LOGIN);
-    	}
-    	else {
-    		List<Stranger> strangers = UsersDao.get().getStrangersForUser(Integer.parseInt(userId));
-    		List<User> friendshipRequests = UsersDao.get().getFriendshipRequests(Integer.parseInt(userId));
-    		List<News> news = NewsDao.get().getNews(Integer.parseInt(userId));
-    		return ok(index.render(news, strangers, friendshipRequests));
-    	}
-    }
+	public static Result home() {
+		String userIdStr = request().cookie(Application.USER_ID).value();
+		int userId = Integer.parseInt(userIdStr);
 
-	public static Result strangers_react() {
-		String origin = request().getHeader("origin");
-		origin = origin == null ? "*" : origin;
-		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
-		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+		List<News> news = NewsDao.get().getNews(userId);
+		return ok(new Gson().toJson(news));
+	}
 
+	public static Result strangers() {
 		String userIdStr = request().cookie(Application.USER_ID).value();
 		int userId = Integer.parseInt(userIdStr);
 
 		List<Stranger> strangers = UsersDao.get().getStrangersForUser(userId);
-
 		return ok(new Gson().toJson(strangers));
 	}
 
-	public static Result friendsRequests_react() {
-		String origin = request().getHeader("origin");
-		origin = origin == null ? "*" : origin;
-		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
-		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
-
+	public static Result friendsRequests() {
 		String userIdStr = request().cookie(Application.USER_ID).value();
 		int userId = Integer.parseInt(userIdStr);
 
 		List<User> friendshipRequests = UsersDao.get().getFriendshipRequests(userId);
 		return ok(new Gson().toJson(friendshipRequests));
 	}
-
-	private static int newsId = 0;
-
-	public static Result home_react(int userId) throws InterruptedException {
-		List<News> news = NewsDao.get().getNews(userId);
-
-		List<News> fakeNews = new ArrayList<>();
-		for (int i = 0; i < 10; ++i) {
-			fakeNews.addAll(news);
-		}
-
-		List<NewsWrapper> result = new ArrayList<>();
-		for (int i = 0; i < fakeNews.size(); i++) {
-			result.add(new NewsWrapper(newsId++, fakeNews.get(i)));
-		}
-
-		Thread.sleep(2000);
-
-		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-		return ok(new Gson().toJson(result));
-	}
-
-    public static Result editAccountSettings() {
-        try {
-            User user = UsersDao.get().getById(Integer.parseInt(session(USER_ID))); //TODO change session to userId
-            return ok(account.render(user));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return badRequest();
-        }
-    }
 
     public static Result options(String path) {
         response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost:3000");

@@ -3,7 +3,7 @@ package models;
 import java.sql.Timestamp;
 
 public class News {
-	
+
 	private int friendId;
 	private String firstName;
 	private String lastName;

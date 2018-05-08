@@ -35,7 +35,8 @@ class Home extends Component {
   doQuery() {
     axios({
       method: 'get',
-      url: 'http://localhost:9000/react/home/' + this.props.userId,
+      url: 'http://localhost:9000/react/home',
+      withCredentials: true
     })
     .then(function (response) {
         var newData = this.state.data.concat(response.data);
@@ -58,11 +59,12 @@ class Home extends Component {
   }
 
   render() {
+    var newsId = 0;
     return (
       <div>
         <div className="news-feed">
           {this.state.data.map(d =>
-            <News key={d.id} news={d.news} />)}
+            <News key={newsId++} news={d} />)}
         </div>
         {this.state.requestSent ? <LoadingSpinner /> : null}
       </div>

@@ -108,7 +108,7 @@ class App extends Component {
 
           {user ?
             <div className="content container">
-              <Route exact path="/" component={() => <Home userId={user.id}/>}/>
+              <Route exact path="/" component={Home}/>
 
               <Route exact path="/workouts" component={Workouts}/>
               <Route exact path="/workouts/new" component={NewWorkout}/>

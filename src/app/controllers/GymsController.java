@@ -1,91 +1,44 @@
 package controllers;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import com.google.gson.Gson;
+import database.GymsDao;
 import models.Comment;
 import models.Gym;
 import models.ImageDescription;
-import models.Secured;
-import play.api.libs.json.Json;
-import play.api.libs.ws.ssl.SystemConfiguration;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Security;
-import views.html.gym_info;
-import views.html.gyms;
-import database.GymsDao;
 
-//@Security.Authenticated(Secured.class)
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class GymsController extends Controller {
-	
-    private static final String RATING = "rating";
-
-    
-    public static Result listAllGyms() {
-    	List<Gym> gymsList = GymsDao.get().getAll();
-    	return ok(gyms.render(gymsList));
-    }
 
 	public static Result listAllGyms_react() {
 		List<Gym> gymsList = GymsDao.get().getAll();
-//		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 		return ok(new Gson().toJson(gymsList));
 	}
-    
-    public static Result rate(int gymId) {
-    	String userId = session(Application.USER_ID);
-		DynamicForm requestData = Form.form().bindFromRequest();
-		String ratingRaw = requestData.get(RATING);
-		
-    	try {
-    		int rating = Integer.parseInt(ratingRaw);
-    		if (rating < 0 || rating > 10)
-    			return badRequest();
-
-    		GymsDao.get().rateGym(Integer.parseInt(userId), gymId, rating);
-        	return ok();
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		return badRequest();
-    	}
-    }
 
 	public static Result rate_react(int gymId) throws InterruptedException {
-		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-
 		int userId = Integer.parseInt(session("user_id") == null ? "1" : session("user_id"));
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String ratingRaw = requestData.get("rating");
 
 		try {
 			int rating = Integer.parseInt(ratingRaw);
-			if (rating < 0 || rating > 10)
-				return badRequest();
-
-			GymsDao.get().rateGym(userId, gymId, rating);
+			if (rating < 0 || rating > 10) {
+				return badRequest("Rating out of range");
+			} else {
+				GymsDao.get().rateGym(userId, gymId, rating);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		Thread.sleep(1000);
-
 		return ok();
 	}
-
-    public static Result showGym(int id) {
-    	Gym g = GymsDao.get().getById(id);
-    	if (g != null) {
-    		return ok(gym_info.render(g));    		
-    	}
-    	else {
-    		return badRequest();
-    	}
-    }
 
 	public static Result showGym_react(int id) {
 		Gym g = GymsDao.get().getById(id);
@@ -147,5 +100,4 @@ public class GymsController extends Controller {
 		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 		return ok(new Gson().toJson(comments.get(imageId)));
 	}
-
 }

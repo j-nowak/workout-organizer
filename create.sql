@@ -250,6 +250,9 @@ FROM USERS
 WHERE user_id != uid AND user_id NOT IN
 	(SELECT (CASE WHEN first_user_id = uid THEN second_user_id ELSE first_user_id END) AS friend_id
 	FROM friendships
+	WHERE first_user_id = uid OR second_user_id = uid) AND user_id NOT IN 
+	(SELECT (CASE WHEN first_user_id = uid THEN second_user_id ELSE first_user_id END) AS friend_id
+	FROM friendship_requests
 	WHERE first_user_id = uid OR second_user_id = uid)
 LIMIT 5;
 $function$
