@@ -2,8 +2,6 @@ import React from "react";
 
 import "./Gallery.css";
 import LoadingSpinner from "./LoadingSpinner.jsx";
-import Popup from "./Popup.jsx";
-import ImageDetails from "./ImageDetails.jsx";
 
 function imagesLoaded(parentNode) {
   const imgElements = [...parentNode.querySelectorAll("img")];
@@ -20,7 +18,7 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading: this.props.images.length > 0,
       focusImage: null,
       show: false
     };
@@ -32,28 +30,14 @@ class Gallery extends React.Component {
     });
   };
 
-  openPopup = (imageData) => {
-    this.setState({
-      focusImage: imageData,
-      show: true
-    });
-  }
-
-  closePopup = () => {
-    this.setState({
-      focusImage: null,
-      show: false
-    });
-  }
-
   renderImage(imageData) {
+    const imageUrl = 'http://localhost:9000/images/' + imageData;
     return (
-      <div key={imageData.id} className="col-sm-4">
+      <div className="col-sm-4">
         <img
-          src={imageData.thumbnailUrl}
+          src={imageUrl}
           className="gallery-item"
-          alt={imageData.name}
-          onClick={() => this.openPopup(imageData)}
+          alt={imageData}
           onLoad={this.handleImageChange}
           onError={this.handleImageChange}
         />
@@ -62,8 +46,9 @@ class Gallery extends React.Component {
   }
 
   renderImagesRow(imagesRow) {
+    var randomImageId = 0;
     return (
-      <div className="row" key={imagesRow.id}>
+      <div className="row" key={randomImageId++}>
         {imagesRow.data.map(imageData => this.renderImage(imageData))}
       </div>
     );
@@ -79,13 +64,6 @@ class Gallery extends React.Component {
 
     return (
       <div>
-        <Popup
-            onClose={this.closePopup}
-            show={this.state.show}>
-          <ImageDetails
-              focusImage={this.state.focusImage} />
-        </Popup>
-
         <div
           className="gallery"
           ref={element => {

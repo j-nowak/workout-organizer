@@ -34,13 +34,9 @@ public class UsersController extends Controller {
 	}
 
 	public static Result showUser(int foreignerId) {
-		String userIdStr = request().cookie(Application.USER_ID).value();
-		int userId = Integer.parseInt(userIdStr);
-
 		User user = UsersDao.get().getById(foreignerId);
 
 		if (user != null) {
-			user.setIsFriend(UsersDao.get().areFriends(userId, foreignerId));
 			return ok(new Gson().toJson(user));
 		}
 		else {

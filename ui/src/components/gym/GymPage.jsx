@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import StarRatingComponent from 'react-star-rating-component';
 import "./GymPage.css"
 
 import Gallery from "../Gallery.jsx";
@@ -12,21 +11,8 @@ class GymPage extends Component {
     this.state = {
       gymId: this.props.match.params.gymId,
       gym: {},
-      imagesData: [],
-      show: false
+      imagesData: []
     };
-  }
-
-  openPopup() {
-    this.setState({
-      show: true
-    });
-  }
-
-  closePopup() {
-    this.setState({
-      show: false
-    });
   }
 
   componentDidMount() {
@@ -45,7 +31,6 @@ class GymPage extends Component {
 
   render() {
     const gym = this.state.gym;
-    const style = { display: 'flex', alignItems: 'center'}
 
     return (
       <div className="container">

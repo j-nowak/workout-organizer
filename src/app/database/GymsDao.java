@@ -1,17 +1,13 @@
 package database;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 import models.Address;
 import models.Coordinates;
 import models.Gym;
 import play.db.DB;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GymsDao {
 	
@@ -137,4 +133,60 @@ public class GymsDao {
 		return g;
 	}
 
+	public void insertImage(String imageId, int gymId) {
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement p = connection.prepareStatement("INSERT INTO gym_images(image_id, gym_id) VALUES (?, ?)");
+			p.setString(1, imageId);
+			p.setInt(2, gymId);
+
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public List<String> getImageIds(int gymId) {
+		List<String> images = new ArrayList<>();
+
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT image_id "
+							+ "FROM gym_images "
+							+ "WHERE gym_id = " + gymId);
+
+			while (resultSet.next()) {
+				String imageId = resultSet.getString("image_id");
+				images.add(imageId);
+			}
+
+			resultSet.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return images;
+	}
 }

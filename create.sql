@@ -408,3 +408,16 @@ INSERT INTO gym_ratings(user_id, gym_id, rating) VALUES
   (5, 2, 8),
   (5, 3, 9)
 ;
+
+CREATE TABLE "public".gym_images ( 
+  image_id             varchar(100)  NOT NULL,
+  gym_id               integer  NOT NULL,
+  CONSTRAINT pk_gym_images PRIMARY KEY ( image_id )
+ );
+
+ALTER TABLE "public".gym_images ADD CONSTRAINT fk_gym_images FOREIGN KEY ( gym_id ) REFERENCES "public".gyms( gym_id ) ON DELETE CASCADE;
+
+INSERT INTO gym_images(image_id, gym_id) VALUES
+  ('favicon.png', 1),
+  ('bg_jRatingInfos.png', 1)
+;

@@ -32,3 +32,4 @@ GET 	/logout						controllers.SignController.logout()
 
 OPTIONS	/*path						controllers.Application.options(path: String)
 
+GET  	/images/:imageId            controllers.ImagesController.get(imageId: String)
