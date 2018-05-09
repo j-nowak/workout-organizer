@@ -8,10 +8,7 @@ GET		/react/exercises			controllers.ExercisesController.listAllExercises()
 
 GET		/react/gyms					controllers.GymsController.listAllGyms()
 GET		/react/gyms/:id 			controllers.GymsController.showGym(id: Int)
-
-GET		/react/gyms/:gymId/images 	controllers.GymsController.gymThumbnails_react(gymId: Int)
-GET		/react/images/:id/comments	controllers.GymsController.getComments(id: Int)
-POST	/react/images/:id/comments	controllers.GymsController.addComment(id: Int)
+GET		/react/gyms/:gymId/images 	controllers.GymsController.images(gymId: Int)
 
 GET		/react/users/:id			controllers.UsersController.showUser(id: Int)
 POST	/react/changePassword		controllers.UsersController.changePassword()
