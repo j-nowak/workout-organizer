@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class WorkoutsController extends BaseController {
 
-	public static Result index_react() {
+	public static Result index() {
 		String origin = request().getHeader("origin");
 		origin = origin == null ? "*" : origin;
 		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
@@ -29,7 +29,7 @@ public class WorkoutsController extends BaseController {
 		}
 	}
 
-    public static Result like_react(int workoutId) {
+    public static Result like(int workoutId) {
 		Integer userId = getCurrentUserId();
 
         try {
@@ -41,7 +41,7 @@ public class WorkoutsController extends BaseController {
         }
     }
 
-	public static Result create_react() {
+	public static Result create() {
 		Map<String, String> params = Form.form().bindFromRequest().data();
 		try {
 			Integer userId = getCurrentUserId();

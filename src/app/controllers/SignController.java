@@ -19,7 +19,7 @@ public class SignController extends BaseController {
 	private static final String FORM_PASSWORD = "password";
 	private static final String FORM_REPEATED_PASSWORD = "passwordConfirm";
 
-	public static Result registerUser_react() {
+	public static Result registerUser() {
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String firstName = requestData.get(FORM_FIRST_NAME);
 		String lastName = requestData.get(FORM_LAST_NAME);
