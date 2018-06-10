@@ -16,7 +16,7 @@ class LoginForm extends Component {
 
     const { username, password } = this.state;
 
-    axios.post('http://localhost:9000/react/login', { username, password })
+    axios.post('http://localhost:9000/react/login', { username, password }, { withCredentials: true })
     .then(response => {
       const user = response.data;
       this.props.onLogin(user);

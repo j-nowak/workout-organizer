@@ -7,9 +7,11 @@ GET     /react/home                 controllers.Application.home()
 GET		/react/exercises			controllers.ExercisesController.listAllExercises()
 
 GET		/react/gyms					controllers.GymsController.listAllGyms()
-GET		/react/gyms/:id 			controllers.GymsController.showGym(id: Int)
-GET		/react/gyms/:gymId/images 	controllers.GymsController.images(gymId: Int)
+GET		/react/gyms/:id				controllers.GymsController.showGym(id: Int)
+GET		/react/gyms/:gymId/images	controllers.GymsController.images(gymId: Int)
+POST  	/react/gyms/:gymId/images	controllers.ImagesController.upload(gymId: Int)
 
+GET		/react/users/current		controllers.SignController.getCurrentUser()
 GET		/react/users/:id			controllers.UsersController.showUser(id: Int)
 POST	/react/changePassword		controllers.UsersController.changePassword()
 
@@ -23,9 +25,9 @@ GET		/react/workouts				controllers.WorkoutsController.index_react()
 POST	/react/workouts				controllers.WorkoutsController.create_react()
 POST 	/react/workouts/:id/like	controllers.WorkoutsController.like_react(id: Int)
 
-POST	/react/login				controllers.SignController.loginUser_react()
+POST	/react/login				controllers.SignController.loginUser()
 POST	/react/register				controllers.SignController.registerUser_react()
-GET 	/logout						controllers.SignController.logout()
+POST 	/logout						controllers.SignController.logout()
 
 OPTIONS	/*path						controllers.Application.options(path: String)
 

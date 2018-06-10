@@ -8,7 +8,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-public class UsersController extends Controller {
+public class UsersController extends BaseController {
 
 	public static Result changePassword() {
 		DynamicForm requestData = Form.form().bindFromRequest();
@@ -16,8 +16,7 @@ public class UsersController extends Controller {
 		String newPassword = requestData.get("newPassword");
 		String repeatedPassword = requestData.get("repeatedPassword");
 
-		String userIdStr = request().cookie(Application.USER_ID).value();
-		int userId = Integer.parseInt(userIdStr);
+		Integer userId = getCurrentUserId();
 
 		if (newPassword.equals(repeatedPassword)) {
 			if (UsersDao.get().checkPasswordForUser(userId, oldPassword)) {

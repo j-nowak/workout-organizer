@@ -1,10 +1,10 @@
-CREATE TABLE "public".equipment ( 
+CREATE TABLE "public".equipment (
 	equipment_name       varchar(100)  NOT NULL,
 	image_path           varchar(255)  ,
 	CONSTRAINT pk_equipment PRIMARY KEY ( equipment_name )
  );
 
-CREATE TABLE "public".exercises ( 
+CREATE TABLE "public".exercises (
 	exercise_id          serial  NOT NULL,
 	exercise_name        varchar(100)  NOT NULL,
 	description          text  ,
@@ -12,7 +12,7 @@ CREATE TABLE "public".exercises (
 	CONSTRAINT pk_exercises PRIMARY KEY ( exercise_id )
  );
 
-CREATE TABLE "public".gyms ( 
+CREATE TABLE "public".gyms (
 	gym_id               serial  NOT NULL,
 	gym_name             varchar(100)  NOT NULL,
 	city                 varchar(100)  NOT NULL,
@@ -23,13 +23,13 @@ CREATE TABLE "public".gyms (
 	CONSTRAINT pk_gyms PRIMARY KEY ( gym_id )
  );
 
-CREATE TABLE "public".muscle_groups ( 
+CREATE TABLE "public".muscle_groups (
 	muscle_name          varchar(100)  NOT NULL,
 	image_path           varchar(255)  ,
 	CONSTRAINT pk_muscle_groups PRIMARY KEY ( muscle_name )
  );
 
-CREATE TABLE "public".users ( 
+CREATE TABLE "public".users (
 	user_id              serial  NOT NULL,
 	login                varchar(20)  NOT NULL,
 	email                varchar(50)  NOT NULL,
@@ -41,14 +41,22 @@ CREATE TABLE "public".users (
 	date_of_birth        date  ,
 	CONSTRAINT pk_users PRIMARY KEY ( user_id ),
 	CONSTRAINT unique_login UNIQUE ( login ) ,
-	CONSTRAINT unique_mail UNIQUE ( email ) 
+	CONSTRAINT unique_mail UNIQUE ( email )
  );
 
 ALTER TABLE "public".users ADD CONSTRAINT weight_ckh CHECK ( weight > (0)::numeric );
 
 ALTER TABLE "public".users ADD CONSTRAINT height_chk CHECK ( (height > 0) AND (height < 300) );
 
-CREATE TABLE "public".workouts ( 
+CREATE TABLE "public".sessions (
+  token                varchar(50)  NOT NULL,
+  user_id              integer  NOT NULL,
+  date_created         timestamp  NOT NULL DEFAULT current_timestamp,
+  CONSTRAINT unique_token PRIMARY KEY ( token ),
+  CONSTRAINT fk_users FOREIGN KEY ( user_id ) REFERENCES public.users ( user_id )
+);
+
+CREATE TABLE "public".workouts (
 	workout_id           serial  NOT NULL,
 	user_id              integer  NOT NULL,
 	gym_id               integer  ,
@@ -64,7 +72,7 @@ CREATE INDEX idx_workouts ON "public".workouts ( user_id );
 
 CREATE INDEX idx_workouts_0 ON "public".workouts ( gym_id );
 
-CREATE TABLE "public".comments ( 
+CREATE TABLE "public".comments (
 	comment_id           serial  NOT NULL,
 	user_id              integer  NOT NULL,
 	workout_id           integer  NOT NULL,
@@ -72,13 +80,13 @@ CREATE TABLE "public".comments (
 	created_at           timestamp DEFAULT now() NOT NULL
  );
 
-CREATE TABLE "public".exercise_equipment ( 
+CREATE TABLE "public".exercise_equipment (
 	exercise_id          integer  NOT NULL,
 	equipment_name       varchar(100)  NOT NULL,
-	CONSTRAINT idx_exercise_equipment UNIQUE ( exercise_id, equipment_name ) 
+	CONSTRAINT idx_exercise_equipment UNIQUE ( exercise_id, equipment_name )
  );
 
-CREATE TABLE "public".exercise_muscle_groups ( 
+CREATE TABLE "public".exercise_muscle_groups (
 	exercise_id          integer  NOT NULL,
 	muscle_name          varchar(100)  NOT NULL
  );
@@ -87,7 +95,7 @@ CREATE INDEX idx_exercise_muscle_groups ON "public".exercise_muscle_groups ( mus
 
 CREATE INDEX idx_exercise_muscle_groups_0 ON "public".exercise_muscle_groups ( exercise_id );
 
-CREATE TABLE "public".exercise_ratings ( 
+CREATE TABLE "public".exercise_ratings (
 	user_id              integer  NOT NULL,
 	exercise_id          integer  NOT NULL,
 	rating               integer  NOT NULL
@@ -99,36 +107,36 @@ CREATE INDEX idx_exercises_ratings ON "public".exercise_ratings ( user_id );
 
 CREATE INDEX idx_exercises_ratings_0 ON "public".exercise_ratings ( exercise_id );
 
-CREATE TABLE "public".friendship_requests ( 
+CREATE TABLE "public".friendship_requests (
 	first_user_id        integer  NOT NULL,
 	second_user_id       integer  NOT NULL,
-	CONSTRAINT unique_friendship_requests_rel UNIQUE ( first_user_id, second_user_id ) 
+	CONSTRAINT unique_friendship_requests_rel UNIQUE ( first_user_id, second_user_id )
  );
 
-CREATE TABLE "public".friendships ( 
+CREATE TABLE "public".friendships (
 	first_user_id        integer  NOT NULL,
 	second_user_id       integer  NOT NULL,
-	CONSTRAINT unique_friendships_rel UNIQUE ( first_user_id, second_user_id ) 
+	CONSTRAINT unique_friendships_rel UNIQUE ( first_user_id, second_user_id )
  );
 
 ALTER TABLE "public".friendships ADD CONSTRAINT proper_rel_check CHECK ( first_user_id < second_user_id );
 
-CREATE TABLE "public".gym_ratings ( 
+CREATE TABLE "public".gym_ratings (
 	gym_id               integer  NOT NULL,
 	user_id              integer  NOT NULL,
 	rating               integer  NOT NULL,
-	CONSTRAINT idx_gym_ratings UNIQUE ( gym_id, user_id ) 
+	CONSTRAINT idx_gym_ratings UNIQUE ( gym_id, user_id )
  );
 
 ALTER TABLE "public".gym_ratings ADD CONSTRAINT rating_chk CHECK ( (rating >= 1) AND (rating <= 10) );
 
-CREATE TABLE "public".likes ( 
+CREATE TABLE "public".likes (
 	user_id              integer  NOT NULL,
 	workout_id           integer  NOT NULL,
-	CONSTRAINT idx_likes UNIQUE ( user_id, workout_id ) 
+	CONSTRAINT idx_likes UNIQUE ( user_id, workout_id )
  );
 
-CREATE TABLE "public".weights ( 
+CREATE TABLE "public".weights (
 	weight_id            serial  NOT NULL,
 	user_id              integer  NOT NULL,
 	workout_id           integer  ,
@@ -141,7 +149,7 @@ CREATE INDEX idx_weights ON "public".weights ( user_id );
 
 CREATE INDEX idx_weights_0 ON "public".weights ( workout_id );
 
-CREATE TABLE "public".workout_entries ( 
+CREATE TABLE "public".workout_entries (
 	workout_id           integer  NOT NULL,
 	exercise_id          integer  NOT NULL,
 	set_count            integer  NOT NULL,
@@ -250,7 +258,7 @@ FROM USERS
 WHERE user_id != uid AND user_id NOT IN
 	(SELECT (CASE WHEN first_user_id = uid THEN second_user_id ELSE first_user_id END) AS friend_id
 	FROM friendships
-	WHERE first_user_id = uid OR second_user_id = uid) AND user_id NOT IN 
+	WHERE first_user_id = uid OR second_user_id = uid) AND user_id NOT IN
 	(SELECT (CASE WHEN first_user_id = uid THEN second_user_id ELSE first_user_id END) AS friend_id
 	FROM friendship_requests
 	WHERE first_user_id = uid OR second_user_id = uid)
@@ -409,7 +417,7 @@ INSERT INTO gym_ratings(user_id, gym_id, rating) VALUES
   (5, 3, 9)
 ;
 
-CREATE TABLE "public".gym_images ( 
+CREATE TABLE "public".gym_images (
   image_id             varchar(100)  NOT NULL,
   gym_id               integer  NOT NULL,
   CONSTRAINT pk_gym_images PRIMARY KEY ( image_id )

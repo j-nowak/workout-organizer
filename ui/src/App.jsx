@@ -16,7 +16,7 @@ import Friendships from "./components/account/Friendships.jsx";
 import UserPage from "./components/users/UserPage.jsx";
 import LoginPage from './components/account/LoginPage.jsx';
 import LoadingSpinner from './components/LoadingSpinner.jsx';
-import { setCookie, deleteCookie, getCurrentUser } from './lib/auth';
+import { deleteSession, getCurrentUser } from './lib/auth';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
@@ -31,14 +31,13 @@ class App extends Component {
 
   login(user) {
     this.setState({ user });
-    setCookie(user.id);
   }
 
   logout() {
     this.setState({
       user: null
     });
-    deleteCookie();
+    deleteSession();
   }
 
   componentWillMount() {

@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import models.Stranger;
 import models.User;
@@ -81,7 +82,7 @@ public class UsersDao {
 			p.setString(2, login);
 			p.setString(3, passwordDigest);
 			ResultSet resultUser = p.executeQuery();
-			
+
 			User user = null;
 			if (resultUser.next()) {
 				Logger.info("User " + resultUser.getString("login") + " logged in!");
@@ -90,15 +91,89 @@ public class UsersDao {
 				user.setLogin(resultUser.getString("login"));
 				user.setEmail(resultUser.getString("email"));
 			}
-			
+
 			resultUser.close();
 			p.close();
-			
+
 			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public String createSession(User user) {
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement p = connection.prepareStatement("INSERT INTO sessions (token, user_id) VALUES (?, ?)");
+			String token = UUID.randomUUID().toString();
+			p.setString(1, token);
+			p.setInt(2, user.getId());
+			p.execute();
+			if (p.getUpdateCount() > 0) {
+				return token;
+			}
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public boolean logout(String token) {
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement p = connection.prepareStatement("DELETE FROM sessions WHERE token = ?");
+			p.setString(1, token);
+			return p.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public Integer getUserIdFromSession(String token) {
+		Connection connection = null;
+		try {
+			connection = DB.getConnection();
+			PreparedStatement p = connection.prepareStatement("SELECT user_id FROM sessions WHERE token = ?");
+			p.setString(1, token);
+			ResultSet result = p.executeQuery();
+
+			if (result.next()) {
+				return result.getInt("user_id");
+			}
+			return null;
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {

@@ -1,14 +1,16 @@
 package controllers;
 
 import models.User;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import database.UsersDao;
 import com.google.gson.Gson;
 
-public class SignController extends Controller {
+public class SignController extends BaseController {
 
 	private static final String FORM_FIRST_NAME = "firstName";
 	private static final String FORM_LAST_NAME = "lastName";
@@ -33,19 +35,25 @@ public class SignController extends Controller {
 			return badRequest("Unable to save user");
 		}
 		else {
-			response().setCookie(Application.USER_ID, "" + user.getId());
+			String token = UsersDao.get().createSession(user);
+			if (token != null) {
+				response().setCookie(Application.SESSION_TOKEN, token, 60 * 60 * 24 * 365);
+			}
 			return ok(new Gson().toJson(user));
 		}
 	}
 
-	public static Result loginUser_react() {
+	public static Result loginUser() {
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String login = requestData.get(FORM_LOGIN);
 		String password = requestData.get(FORM_PASSWORD);
 
-		User user = UsersDao.get().login(login, password);
+		UsersDao dao = UsersDao.get();
+		User user = dao.login(login, password);
 		if (user != null) {
-			response().setCookie(Application.USER_ID, "" + user.getId());
+			String sessionToken = dao.createSession(user);
+			Logger.info("Created session: " + sessionToken + " for user: " + user.getId());
+			response().setCookie(Application.SESSION_TOKEN, sessionToken, 60 * 60 * 24 * 365);
 			return ok(new Gson().toJson(user));
 		}
 		else {
@@ -53,9 +61,26 @@ public class SignController extends Controller {
 		}
 	}
 
+	public static Result getCurrentUser() {
+		Integer userId = getCurrentUserId();
+
+		if (userId != null) {
+			User user = UsersDao.get().getById(userId);
+			return ok(new Gson().toJson(user));
+		}
+		else {
+			return notFound("Session not found");
+		}
+	}
+
 	public static Result logout() {
+		Http.Cookie cookie = request().cookie(Application.SESSION_TOKEN);
+		if (cookie != null) {
+			UsersDao.get().logout(cookie.value());
+		}
+		response().discardCookie(Application.SESSION_TOKEN);
 		session().clear();
-		return redirect(Application.LOGIN);
+		return ok(new Gson().toJson(true));
 	}
 
 	private static boolean saveUser(User user) {

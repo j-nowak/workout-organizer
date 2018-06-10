@@ -18,7 +18,7 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: this.props.images.length > 0,
+      loading: props.images.length > 0,
       focusImage: null,
       show: false
     };
@@ -30,10 +30,10 @@ class Gallery extends React.Component {
     });
   };
 
-  renderImage(imageData) {
+  renderImage(imageData, index) {
     const imageUrl = 'http://localhost:9000/images/' + imageData;
     return (
-      <div className="col-sm-4">
+      <div className="col-sm-4" key={index}>
         <img
           src={imageUrl}
           className="gallery-item"
@@ -45,11 +45,10 @@ class Gallery extends React.Component {
     );
   }
 
-  renderImagesRow(imagesRow) {
-    var randomImageId = 0;
+  renderImagesRow(imagesRow, index) {
     return (
-      <div className="row" key={randomImageId++}>
-        {imagesRow.data.map(imageData => this.renderImage(imageData))}
+      <div className="row" key={index}>
+        {imagesRow.map(this.renderImage.bind(this))}
       </div>
     );
   }
@@ -59,20 +58,15 @@ class Gallery extends React.Component {
     const chunkSize = 3
     var rowId = 0;
     for (var i = 0, j = this.props.images.length; i < j; i += chunkSize) {
-        galleryImages.push({id: rowId++, data: this.props.images.slice(i, i + chunkSize)});
+      galleryImages.push(this.props.images.slice(i, i + chunkSize));
     }
 
     return (
       <div>
-        <div
-          className="gallery"
-          ref={element => {
-            this.galleryElement = element;
-          }}
-        >
+        <div className="gallery" ref={element => { this.galleryElement = element }} >
           {this.state.loading ? <LoadingSpinner /> : null}
           <div className="images">
-            {galleryImages.map(imagesRow => this.renderImagesRow(imagesRow))}
+            {galleryImages.map(this.renderImagesRow.bind(this))}
           </div>
         </div>
       </div>

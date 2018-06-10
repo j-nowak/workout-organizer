@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
-public class WorkoutsController extends Controller {
+public class WorkoutsController extends BaseController {
 
 	public static Result index_react() {
 		String origin = request().getHeader("origin");
@@ -20,8 +20,7 @@ public class WorkoutsController extends Controller {
 		response().setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
 		response().setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
 		try {
-			String userIdStr = request().cookie(Application.USER_ID).value();
-			int userId = Integer.parseInt(userIdStr);
+			Integer userId = getCurrentUserId();
 			List<Workout> workouts = WorkoutDao.get().getUserWorkouts(userId);
 			return ok(new Gson().toJson(workouts));
 		} catch (Exception e) {
@@ -31,8 +30,7 @@ public class WorkoutsController extends Controller {
 	}
 
     public static Result like_react(int workoutId) {
-		String userIdStr = request().cookie(Application.USER_ID).value();
-		int userId = Integer.parseInt(userIdStr);
+		Integer userId = getCurrentUserId();
 
         try {
             int likesCount = WorkoutDao.get().like(workoutId, userId);
@@ -46,7 +44,7 @@ public class WorkoutsController extends Controller {
 	public static Result create_react() {
 		Map<String, String> params = Form.form().bindFromRequest().data();
 		try {
-			String userId = request().cookie(Application.USER_ID).value();
+			Integer userId = getCurrentUserId();
 			String gymId = params.get("gymId");
 			String startedAt =  params.get("startedAt");
 			String finishedAt = params.get("finishedAt");
@@ -54,7 +52,7 @@ public class WorkoutsController extends Controller {
 
 			startedAt = startedAt.replace("T", " ") + ":00";
 			finishedAt = finishedAt.replace("T", " ") + ":00";
-			Workout workout = new Workout(Integer.parseInt(userId), Integer.parseInt(gymId), Timestamp.valueOf(startedAt), Timestamp.valueOf(finishedAt));
+			Workout workout = new Workout(userId, Integer.parseInt(gymId), Timestamp.valueOf(startedAt), Timestamp.valueOf(finishedAt));
 			workout.setNote(note);
 
 			for (int i = 0; params.get("entries[" + i + "].exerciseId") != null; ++i) {
