@@ -2,78 +2,33 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /home                       controllers.Application.home()
+GET     /react/home                 controllers.Application.home()
 
-# Users
-POST	/users/:id/invite			controllers.UsersController.invite(id: Int)
-POST	/users/:id/accept			controllers.UsersController.invite(id: Int)
-POST	/users/:id/decline			controllers.UsersController.decline(id: Int)
-GET		/users/:id					controllers.UsersController.showUser(id: Int)
+GET		/react/exercises			controllers.ExercisesController.listAllExercises()
 
-# Exercises
-GET		/exercises					controllers.ExercisesController.listAllExercises()
-POST	/exercises/:exerciseId		controllers.ExercisesController.rate(exerciseId: Int)
-GET		/fileterExercises			controllers.ExercisesController.listFileteredExercises()
-POST	/showBest					controllers.ExercisesController.showBestResult()
+GET		/react/gyms					controllers.GymsController.listAllGyms()
+GET		/react/gyms/:id				controllers.GymsController.showGym(id: Int)
+GET		/react/gyms/:gymId/images	controllers.GymsController.images(gymId: Int)
+POST  	/react/gyms/:gymId/images	controllers.ImagesController.upload(gymId: Int)
 
-# Gyms
-GET		/gyms						controllers.GymsController.listAllGyms()
-POST	/gyms/:gymId				controllers.GymsController.rate(gymId: Int)
-GET		/gyms/:id					controllers.GymsController.showGym(id: Int)
+GET		/react/users/current		controllers.SignController.getCurrentUser()
+GET		/react/users/:id			controllers.UsersController.showUser(id: Int)
+POST	/react/changePassword		controllers.UsersController.changePassword()
 
-# Workouts
-GET		/workouts					controllers.WorkoutsController.index()
-GET		/workouts/new				controllers.WorkoutsController.buildNew()
-POST	/workouts					controllers.WorkoutsController.create()
-POST 	/workouts/:id/like			controllers.WorkoutsController.like(id: Int)
+POST	/react/users/:id/invite		controllers.FriendshipsController.invite(id: Int)
+POST	/react/users/:id/accept		controllers.FriendshipsController.invite(id: Int)
+POST	/react/users/:id/decline	controllers.FriendshipsController.decline(id: Int)
+GET     /react/strangers            controllers.FriendshipsController.strangers()
+GET     /react/friendships          controllers.FriendshipsController.friendsRequests()
 
-# Account
-GET		/account					controllers.Application.editAccountSettings()
-POST	/changePassword				controllers.AccountController.changePassword()
-POST	/changeUserInfo				controllers.AccountController.changeUserInfo()
+GET		/react/workouts				controllers.WorkoutsController.index()
+POST	/react/workouts				controllers.WorkoutsController.create()
+POST 	/react/workouts/:id/like	controllers.WorkoutsController.like(id: Int)
 
-# Sign up and in
-GET		/							controllers.Assets.at(path="/public/html", file="login.html")
-GET		/login						controllers.Assets.at(path="/public/html", file="login.html")
-POST	/register					controllers.SignController.registerUser()
-POST	/signin						controllers.SignController.loginUser()
-GET 	/logout						controllers.SignController.logout()
+POST	/react/login				controllers.SignController.loginUser()
+POST	/react/register				controllers.SignController.registerUser()
+POST 	/logout						controllers.SignController.logout()
 
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
-GET  	/javascripts/*file        	controllers.Assets.at(path="/public/javascripts", file)
-GET  	/images/*file             	controllers.Assets.at(path="/public/images", file)
-GET  	/stylesheets/*file          controllers.Assets.at(path="/public/stylesheets", file)
-
-# React
-GET     /react/home/:userId         controllers.Application.home_react(userId: Int)
-GET     /react/strangers       controllers.Application.strangers_react()
-GET     /react/friendships     controllers.Application.friendsRequests_react()
-
-GET		/react/exercises			controllers.ExercisesController.listAllExercises_react()
-
-GET		/react/gyms					controllers.GymsController.listAllGyms_react()
-GET		/react/gyms/:id 			controllers.GymsController.showGym_react(id: Int)
-GET		/react/gyms/:gymId/images 	controllers.GymsController.gymThumbnails_react(gymId: Int)
-POST	/react/gyms/:gymId			controllers.GymsController.rate_react(gymId: Int)
-
-POST	/react/changePassword		controllers.AccountController.changePassword_react()
-
-GET		/react/workouts				controllers.WorkoutsController.index_react()
-POST	/react/workouts				controllers.WorkoutsController.create_react()
-POST 	/react/workouts/:id/like	controllers.WorkoutsController.like_react(id: Int)
-
-GET		/react/images/:id/comments	controllers.GymsController.getComments(id: Int)
-POST	/react/images/:id/comments	controllers.GymsController.addComment(id: Int)
-
-GET		/react/users/:id			controllers.UsersController.showUser_react(id: Int)
-POST	/react/users/:id/invite			controllers.UsersController.invite_react(id: Int)
-POST	/react/users/:id/accept			controllers.UsersController.invite_react(id: Int)
-POST	/react/users/:id/decline			controllers.UsersController.decline_react(id: Int)
-
-POST	/react/login				controllers.SignController.loginUser_react()
-POST	/react/register				controllers.SignController.registerUser_react()
 OPTIONS	/*path						controllers.Application.options(path: String)
 
+GET  	/images/:imageId            controllers.ImagesController.get(imageId: String)

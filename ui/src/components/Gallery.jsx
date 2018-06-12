@@ -2,8 +2,6 @@ import React from "react";
 
 import "./Gallery.css";
 import LoadingSpinner from "./LoadingSpinner.jsx";
-import Popup from "./Popup.jsx";
-import ImageDetails from "./ImageDetails.jsx";
 
 function imagesLoaded(parentNode) {
   const imgElements = [...parentNode.querySelectorAll("img")];
@@ -20,7 +18,7 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading: props.images.length > 0,
       focusImage: null,
       show: false
     };
@@ -32,28 +30,14 @@ class Gallery extends React.Component {
     });
   };
 
-  openPopup = (imageData) => {
-    this.setState({
-      focusImage: imageData,
-      show: true
-    });
-  }
-
-  closePopup = () => {
-    this.setState({
-      focusImage: null,
-      show: false
-    });
-  }
-
-  renderImage(imageData) {
+  renderImage(imageData, index) {
+    const imageUrl = 'http://localhost:9000/images/' + imageData;
     return (
-      <div key={imageData.id} className="col-sm-4">
+      <div className="col-sm-4" key={index}>
         <img
-          src={imageData.thumbnailUrl}
+          src={imageUrl}
           className="gallery-item"
-          alt={imageData.name}
-          onClick={() => this.openPopup(imageData)}
+          alt={imageData}
           onLoad={this.handleImageChange}
           onError={this.handleImageChange}
         />
@@ -61,10 +45,10 @@ class Gallery extends React.Component {
     );
   }
 
-  renderImagesRow(imagesRow) {
+  renderImagesRow(imagesRow, index) {
     return (
-      <div className="row" key={imagesRow.id}>
-        {imagesRow.data.map(imageData => this.renderImage(imageData))}
+      <div className="row" key={index}>
+        {imagesRow.map(this.renderImage.bind(this))}
       </div>
     );
   }
@@ -74,27 +58,15 @@ class Gallery extends React.Component {
     const chunkSize = 3
     var rowId = 0;
     for (var i = 0, j = this.props.images.length; i < j; i += chunkSize) {
-        galleryImages.push({id: rowId++, data: this.props.images.slice(i, i + chunkSize)});
+      galleryImages.push(this.props.images.slice(i, i + chunkSize));
     }
 
     return (
       <div>
-        <Popup
-            onClose={this.closePopup}
-            show={this.state.show}>
-          <ImageDetails
-              focusImage={this.state.focusImage} />
-        </Popup>
-
-        <div
-          className="gallery"
-          ref={element => {
-            this.galleryElement = element;
-          }}
-        >
+        <div className="gallery" ref={element => { this.galleryElement = element }} >
           {this.state.loading ? <LoadingSpinner /> : null}
           <div className="images">
-            {galleryImages.map(imagesRow => this.renderImagesRow(imagesRow))}
+            {galleryImages.map(this.renderImagesRow.bind(this))}
           </div>
         </div>
       </div>

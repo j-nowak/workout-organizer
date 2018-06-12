@@ -3,6 +3,9 @@
 .classpath
 conf/application.conf
 
+# We store images there
+public/
+
 # Created by https://www.gitignore.io
 
 ### PlayFramework ###

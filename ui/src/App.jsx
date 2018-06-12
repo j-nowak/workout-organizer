@@ -16,7 +16,7 @@ import Friendships from "./components/account/Friendships.jsx";
 import UserPage from "./components/users/UserPage.jsx";
 import LoginPage from './components/account/LoginPage.jsx';
 import LoadingSpinner from './components/LoadingSpinner.jsx';
-import { setCookie, deleteCookie, getCurrentUser } from './lib/auth';
+import { deleteSession, getCurrentUser } from './lib/auth';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
@@ -31,14 +31,13 @@ class App extends Component {
 
   login(user) {
     this.setState({ user });
-    setCookie(user.id);
   }
 
   logout() {
     this.setState({
       user: null
     });
-    deleteCookie();
+    deleteSession();
   }
 
   componentWillMount() {
@@ -108,7 +107,7 @@ class App extends Component {
 
           {user ?
             <div className="content container">
-              <Route exact path="/" component={() => <Home userId={user.id}/>}/>
+              <Route exact path="/" component={Home}/>
 
               <Route exact path="/workouts" component={Workouts}/>
               <Route exact path="/workouts/new" component={NewWorkout}/>
@@ -119,7 +118,7 @@ class App extends Component {
               <Route path="/gyms/:gymId" component={GymPage}/>
 
               <Route exact path="/account/friednships" component={Friendships}/>
-              <Route exact path="/account/password" component={() => <ChangePassword userId={user.id} />}/>
+              <Route exact path="/account/password" component={ChangePassword}/>
 
               <Route path="/users/:userId" component={UserPage}/>
             </div>

@@ -1,19 +1,13 @@
 package database;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.sql.Types;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
 import models.Workout;
 import models.WorkoutEntry;
 import play.db.DB;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
 
 public class WorkoutDao {
 

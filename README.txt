@@ -6,23 +6,12 @@ Użytkownik może logować się do aplikacji przy użyciu swojego loginu lub adr
 
 Podobnie jak w Facebook'u, użytkownicy mają swoich znajomych (informacje o tym, kto z kim jest znajomym, przechowywane są w tabeli friendships) i mogą zapraszać innych aby zostali ich znajomymi (dane przechowywane w tabeli frienship_requests).
 
-Na stronie głownej wyświetlane są najnowsze wpisy znajomych z informacją o tym kiedy i na której siłowni trenowali oraz jakie partie mięśni zrobili podczas tego treningu (dane te są wyliczane przy użyciu widoku detailed_news). Wszystkie te wpisy można likować (dany użytkownik może polubić pewien wpis tylko raz - tabela likes) oraz komentować (komentarzy od jednego użytkownika do danego wpisu może być wiele; ta funkcjonalność nie została jeszcze zaimplementowana).
+Na stronie głownej wyświetlane są najnowsze wpisy znajomych z informacją o tym kiedy i na której siłowni trenowali oraz jakie partie mięśni zrobili podczas tego treningu (dane te są wyliczane przy użyciu widoku detailed_news). Wszystkie te wpisy można likować (dany użytkownik może polubić pewien wpis tylko raz).
 
-Ćwiczenia są głównym elementem treningu. Są one wyświetlane w atlasie ćwiczeń. Dane ćwiczenie może posiadać opcjonalny opis lub filmik. Dodatkowo dostępna jest lista mięśni które sa używane podczas wykonywania danego ćwiczenia. Dzięki temu użytkownik może filtrować ćwicznienia po partiach mięśniowych. Ponadto każdy użytkownik ma możliwość wystawienia oceny danemu ćwiczeniu oraz zobaczenia średnią ocenę innych użytkowników. Dzieki temu uzytkownik może wybrać najlepsze ćwiczenia. Kolejną funkcjonalnością jest podejrzenie swojego najlepszego rezultatu na danym ćwiczeniu. 
+Ćwiczenia są głównym elementem treningu. Są one wyświetlane w atlasie ćwiczeń. Dane ćwiczenie może posiadać opcjonalny opis lub filmik. Dodatkowo dostępna jest lista mięśni które sa używane podczas wykonywania danego ćwiczenia. Dzięki temu użytkownik może filtrować ćwicznienia po partiach mięśniowych. Ponadto każdy użytkownik ma możliwość wystawienia oceny danemu ćwiczeniu oraz zobaczenia średnią ocenę innych użytkowników. Dzieki temu uzytkownik może wybrać najlepsze ćwiczenia.
 
 W systemie znajduje sie również baza siłowni. Każda siłownia posiada adres, aby użytkownik mógł ją łatwo zlokalizować. Opcjonalnie, jeśli dana siłownia posiada wprowadzone współrzędne geograficzne, to jej położenie jest wyświetlane z wykorzystaniem GoogleMaps API. Korzystając z geolokalizacji HTML5, mapa centrowana jest na aktualne położenie usera, aby mógł jak najszybciej odnaleźć najbliżsżą siownię i rozpocząć trening. Podobnie jak w przypadku ćwiczeń, każdą siłownię mozna ocenić.
 
-TODO:
-
--dodanie do ćwiczeń wykorzystywanego sprzętu (analogicznie do ćwiczonych partii mięśni), obecne już na diagramie;
--rozszerzenie ocen siłowni na poszczególne aspekty (m. in. ilość sprzętu, jego jakość, natężnie, atmosfera);
--usunięcie z tabeli users pola "weights" i trackowanie wagi użytkownika w osobnej tabeli. Użytkownik ma możliwość ustawienia wagi niezależnie od treningu oraz przed/po każdym treningu. Dzięki temu i dodatkowej tabeli (obecna na diagramie) możliwe byloby robienie pełnych statystyk, które użytkownik mógłby śledzic i analizować;
--obecnie na danym treningu można zrobić ćwiczenie z daną masą ciężaru w kilku seriach przy konkretnej liczbie powtórzeń. Ostatecznie każda seria byłaby niezależna od siebie, to znaczy niezależną ilością powtórzeń i ciężarem. Miałaby również typ: zwykła, superseria, drop set;
--dodanie prostych notyfikacji (analogiczne jak na Facebooku), informujących o aktywności przyjaciół, nowych zaproszeniach do znajomych, wydarzeniach sporotwych;
--trackowanie danego treningu przez szablon - przygotowane przez specjalistów lub też te udostępnione przez znajomych. W ten sposób użytkownik nie musiałby wprowadzać każdego ćwicznia osobno, a jedynie uzupełnić o parametry (ilość serii, powtórzeń i ciężar);
--bogate statystyki treningów, trackowanie wymiarów ciała (obwód w klatce, bicepsie, itp.);
--stylowanie, rozplanowanie interfejsu aby był bardziej "user friendly", lazy loading;
--integracja z Facebookiem, aby użytkownik mógł łatwo i szybko pochwalic się znajomym nowym rekordem.
 
 Wymagania:
 -Java 8,
@@ -34,6 +23,10 @@ https://jdbc.postgresql.org/download/postgresql-9.4-1200.jdbc41.jar
 #begin
 application.secret="/vqXV_IjArDXQ`BMmk__m[6:5p<=RhOfLej2GhmoX<w2baKdrHsP@L5maKlP[7fy"
 application.langs="en"
+
+ebean.default = ["models.*"]
+
+play.http.requestHandler = "handler.HttpRequestHandlerImpl"
 
 db.default.driver=org.postgresql.Driver
 db.default.url="jdbc:postgresql://localhost/baza_workouts"
@@ -47,15 +40,15 @@ logger.application=DEBUG
 #end
 
 Jak postawić:
-#Postawić bazę z create.sql
-git clone https://github.com/Mszak/workout-organizer.git
+git clone https://github.com/j-nowak/workout-organizer.git
+# Postawić bazę z create.sql
 cd workout-organizer/src
 mkdir lib # tutaj wrzucić bibliotekę postgresa
 cd conf # tutaj wrzucić plik application.conf
 cd ..
 ./activator
-#Po uruchomieniu kosnoli:
+# Po uruchomieniu kosnoli:
 run
-#Serwer powinien działać i nasłuchuje pod adresem localhost:9000
+# Serwer powinien działać i nasłuchuje pod adresem localhost:9000
 
 

@@ -28,7 +28,6 @@ export class Gyms extends Component {
 
   updatePage(ev) {
     const currentPage = ev.target.id;
-    console.log('cdacsa ' + currentPage);
     this.setState({ currentPage });
   }
 
